@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Movhaul Agent</string>
+    <string name="login_terms"><![CDATA[By Login you agree to the terms & conditions  and privacy policy of MovHaul]]></string>
+    <string name="register_terms"><![CDATA[By Register you agree to the terms & conditions  and privacy policy of MovHaul]]></string>
+    <string name="chang_to_admin">Change to Admin</string>
+    <string name="chang_to_agent">Change to Agent</string>
+    <string name="login">Login</string>
+    <string name="mobile">Mobile</string>
+    <string name="register">Register</string>
+    <string name="register_">Register?</string>
+    <string name="login_">Have an account, Login</string>
+    <string name="submit">Submit</string>
+    <string name="img_vec_lic">State Issued ID Card</string>
+    <string name="img_vec_lic_photo">Passport Photograph</string>
+    <string name="dashboard">Dashboard</string>
+</resources>

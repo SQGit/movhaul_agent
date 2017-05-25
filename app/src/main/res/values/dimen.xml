@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="app_camera_height">@dimen/_600sdp</dimen>
+    <dimen name="bottom_height">100dp</dimen>
+</resources>

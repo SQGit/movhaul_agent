@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="@dimen/_5sdp"
+             android:layout_marginLeft="@dimen/_5sdp"
+             android:layout_marginRight="@dimen/_5sdp"
+             android:layout_marginTop="@dimen/_5sdp"
+             android:orientation="vertical"
+             android:gravity="center">
+
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/textview_type"
+                 android:padding="@dimen/_8sdp"
+                 android:gravity="left"
+                 android:text="Private Driver"
+                 android:textSize="@dimen/_16sdp" />
+             <View
+                 android:layout_width="match_parent"
+                 android:layout_height="2dp"
+                 android:layout_marginTop="@dimen/_2sdp"
+                 android:layout_above="@+id/bottom"
+                 android:background="@color/viewColor"/>
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/textview_types"
+                 android:padding="@dimen/_8sdp"
+                 android:gravity="left"
+                 android:text="Company Driver"
+                 android:textSize="@dimen/_16sdp" />
+
+             <Spinner
+                 android:layout_width="match_parent"
+                 android:id="@+id/spinner"
+                 android:layout_marginLeft="@dimen/_20sdp"
+                 android:layout_height="wrap_content"
+                 android:paddingBottom="@dimen/_5sdp"/>
+
+
+         </LinearLayout>
+
+
+
+</ScrollView>
