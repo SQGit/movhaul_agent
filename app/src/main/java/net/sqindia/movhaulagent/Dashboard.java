@@ -71,6 +71,8 @@ public class Dashboard extends AppCompatActivity{
         ib_comp_add = (ImageButton) findViewById(R.id.add_company);
         fl_bottom = (FrameLayout) findViewById(R.id.bottom_layout);
 
+        tv_header = (TextView) findViewById(R.id.textview_header);
+
         lt_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
