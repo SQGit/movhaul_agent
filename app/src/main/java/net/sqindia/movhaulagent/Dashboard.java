@@ -56,16 +56,20 @@ public class Dashboard extends AppCompatActivity{
     AlertDialog b;
     int sts;
     ListView lview_state,lview_district;
-    FrameLayout fl_header;
+    FrameLayout fl_header,fl_bottom;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
 
+        FontsManager.initFormAssets(Dashboard.this, "fonts/lato.ttf");
+        FontsManager.changeFonts(Dashboard.this);
+
 
         lt_back = (LinearLayout) findViewById(R.id.action_back);
         ib_driver_add = (ImageButton) findViewById(R.id.add_driver);
         ib_comp_add = (ImageButton) findViewById(R.id.add_company);
+        fl_bottom = (FrameLayout) findViewById(R.id.bottom_layout);
 
         lt_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,8 +115,9 @@ public class Dashboard extends AppCompatActivity{
             public void onClick(View v) {
 
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment_container, new LoginFragment());
+                ft.replace(R.id.fragment_container, new CompanyFragment());
                 ft.commit();
+                fl_bottom.setVisibility(View.GONE);
 
             }
         });
@@ -223,8 +228,8 @@ public class Dashboard extends AppCompatActivity{
         state_lists.clear();
         district_lists.clear();
 
-        state_lists.add("Private Driver");
-        state_lists.add("Company Driver");
+        state_lists.add("Private");
+        state_lists.add("Corporate");
 
 
         district_lists.add("IBM");
@@ -291,6 +296,12 @@ public class Dashboard extends AppCompatActivity{
 
             TextView label = (TextView) arow.findViewById(R.id.textview_header);
 
+            final View vie_line = arow.findViewById(R.id.viewcolor);
+
+            if(posi == data_lists.size()-1){
+                vie_line.setVisibility(View.GONE);
+            }
+
             label.setTypeface(tf);
 
             label.setText(data_lists.get(posi));
@@ -300,14 +311,31 @@ public class Dashboard extends AppCompatActivity{
                 public void onClick(View v) {
                     if(sts ==0) {
 
-                        Log.e("tag","clicked"+posi);
-                        lview_state.setVisibility(View.GONE);
-                        lview_district.setVisibility(View.VISIBLE);
-                        sts = 1;
+                        if(posi == 0){
+                            Log.e("tag", "clicked" + posi);
+                            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                            ft.replace(R.id.fragment_container, new DriverFragment());
+                            ft.commit();
+                            fl_bottom.setVisibility(View.GONE);
+                            tv_header.setText("Driver");
+                            b.dismiss();
+
+                        }
+                        else{
+                            lview_state.setVisibility(View.GONE);
+                            lview_district.setVisibility(View.VISIBLE);
+                            sts = 1;
+                        }
                     }
                     else{
                         fl_header.setVisibility(View.VISIBLE);
+
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.fragment_container, new DriverFragment());
+                        ft.commit();
                         b.dismiss();
+                        tv_header.setText("Corporate");
+                        fl_bottom.setVisibility(View.GONE);
                         sts = 0;
                     }
 

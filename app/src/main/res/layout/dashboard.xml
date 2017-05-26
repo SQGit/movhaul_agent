@@ -60,60 +60,56 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        >
+        android:layout_weight="1">
 
 
     </FrameLayout>
 
 
     <FrameLayout
+        android:id="@+id/bottom_layout"
         android:layout_width="match_parent"
-        android:layout_marginBottom="@dimen/_10sdp"
         android:layout_height="wrap_content">
 
         <ImageButton
             android:id="@+id/add_driver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_gravity="right|bottom"
+            android:layout_marginBottom="@dimen/_15sdp"
             android:layout_marginRight="@dimen/_30sdp"
-            android:background="@drawable/driver_btn"
-            android:padding="@dimen/_20sdp" />
+            android:background="@drawable/driver_btn" />
 
 
         <ImageButton
             android:id="@+id/add_company"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_gravity="left|right"
-
             android:layout_marginLeft="@dimen/_30sdp"
-            android:background="@drawable/company_btn"
-            android:padding="@dimen/_20sdp" />
-
-
-    </FrameLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:background="@drawable/company_btn" />
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom">
 
-            <include layout="@layout/down_icon" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
+
+                <include layout="@layout/down_icon" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
 
-
-
-
-    </LinearLayout>
+    </FrameLayout>
 
 
 </LinearLayout>
