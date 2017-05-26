@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|bottom"
             android:layout_marginRight="@dimen/_30sdp"
-            android:background="@mipmap/ic_launcher_round"
+            android:background="@drawable/driver_btn"
             android:padding="@dimen/_20sdp" />
 
 
@@ -89,7 +89,7 @@
             android:layout_gravity="left|right"
 
             android:layout_marginLeft="@dimen/_30sdp"
-            android:background="@mipmap/ic_launcher_round"
+            android:background="@drawable/company_btn"
             android:padding="@dimen/_20sdp" />
 
 
