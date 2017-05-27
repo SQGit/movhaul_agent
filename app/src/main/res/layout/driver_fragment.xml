@@ -8,11 +8,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_above="@+id/bottom"
-        android:paddingBottom="@dimen/_5sdp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:paddingBottom="@dimen/_5sdp">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -199,8 +198,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginTop="@dimen/_3sdp"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <com.hbb20.CountryCodePicker
@@ -209,8 +208,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
                             android:layout_marginTop="@dimen/_5sdp"
-                            app:arrowSize="@dimen/_13sdp"
                             android:gravity="bottom"
+                            app:arrowSize="@dimen/_13sdp"
                             app:contentColor="@color/textColor"
                             app:customMasterCountries="NG,US,IN"
                             app:defaultNameCode="NG"
@@ -277,52 +276,10 @@
                         android:background="#E1E1E1" />
 
 
-                    <EditText
-                        android:id="@+id/edittext_coverage"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="Enter Coverage Area"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:imeOptions="actionDone"
-                        android:minHeight="@dimen/_30sdp"
-                        android:paddingTop="@dimen/_10sdp"
-                        android:textColor="@color/textColor"
-                        android:textColorHint="@color/textColor"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        android:background="#E1E1E1" />
-
-
-                    <LinearLayout
-                        android:id="@+id/layout_coverage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:background="@color/rect_bg"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/_5sdp"
-                        android:paddingTop="@dimen/_2sdp"
-                        android:paddingBottom="@dimen/_2sdp"
-                        android:paddingRight="@dimen/_5sdp"
-                        android:visibility="gone">
-
-
-                    </LinearLayout>
-
-
-
-
-
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_3sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -384,14 +341,266 @@
                             android:layout_weight="1"
                             android:background="@drawable/grey_box"
                             android:gravity="center_vertical|left"
-                            android:hint="Agent Bank No"
-                            android:maxLength="20"
-                            android:textColorHint="@color/textColor"
+                            android:hint="Driver Bank No"
                             android:inputType="number"
+                            android:maxLength="20"
                             android:maxLines="1"
                             android:padding="@dimen/_5sdp"
                             android:textColor="@color/textColor"
+                            android:textColorHint="@color/textColor"
                             android:textSize="@dimen/_12sdp" />
+
+                    </LinearLayout>
+
+
+                    <FrameLayout
+                        android:id="@+id/frame_typeofservice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center_vertical|left">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/textinput_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:textColorHint="@color/textColor">
+
+                            <EditText
+                                android:id="@+id/edittext_type"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:hint="Type of Service"
+                                android:inputType="text"
+                                android:maxLines="1"
+                                android:paddingTop="@dimen/_5sdp"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/_12sdp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:layout_gravity="bottom"
+                            android:background="#E1E1E1" />
+
+
+                        <LinearLayout
+                            android:id="@+id/layout_choose_service_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
+                    </FrameLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:text="Primary Route "
+                            android:layout_marginRight="@dimen/_15sdp"
+                            android:textColor="@color/textColor"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_gravity="left"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            android:gravity="left|center_vertical"
+                            android:layout_height="match_parent">
+
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="@dimen/_12sdp"
+                                android:textColor="@color/textColor"
+                                android:text="Local" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/_15sdp"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/_12sdp"
+                                android:text="InterState" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="#E1E1E1" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/layout_service_range"
+                        android:layout_marginTop="@dimen/_10sdp">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:text="Service Range "
+                            android:layout_marginRight="@dimen/_15sdp"
+                            android:textColor="@color/textColor"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            android:gravity="left|center_vertical"
+                            android:layout_height="match_parent">
+
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:textSize="@dimen/_12sdp"
+                                android:textColor="@color/textColor"
+                                android:text="50-100 miles" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/_12sdp"
+                                android:text="100-200 miles" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/_12sdp"
+                                android:text="200+ miles" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:background="#E1E1E1" />
+
+
+
+                    <FrameLayout
+                        android:id="@+id/frame_typeofserviddce"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:gravity="center_vertical|left">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/textinput_typedd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_3sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:textColorHint="@color/textColor">
+
+                            <EditText
+                                android:id="@+id/edittext_typdde"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:hint="Local Government"
+                                android:inputType="text"
+                                android:maxLines="1"
+                                android:paddingTop="@dimen/_5sdp"
+                                android:textColor="@color/textColor"
+                                android:textSize="@dimen/_12sdp" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:layout_gravity="bottom"
+                            android:background="#E1E1E1" />
+
+
+                        <LinearLayout
+                            android:id="@+id/layout_choose_service_tydpde"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                        </LinearLayout>
+                    </FrameLayout>
+
+
+                    <EditText
+                        android:id="@+id/edittext_coverage"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="Enter Service Areas"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:minHeight="@dimen/_30sdp"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:textColor="@color/textColor"
+                        android:textColorHint="@color/textColor"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:background="#E1E1E1" />
+
+
+                    <LinearLayout
+                        android:id="@+id/layout_coverage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:background="@color/rect_bg"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/_2sdp"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:paddingRight="@dimen/_5sdp"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:visibility="gone">
+
 
                     </LinearLayout>
 
@@ -408,8 +617,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left"
-                            android:background="@drawable/btn_bg1"
                             android:layout_marginRight="@dimen/_10sdp"
+                            android:background="@drawable/btn_bg1"
                             android:gravity="bottom"
                             android:orientation="horizontal">
 
@@ -435,7 +644,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="right"
-                                    android:text="State Issued ID"
+                                    android:text="Driving Licence"
                                     android:textColor="#F65F52"
                                     android:textSize="@dimen/_10sdp" />
 
@@ -445,74 +654,6 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:id="@+id/layout_photograph"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:background="@drawable/btn_bg1"
-                            android:layout_marginLeft="@dimen/_30sdp"
-                            android:gravity="right"
-                            android:orientation="horizontal">
-
-
-                            <ImageView
-                                android:id="@+id/imageview_photograph"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_21sdp"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:layout_gravity="center_vertical"
-                                android:background="@drawable/lic_ico" />
-
-
-                            <LinearLayout
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/textView3"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="right"
-                                    android:gravity="right"
-                                    android:text="Passport Photograph"
-                                    android:textColor="#F65F52"
-                                    android:textSize="@dimen/_10sdp" />
-
-
-                            </LinearLayout>
-
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:gravity="center">
-
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:text="I agree the Terms &amp; Conditions of MovHaul"
-                            android:textColor="@color/textColor"
-                            android:textSize="@dimen/_10sdp" />
 
                     </LinearLayout>
 
@@ -529,20 +670,20 @@
     </ScrollView>
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_above="@+id/bottom"
-        android:background="@color/viewColor"/>
+        android:background="@color/viewColor" />
 
     <FrameLayout
+        android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:id="@+id/bottom"
         android:layout_alignParentLeft="true"
-        android:background="@color/white"
-        android:layout_alignParentStart="true">
-
+        android:layout_alignParentStart="true"
+        android:background="@color/white">
 
 
         <LinearLayout
@@ -550,7 +691,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/_3sdp">
-
 
 
             <Button
@@ -566,17 +706,6 @@
                 android:textColor="@color/redColor"
                 android:textSize="@dimen/_15sdp" />
 
-            <TextView
-                android:id="@+id/textview_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="@dimen/_4sdp"
-                android:text="@string/login_"
-                android:textColor="#F65F52"
-                android:textSize="@dimen/_10sdp" />
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -588,24 +717,6 @@
 
         </LinearLayout>
 
-
-       <!-- <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/_3sdp">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/_1sdp"
-                android:text="@string/register_terms"
-                android:textSize="@dimen/_5sdp" />
-
-
-        </LinearLayout>-->
 
     </FrameLayout>
 
