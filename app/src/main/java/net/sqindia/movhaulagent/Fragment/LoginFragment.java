@@ -1,10 +1,11 @@
-package net.sqindia.movhaulagent;
+package net.sqindia.movhaulagent.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +20,9 @@ import android.widget.TextView;
 
 import com.sloop.fonts.FontsManager;
 
+import net.sqindia.movhaulagent.Class.Dashboard;
+import net.sqindia.movhaulagent.R;
+
 /**
  * Created by Salman on 23-05-2017.
  */
@@ -30,25 +34,26 @@ public class LoginFragment extends Fragment {
     Typeface tf;
     LinearLayout lt_agent,lt_admin,lt_bottom;
     Button btn_submit;
+    boolean bl_admin;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View get_LoginView = inflater.inflate(R.layout.login_fragment, container, false);
         FontsManager.initFormAssets(getActivity(), "fonts/lato.ttf");
         FontsManager.changeFonts(get_LoginView);
         tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/lato.ttf");
 
-
+        Log.e("tag","login_fragment");
         tv_header_txt = (TextView)getActivity().findViewById(R.id.textview_header);
+        tv_header_txt.setText(getString(R.string.login));
 
         lt_agent = (LinearLayout) get_LoginView.findViewById(R.id.agent_layout);
         lt_admin = (LinearLayout) get_LoginView.findViewById(R.id.admin_layout);
         til_phone = (TextInputLayout) get_LoginView.findViewById(R.id.textinput_number);
-        til_user_name = (TextInputLayout) get_LoginView.findViewById(R.id.textinput_username);
-        til_password = (TextInputLayout) get_LoginView.findViewById(R.id.textinput_password);
+        til_user_name = (TextInputLayout) get_LoginView.findViewById(R.id.textinput_admin_username);
+        til_password = (TextInputLayout) get_LoginView.findViewById(R.id.textinput_admin_password);
         tv_register = (TextView) get_LoginView.findViewById(R.id.textview_register);
         btn_submit = (Button) get_LoginView.findViewById(R.id.button_submit);
 
@@ -57,6 +62,28 @@ public class LoginFragment extends Fragment {
 
 
         til_phone.setTypeface(tf);
+        til_user_name.setTypeface(tf);
+        til_password.setTypeface(tf);
+
+  /*      if(savedInstanceState != null){
+
+            Log.e("tag","bool "+savedInstanceState.getBoolean("admin",false));
+            bl_admin = savedInstanceState.getBoolean("admin",false);
+            if(bl_admin){
+                lt_agent.setVisibility(View.GONE);
+                lt_admin.setVisibility(View.VISIBLE);
+                tv_register.setVisibility(View.GONE);
+                Log.e("tag","admin_portal");
+                tv_admin.setText("Change to Agent");
+            }
+            else{
+                lt_agent.setVisibility(View.VISIBLE);
+                lt_admin.setVisibility(View.GONE);
+                tv_register.setVisibility(View.VISIBLE);
+                Log.e("tag","agent_portal");
+            }
+            //  lt_admin.setVisibility(bl_admin?View.VISIBLE:View.GONE);
+        }*/
 
 
 
@@ -64,13 +91,13 @@ public class LoginFragment extends Fragment {
 
         int currentOrientation = getResources().getConfiguration().orientation;
         if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Log.e("tag","Landscape");
+            //Log.e("tag","login_Landscape");
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT); // or wrap_content
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
             lt_bottom.setLayoutParams(layoutParams);
         }
         else {
-            Log.e("tag","Portrait");
+            //Log.e("tag","login_Portrait");
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT); // or wrap_content
             layoutParams.addRule(RelativeLayout.BELOW,R.id.layout_login);
             lt_bottom.setLayoutParams(layoutParams);
@@ -80,7 +107,8 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment_container, new RegisterFragment());
+                ft.replace(R.id.fragment_container, new RegisterFragment(),"register");
+                ft.addToBackStack("register");
                 ft.commit();
                 tv_header_txt.setText(getString(R.string.register));
             }
@@ -94,12 +122,15 @@ public class LoginFragment extends Fragment {
                     lt_agent.setVisibility(View.GONE);
                     lt_admin.setVisibility(View.VISIBLE);
                     tv_register.setVisibility(View.GONE);
+                    bl_admin = true;
+
                 }
                 else{
                     tv_admin.setText("Change to Admin");
                     lt_agent.setVisibility(View.VISIBLE);
                     lt_admin.setVisibility(View.GONE);
                     tv_register.setVisibility(View.VISIBLE);
+                    bl_admin = false;
                 }
             }
         });
@@ -124,4 +155,38 @@ public class LoginFragment extends Fragment {
         super.onAttach(activity);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("admin",bl_admin);
+        Log.e("tag","outstate_login");
+    }
+
+   @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if(savedInstanceState != null){
+
+            Log.e("tag","bool "+savedInstanceState.getBoolean("admin",false));
+            bl_admin = savedInstanceState.getBoolean("admin",false);
+            if(bl_admin){
+                lt_agent.setVisibility(View.GONE);
+                lt_admin.setVisibility(View.VISIBLE);
+                tv_register.setVisibility(View.GONE);
+                tv_admin.setText("Change to Agent");
+
+                Log.e("tag","admin_portal");
+            }
+            else{
+                lt_agent.setVisibility(View.VISIBLE);
+                lt_admin.setVisibility(View.GONE);
+                tv_register.setVisibility(View.VISIBLE);
+                tv_admin.setText("Change to Admin");
+                Log.e("tag","agent_portal");
+            }
+          //  lt_admin.setVisibility(bl_admin?View.VISIBLE:View.GONE);
+        }
+
+    }
 }

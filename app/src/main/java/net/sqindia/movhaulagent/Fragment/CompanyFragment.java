@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent;
+package net.sqindia.movhaulagent.Fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,15 +6,16 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sloop.fonts.FontsManager;
+
+import net.sqindia.movhaulagent.Class.Dashboard;
+import net.sqindia.movhaulagent.R;
 
 /**
  * Created by Salman on 23-05-2017.

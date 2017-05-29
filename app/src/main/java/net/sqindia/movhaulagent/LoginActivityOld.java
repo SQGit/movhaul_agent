@@ -30,7 +30,9 @@ import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
 
 
-public class LoginActivity extends AppCompatActivity {
+
+
+public class LoginActivityOld extends AppCompatActivity {
 
     public static String[] ar_banks;
     public String str_state = "state", str_district = "dist";
@@ -49,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
-        FontsManager.initFormAssets(LoginActivity.this, "fonts/lato.ttf");
-        FontsManager.changeFonts(LoginActivity.this);
+        FontsManager.initFormAssets(LoginActivityOld.this, "fonts/lato.ttf");
+        FontsManager.changeFonts(LoginActivityOld.this);
         tf = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/lato.ttf");
 
         til_login_phone = (TextInputLayout) findViewById(R.id.textinputlayout_login_phone);
@@ -111,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     lparams.setMargins(10, 10, 10, 10);
-                    TextView tv = new TextView(LoginActivity.this);
+                    TextView tv = new TextView(LoginActivityOld.this);
                     tv.setLayoutParams(lparams);
 
                     Drawable img = getResources().getDrawable(R.drawable.close);
@@ -208,7 +210,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(LoginActivity.this);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(LoginActivityOld.this);
                 LayoutInflater inflater = getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.dialog_choose_bank, null);
                 dialogBuilder.setView(dialogView);
@@ -218,17 +220,17 @@ public class LoginActivity extends AppCompatActivity {
 
                 for (int i = 0; i < ar_banks.length; i++) {
 
-                    a = new LinearLayout(LoginActivity.this);
+                    a = new LinearLayout(LoginActivityOld.this);
                     LinearLayout.LayoutParams para = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                     para.setMargins(5, 20, 5, 20);
                     a.setOrientation(LinearLayout.HORIZONTAL);
                     a.setLayoutParams(para);
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(60, 60);
                     params.gravity = Gravity.CENTER;
-                    ImageView imageView = new ImageView(LoginActivity.this);
+                    ImageView imageView = new ImageView(LoginActivityOld.this);
                     imageView.setImageResource(R.drawable.button_change);
                     imageView.setLayoutParams(params);
-                    TextView tss = new TextView(LoginActivity.this);
+                    TextView tss = new TextView(LoginActivityOld.this);
                     tss.setText(ar_banks[i]);
                     LinearLayout.LayoutParams paramsQ = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                     paramsQ.gravity = Gravity.CENTER;
@@ -237,7 +239,7 @@ public class LoginActivity extends AppCompatActivity {
                     tss.setTextColor(getResources().getColor(R.color.textColor));
                     tss.setTypeface(tf);
 
-                    View vres = new View(LoginActivity.this);
+                    View vres = new View(LoginActivityOld.this);
                     LinearLayout.LayoutParams paramss = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
                     vres.setLayoutParams(paramss);
                     vres.setBackgroundColor(getResources().getColor(R.color.viewColor));
@@ -270,7 +272,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Log.e("tag", "click workde");
 
-                Dialog_Region dialog_region = new Dialog_Region(LoginActivity.this);
+         /*       Dialog_Region dialog_region = new Dialog_Region(LoginActivityOld.this);
                 dialog_region.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.white)));
                 dialog_region.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
                 dialog_region.show();
@@ -286,7 +288,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                     }
-                });
+                });*/
 
 
             }

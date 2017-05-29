@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         tools:replace="android:icon"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivityNew" android:windowSoftInputMode="stateHidden">
+        <activity android:name=".Class.LoginRegisterActivity" android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Dashboard" android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".Class.Dashboard" android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name="com.gun0912.tedpicker.ImagePickerActivity"

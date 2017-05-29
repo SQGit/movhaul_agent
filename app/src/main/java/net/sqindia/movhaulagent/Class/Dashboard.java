@@ -1,8 +1,10 @@
-package net.sqindia.movhaulagent;
+package net.sqindia.movhaulagent.Class;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
@@ -12,7 +14,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,6 +25,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.sloop.fonts.FontsManager;
+
+import net.sqindia.movhaulagent.Fragment.CompanyFragment;
+import net.sqindia.movhaulagent.Fragment.DriverFragment;
+import net.sqindia.movhaulagent.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +56,11 @@ public class Dashboard extends AppCompatActivity{
     ListView lview_state,lview_district;
     FrameLayout fl_header,fl_bottom;
     boolean bl_bottom;
+    Dialog dialog_yes_no;
+    Typeface tf;
+    TextView tv_txt1, tv_txt2, tv_txt3,tv_snack2,sb_text,tv_snack_act,tv_snack;
+    Button btn_yes, btn_no, btn_submit;
+    LinearLayout lt_content;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,11 +72,46 @@ public class Dashboard extends AppCompatActivity{
 
 
         lt_back = (LinearLayout) findViewById(R.id.action_back);
+        lt_content = (LinearLayout) findViewById(R.id.content);
         ib_driver_add = (ImageButton) findViewById(R.id.add_driver);
         ib_comp_add = (ImageButton) findViewById(R.id.add_company);
         fl_bottom = (FrameLayout) findViewById(R.id.bottom_layout);
 
         tv_header = (TextView) findViewById(R.id.textview_header);
+
+
+        dialog_yes_no = new Dialog(Dashboard.this);
+        dialog_yes_no.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_yes_no.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog_yes_no.setCancelable(false);
+        dialog_yes_no.setContentView(R.layout.dialog_yes_no);
+        btn_yes = (Button) dialog_yes_no.findViewById(R.id.button_yes);
+        btn_no = (Button) dialog_yes_no.findViewById(R.id.button_no);
+
+        tv_txt1 = (TextView) dialog_yes_no.findViewById(R.id.textView_1);
+        tv_txt2 = (TextView) dialog_yes_no.findViewById(R.id.textView_2);
+        tv_txt3 = (TextView) dialog_yes_no.findViewById(R.id.textView_3);
+
+        tv_txt1.setTypeface(tf);
+        tv_txt2.setTypeface(tf);
+        tv_txt3.setTypeface(tf);
+        btn_yes.setTypeface(tf);
+        btn_no.setTypeface(tf);
+
+        btn_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishAffinity();
+                dialog_yes_no.dismiss();
+            }
+        });
+
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog_yes_no.dismiss();
+            }
+        });
 
         lt_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +140,7 @@ public class Dashboard extends AppCompatActivity{
                 ft.commit();
                 fl_bottom.setVisibility(View.GONE);
                 tv_header.setText("Company");
+                lt_content.setVisibility(View.GONE);
 
             }
         });
@@ -119,6 +168,8 @@ public class Dashboard extends AppCompatActivity{
         Log.e("tag","frag_count : "+getSupportFragmentManager().getBackStackEntryCount());
         Log.e("tag","frag_countee : "+getSupportFragmentManager().findFragmentByTag("driver"));
         Log.e("tag","frags : "+getSupportFragmentManager().getFragments());
+
+        dialog_yes_no.show();
     }
 
     public void popupwithlistview(){
@@ -243,6 +294,7 @@ public class Dashboard extends AppCompatActivity{
                         b.dismiss();
                         tv_header.setText("Corporate");
                         fl_bottom.setVisibility(View.GONE);
+                        lt_content.setVisibility(View.GONE);
                         sts = 0;
                     }
 

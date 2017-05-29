@@ -6,7 +6,7 @@
     android:background="@drawable/bg"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="net.sqindia.movhaulagent.LoginActivity">
+    tools:context="net.sqindia.movhaulagent.LoginActivityOld">
 
 
     <LinearLayout
@@ -61,6 +61,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1">
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:id="@+id/content"
+            android:layout_height="wrap_content">
+
+            <include
+                layout="@layout/dashboard_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></include>
+        </LinearLayout>
 
 
     </FrameLayout>

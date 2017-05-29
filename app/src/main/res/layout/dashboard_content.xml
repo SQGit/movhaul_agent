@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow android:layout_height="1px"
+                android:layout_width="match_parent" >
+
+
+                <TextView
+                    android:id="@+id/textview_hear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Enrolled Drivers"
+                    android:textColor="#F65F52"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/textview_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:text="Jobs Completed"
+                    android:textColor="#F65F52"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_headerasf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:text="Comission Earned"
+                    android:textColor="#F65F52"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_headeraf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:text="Payments"
+                    android:textColor="#F65F52"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_headersafd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="Trucking"
+                    android:textColor="#F65F52"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_hesdfader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:text="Bus Rental"
+                    android:textColor="#F65F52"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_hesdfadesfr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:text="Road Assistance"
+                    android:textColor="#F65F52"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+
+            </TableRow>
+
+
+            <TableRow
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/_15sdp">
+
+
+                <TextView
+                    android:id="@+id/textview_hadsfear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/viewColor"
+                    android:drawableRight="@drawable/plus"
+                    android:gravity="center_vertical"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:text="Emeka"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/textview_hasdfeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColorLight"
+                    android:text="25"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_headasdferasf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColor"
+                    android:text="240 ₦"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_hesdfaderaf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColorLight"
+                    android:text="3500 ₦"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_headeasdfrsafd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColor"
+                    android:text="17"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textview_hesasdfdfader"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColorLight"
+                    android:text="5"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/asd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColor"
+                    android:text="3"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/_15sdp">
+
+
+                <TextView
+                    android:id="@+id/asdfasdf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/viewColor"
+                    android:gravity="center_vertical"
+                    android:drawableRight="@drawable/plus"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:text="Chibu"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/dfd"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColorLight"
+                    android:text="18"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sdfsdf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColor"
+                    android:text="420 ₦"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/dsfdf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColorLight"
+                    android:text="5700 ₦"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sadfas"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColor"
+                    android:text="10"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/ewsdf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColorLight"
+                    android:text="8"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/asdf"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:gravity="center|center_vertical"
+                    android:background="@color/viewColor"
+                    android:text="2"
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+
+            </TableRow>
+
+
+        </TableLayout>
+    </HorizontalScrollView>
+</LinearLayout>

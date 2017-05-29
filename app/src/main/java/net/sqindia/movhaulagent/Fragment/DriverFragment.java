@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent;
+package net.sqindia.movhaulagent.Fragment;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -29,6 +29,8 @@ import com.bumptech.glide.Glide;
 import com.gun0912.tedpicker.ImagePickerActivity;
 import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
+
+import net.sqindia.movhaulagent.R;
 
 import java.io.File;
 import java.util.ArrayList;

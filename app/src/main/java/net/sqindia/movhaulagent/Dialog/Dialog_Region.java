@@ -1,10 +1,9 @@
-package net.sqindia.movhaulagent;
+package net.sqindia.movhaulagent.Dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -16,10 +15,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import net.sqindia.movhaulagent.LoginActivityOld;
+import net.sqindia.movhaulagent.R;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ class Dialog_Region extends Dialog {
     ArrayList<String> state_lists = new ArrayList<>();
     ArrayList<String> district_lists = new ArrayList<>();
     ListAdapter adapter1, adapter2, adapter3;
-    LoginActivity regi;
+    LoginActivityOld regi;
     String str_states, str_districts;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -93,7 +94,7 @@ class Dialog_Region extends Dialog {
 
         Log.e("tag","dialog_worked");
 
-        regi = new LoginActivity();
+        regi = new LoginActivityOld();
 
         layouts = new int[]{
                 R.layout.register_state0,

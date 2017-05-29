@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent;
+package net.sqindia.movhaulagent.Model;
 
 import java.util.ArrayList;
 

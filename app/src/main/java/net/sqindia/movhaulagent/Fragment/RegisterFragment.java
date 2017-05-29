@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent;
+package net.sqindia.movhaulagent.Fragment;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -28,6 +27,9 @@ import com.bumptech.glide.Glide;
 import com.gun0912.tedpicker.ImagePickerActivity;
 import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
+
+import net.sqindia.movhaulagent.Fragment.LoginFragment;
+import net.sqindia.movhaulagent.R;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -56,6 +58,8 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
     String str_id_card_photo,str_photograph;
     ImageView iv_id_card,iv_photograph;
 
+    LinearLayout lt_action_back;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,6 +78,11 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
 
         tv_login = (TextView) get_RegisterView.findViewById(R.id.textview_login);
         tv_activity_header = (TextView)getActivity().findViewById(R.id.textview_header);
+        tv_activity_header.setText(getString(R.string.register));
+        Log.e("tag","register");
+
+        lt_action_back  = (LinearLayout) getActivity().findViewById(R.id.action_back);
+        lt_action_back.setVisibility(View.VISIBLE);
 
         til_name = (TextInputLayout) get_RegisterView.findViewById(R.id.textinput_username);
         til_address = (TextInputLayout) get_RegisterView.findViewById(R.id.textinput_address);
@@ -122,6 +131,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 ft.replace(R.id.fragment_container, new LoginFragment());
                 ft.commit();
                 tv_activity_header.setText(getString(R.string.login));
+                lt_action_back.setVisibility(View.GONE);
             }
         });
 
