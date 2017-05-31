@@ -3,9 +3,11 @@ package net.sqindia.movhaulagent.Fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,12 +32,15 @@ import net.sqindia.movhaulagent.R;
 
 public class LoginFragment extends Fragment {
 
-    TextView tv_header_txt,tv_register,tv_admin;
+    TextView tv_header_txt,tv_register,tv_admin,tv_snack;
     TextInputLayout til_phone,til_user_name,til_password;
     Typeface tf;
     LinearLayout lt_agent,lt_admin,lt_bottom;
     Button btn_submit;
     boolean bl_admin;
+    EditText et_phone;
+    String str_phone;
+    Snackbar snackbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +65,15 @@ public class LoginFragment extends Fragment {
 
         tv_admin = (TextView) get_LoginView.findViewById(R.id.textview_admin);
         lt_bottom = (LinearLayout) get_LoginView.findViewById(R.id.bottom);
+
+        et_phone = (EditText) get_LoginView.findViewById(R.id.edittext_login_phone);
+
+        snackbar = Snackbar
+                .make(getActivity().findViewById(R.id.top),"No NetWork", Snackbar.LENGTH_LONG);
+        View sbView = snackbar.getView();
+        tv_snack = (android.widget.TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        tv_snack.setTextColor(Color.WHITE);
+        tv_snack.setTypeface(tf);
 
 
         til_phone.setTypeface(tf);
@@ -139,8 +154,23 @@ public class LoginFragment extends Fragment {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goDash  = new Intent(getActivity(),Dashboard.class);
-                getActivity().startActivity(goDash);
+                str_phone = et_phone.getText().toString().trim();
+
+                if(!str_phone.isEmpty()) {
+                    if(str_phone.length()>9) {
+                        Intent goDash = new Intent(getActivity(), Dashboard.class);
+                        getActivity().startActivity(goDash);
+                    }
+                    else{
+                        snackbar.show();
+                        tv_snack.setText("Enter Valid Mobile Number.");
+                    }
+                }
+                else{
+                    snackbar.show();
+                    tv_snack.setText("Enter  Mobile Number.");
+
+                }
             }
         });
 

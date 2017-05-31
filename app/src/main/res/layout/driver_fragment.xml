@@ -203,7 +203,7 @@
                         android:orientation="horizontal">
 
                         <com.hbb20.CountryCodePicker
-                            android:id="@+id/ccp_register"
+                            android:id="@+id/ccp_driver"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
@@ -406,6 +406,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/rect_bg"
                         android:layout_marginTop="@dimen/_10sdp">
 
 
@@ -414,6 +416,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/_3sdp"
                             android:text="Primary Route "
+                            android:paddingTop="@dimen/_5sdp"
                             android:layout_marginRight="@dimen/_15sdp"
                             android:textColor="@color/textColor"
                             android:textSize="@dimen/_12sdp" />
@@ -423,6 +426,8 @@
                             android:orientation="horizontal"
                             android:layout_gravity="left"
                             android:layout_marginBottom="@dimen/_2sdp"
+                            android:paddingBottom="@dimen/_5sdp"
+                            android:paddingLeft="@dimen/_10sdp"
                             android:gravity="left|center_vertical"
                             android:layout_height="match_parent">
 
@@ -430,7 +435,7 @@
                             <RadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textColor="@color/textColor"
                                 android:text="Local" />
 
@@ -439,25 +444,21 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_15sdp"
                                 android:textColor="@color/textColor"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:text="InterState" />
 
                         </RadioGroup>
 
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_marginBottom="@dimen/_3sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:background="#E1E1E1" />
+
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:background="@color/rect_bg"
                         android:id="@+id/layout_service_range"
                         android:layout_marginTop="@dimen/_10sdp">
 
@@ -467,6 +468,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/_3sdp"
                             android:text="Service Range "
+                            android:paddingTop="@dimen/_5sdp"
                             android:layout_marginRight="@dimen/_15sdp"
                             android:textColor="@color/textColor"
                             android:textSize="@dimen/_12sdp" />
@@ -475,7 +477,9 @@
                             android:layout_width="match_parent"
                             android:orientation="horizontal"
                             android:layout_gravity="center"
+                            android:paddingBottom="@dimen/_5sdp"
                             android:layout_marginBottom="@dimen/_2sdp"
+                            android:paddingLeft="@dimen/_10sdp"
                             android:gravity="left|center_vertical"
                             android:layout_height="match_parent">
 
@@ -483,7 +487,7 @@
                             <RadioButton
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textColor="@color/textColor"
                                 android:text="50-100 miles" />
 
@@ -492,7 +496,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_10sdp"
                                 android:textColor="@color/textColor"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:text="100-200 miles" />
 
                             <RadioButton
@@ -500,19 +504,13 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_10sdp"
                                 android:textColor="@color/textColor"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:text="200+ miles" />
 
                         </RadioGroup>
 
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_marginBottom="@dimen/_3sdp"
-                        android:layout_marginRight="@dimen/_5sdp"
-                        android:background="#E1E1E1" />
 
 
 
@@ -527,7 +525,7 @@
                         android:gravity="center_vertical|left">
 
                         <android.support.design.widget.TextInputLayout
-                            android:id="@+id/textinput_typedd"
+                            android:id="@+id/textinput_loc_govt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/_3sdp"
@@ -609,17 +607,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:gravity="center_vertical">
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:gravity="center_vertical|right">
 
                         <LinearLayout
                             android:id="@+id/layout_id_card"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="left"
+                            android:layout_gravity="right"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:background="@drawable/btn_bg1"
-                            android:gravity="bottom"
+                            android:gravity="right"
                             android:orientation="horizontal">
 
 
@@ -644,7 +642,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="right"
-                                    android:text="Driving Licence"
+                                    android:text="Upload DL"
                                     android:textColor="#F65F52"
                                     android:textSize="@dimen/_10sdp" />
 

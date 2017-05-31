@@ -1,8 +1,6 @@
 package net.sqindia.movhaulagent.Class;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -13,7 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.sloop.fonts.FontsManager;
 
@@ -24,7 +21,7 @@ import net.sqindia.movhaulagent.R;
  * Created by Salman on 23-05-2017.
  */
 
-public class LoginRegisterActivity extends AppCompatActivity {
+public class LoginRegister extends AppCompatActivity {
 
     boolean bl_fragment;
     LinearLayout lt_action_back;
@@ -34,8 +31,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_register_activity);
 
-        FontsManager.initFormAssets(LoginRegisterActivity.this, "fonts/lato.ttf");
-        FontsManager.changeFonts(LoginRegisterActivity.this);
+        FontsManager.initFormAssets(LoginRegister.this, "fonts/lato.ttf");
+        FontsManager.changeFonts(LoginRegister.this);
 
         lt_action_back  = (LinearLayout) findViewById(R.id.action_back);
 

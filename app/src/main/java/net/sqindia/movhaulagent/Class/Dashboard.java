@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -37,30 +38,30 @@ import java.util.List;
  * Created by Salman on 25-05-2017.
  */
 
-public class Dashboard extends AppCompatActivity{
+public class Dashboard extends AppCompatActivity {
 
     LinearLayout lt_back;
-    ImageButton ib_driver_add,ib_comp_add;
+    ImageButton ib_driver_add, ib_comp_add;
 
     List<String> ar_comp_lists = new ArrayList<String>();
 
     TextView tv_header;
     ImageView img_back;
-    private ViewPager viewPager;
-    private int[] layouts;
     ArrayList<String> state_lists = new ArrayList<>();
     ArrayList<String> district_lists = new ArrayList<>();
     ListAdapter adapter1, adapter2, adapter3;
     AlertDialog b;
     int sts;
-    ListView lview_state,lview_district;
-    FrameLayout fl_header,fl_bottom;
+    ListView lview_state, lview_district;
+    FrameLayout fl_header, fl_bottom;
     boolean bl_bottom;
     Dialog dialog_yes_no;
     Typeface tf;
-    TextView tv_txt1, tv_txt2, tv_txt3,tv_snack2,sb_text,tv_snack_act,tv_snack;
+    TextView tv_txt1, tv_txt2, tv_txt3, tv_snack2, sb_text, tv_snack_act, tv_snack;
     Button btn_yes, btn_no, btn_submit;
     LinearLayout lt_content;
+    private ViewPager viewPager;
+    private int[] layouts;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -136,12 +137,29 @@ public class Dashboard extends AppCompatActivity{
 
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_container, new CompanyFragment());
-                ft.addToBackStack("driver");
+                ft.addToBackStack("company");
                 ft.commit();
                 fl_bottom.setVisibility(View.GONE);
                 tv_header.setText("Company");
                 lt_content.setVisibility(View.GONE);
 
+            }
+        });
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+
+
+
+                FragmentManager manager = getSupportFragmentManager();
+                int index = manager.getBackStackEntryCount() - 1;
+                Log.e("tag","bakstk"+index);
+                if(index<0){
+                    fl_bottom.setVisibility(View.VISIBLE);
+                    tv_header.setText("Dashboard");
+                    lt_content.setVisibility(View.VISIBLE);
+
+                }
             }
         });
     }
@@ -150,7 +168,7 @@ public class Dashboard extends AppCompatActivity{
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        bl_bottom = fl_bottom.getVisibility()== View.VISIBLE ;
+        bl_bottom = fl_bottom.getVisibility() == View.VISIBLE;
         outState.putBoolean("bl_layout", bl_bottom);
     }
 
@@ -160,25 +178,42 @@ public class Dashboard extends AppCompatActivity{
         super.onRestoreInstanceState(savedInstanceState);
         bl_bottom = savedInstanceState.getBoolean("bl_layout");
         fl_bottom.setVisibility(bl_bottom ? View.VISIBLE : View.GONE);
+        lt_content.setVisibility(bl_bottom ? View.VISIBLE : View.GONE);
     }
 
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        Log.e("tag","frag_count : "+getSupportFragmentManager().getBackStackEntryCount());
-        Log.e("tag","frag_countee : "+getSupportFragmentManager().findFragmentByTag("driver"));
-        Log.e("tag","frags : "+getSupportFragmentManager().getFragments());
+        Log.e("tag", "frag_count : " + getSupportFragmentManager().getBackStackEntryCount());
+        Log.e("tag", "frag_countee : " + getSupportFragmentManager().findFragmentByTag("driver"));
 
-        dialog_yes_no.show();
+
+        FragmentManager manager = getSupportFragmentManager();
+        int index = manager.getBackStackEntryCount() - 1;
+
+        if(index>=0){
+
+            Log.e("tag", "frags : " + getSupportFragmentManager().getFragments());
+            manager.popBackStackImmediate();
+            fl_bottom.setVisibility(View.VISIBLE);
+            tv_header.setText("Dashboard");
+            lt_content.setVisibility(View.VISIBLE);
+
+        }
+        else{
+            dialog_yes_no.show();
+        }
+
+
+        //
     }
 
-    public void popupwithlistview(){
+    public void popupwithlistview() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(Dashboard.this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.register_state, null);
         dialogBuilder.setView(dialogView);
         b = dialogBuilder.create();
-
 
 
         state_lists.clear();
@@ -195,24 +230,20 @@ public class Dashboard extends AppCompatActivity{
         district_lists.add("IFindCard");
         district_lists.add("Zoho");
 
-        sts =0;
+        sts = 0;
 
         fl_header = (FrameLayout) dialogView.findViewById(R.id.framelayout);
         fl_header.setVisibility(View.GONE);
         lview_state = (ListView) dialogView.findViewById(R.id.lview);
         lview_district = (ListView) dialogView.findViewById(R.id.lview1);
-        Log.e("tag","stsiz: "+state_lists.size());
+        Log.e("tag", "stsiz: " + state_lists.size());
         adapter1 = new ListAdapter(getApplicationContext(), R.layout.dialog_region_txts0, state_lists);
         lview_state.setAdapter(adapter1);
         adapter2 = new ListAdapter(getApplicationContext(), R.layout.dialog_region_txts, district_lists);
         lview_district.setAdapter(adapter2);
 
 
-
-
         b.show();
-
-
 
 
     }
@@ -256,7 +287,7 @@ public class Dashboard extends AppCompatActivity{
             final View vie_line = arow.findViewById(R.id.viewcolor);
 
 
-            if(posi == data_lists.size()-1){
+            if (posi == data_lists.size() - 1) {
                 vie_line.setVisibility(View.GONE);
             }
 
@@ -267,29 +298,30 @@ public class Dashboard extends AppCompatActivity{
             arow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(sts ==0) {
+                    if (sts == 0) {
 
-                        if(posi == 0){
+                        if (posi == 0) {
                             Log.e("tag", "clicked" + posi);
                             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                             ft.replace(R.id.fragment_container, new DriverFragment());
+                            ft.addToBackStack("driver");
                             ft.commit();
                             fl_bottom.setVisibility(View.GONE);
                             tv_header.setText("Driver");
+                            lt_content.setVisibility(View.GONE);
                             b.dismiss();
 
-                        }
-                        else{
+                        } else {
                             lview_state.setVisibility(View.GONE);
                             lview_district.setVisibility(View.VISIBLE);
                             sts = 1;
                         }
-                    }
-                    else{
+                    } else {
                         fl_header.setVisibility(View.VISIBLE);
 
                         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.fragment_container, new DriverFragment());
+                        ft.addToBackStack("driver_corporate");
                         ft.commit();
                         b.dismiss();
                         tv_header.setText("Corporate");

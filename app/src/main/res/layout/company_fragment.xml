@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/layout_login"
+
+        <ScrollView
+            android:id="@+id/layout_company"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/bottom"
+            >
 
 
             <LinearLayout
@@ -99,7 +99,7 @@
                         android:orientation="horizontal">
 
                         <com.hbb20.CountryCodePicker
-                            android:id="@+id/ccp_login"
+                            android:id="@+id/ccp_company"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -229,36 +229,51 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_25sdp"
+
+
+
+        </ScrollView>
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="@dimen/_3sdp">
+
+
+            <Button
+                android:id="@+id/button_submit"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/btn_bg"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:padding="@dimen/_3sdp">
-
-
-                <Button
-                    android:id="@+id/button_submit"
-                    android:layout_width="@dimen/_110sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:background="@drawable/btn_bg"
-                    android:gravity="center"
-                    android:text="@string/submit"
-                    android:textAllCaps="false"
-                    android:textColor="@color/redColor"
-                    android:textSize="@dimen/_15sdp" />
-
-
-            </LinearLayout>
+                android:text="@string/submit"
+                android:textAllCaps="false"
+                android:textColor="@color/redColor"
+                android:textSize="@dimen/_15sdp" />
 
 
         </LinearLayout>
 
-
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom">
 
             <include layout="@layout/down_icon" />
@@ -266,6 +281,7 @@
         </LinearLayout>
 
 
-    </FrameLayout>
 
-</LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -3,10 +3,12 @@ package net.sqindia.movhaulagent.Fragment;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,7 +48,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
     private static final int REQUEST_CODE_PHOTO = 20;
     TextView tv_activity_header,tv_login;
     TextInputLayout til_name,til_address,til_state,til_city,til_phone,til_email,til_bank;
-    EditText et_name,et_address,et_state,et_city,et_phone,et_email,et_bank,et_coverage;
+    EditText et_name,et_address,et_state,et_city,et_phone,et_email,et_bank,et_coverage,et_bank_no;
     LinearLayout lt_state,lt_city,lt_bank,lt_coverage,lt_id_card,lt_photo;
     public String[] ar_banks;
     public String[] ar_state;
@@ -59,6 +62,11 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
     ImageView iv_id_card,iv_photograph;
 
     LinearLayout lt_action_back;
+    Button btn_submit;
+
+    Snackbar snackbar;
+    TextView tv_snack;
+    String str_name,str_address,str_state,str_city,str_phone,str_email,str_coverage,str_bank,str_bank_no;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +77,13 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
         FontsManager.initFormAssets(getActivity(), "fonts/lato.ttf");
         FontsManager.changeFonts(get_RegisterView);
         tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/lato.ttf");
+
+        snackbar = Snackbar
+                .make(getActivity().findViewById(R.id.top),"No NetWork", Snackbar.LENGTH_LONG);
+        View sbView = snackbar.getView();
+        tv_snack = (android.widget.TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        tv_snack.setTextColor(Color.WHITE);
+        tv_snack.setTypeface(tf);
 
         ar_banks = new String[]{" HSBC ", " Hongkong&Sangai Bank ", " SAFC ", " Bank Of Africa ", "Federal Bank of Nigeria", " LEKIA Bank ", " Nigeria Bank ",};
 
@@ -98,10 +113,16 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
         lt_coverage = (LinearLayout) get_RegisterView.findViewById(R.id.layout_coverage);
         lt_id_card = (LinearLayout) get_RegisterView.findViewById(R.id.layout_id_card);
         lt_photo = (LinearLayout) get_RegisterView.findViewById(R.id.layout_photograph);
+        btn_submit = (Button) get_RegisterView.findViewById(R.id.button_submit);
 
         iv_id_card = (ImageView)  get_RegisterView.findViewById(R.id.imageview_idcard);
         iv_photograph = (ImageView)  get_RegisterView.findViewById(R.id.imageview_photograph);
 
+        et_name = (EditText) get_RegisterView.findViewById(R.id.edittext_user_name);
+        et_address = (EditText) get_RegisterView.findViewById(R.id.edittext_address);
+        et_phone = (EditText) get_RegisterView.findViewById(R.id.edittext_phone);
+        et_email = (EditText) get_RegisterView.findViewById(R.id.edittext_email);
+        et_bank_no = (EditText) get_RegisterView.findViewById(R.id.edittext_bank_no);
         et_bank = (EditText) get_RegisterView.findViewById(R.id.edittext_bank);
         et_state = (EditText) get_RegisterView.findViewById(R.id.edittext_state);
         et_city = (EditText) get_RegisterView.findViewById(R.id.edittext_city);
@@ -272,6 +293,81 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
 
             }
         });
+
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str_name = et_name.getText().toString().trim();
+                str_address = et_address.getText().toString().trim();
+                str_state = et_state.getText().toString().trim();
+                str_city = et_city.getText().toString().trim();
+                str_phone = et_phone.getText().toString().trim();
+                str_email = et_email.getText().toString().trim();
+                str_coverage = et_coverage.getText().toString().trim();
+                str_bank = et_bank.getText().toString().trim();
+                str_bank_no = et_bank_no.getText().toString().trim();
+
+                if(!str_name.isEmpty() && str_name.length()>4){
+                    if(!str_address.isEmpty() && str_address.length()>4){
+                        if(!str_state.isEmpty()){
+                            if(!str_city.isEmpty()){
+                                if(!str_phone.isEmpty() && str_phone.length()>9){
+                                    if(!str_email.isEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(str_email).matches()){
+                                        if(!str_bank_no.isEmpty() && str_bank_no.length()>9){
+
+                                        }
+                                        else{
+                                            snackbar.show();
+                                            tv_snack.setText("Enter Valid Account Number");
+                                        }
+                                    }
+                                    else{
+                                        snackbar.show();
+                                        tv_snack.setText("Enter Valid Email");
+                                    }
+                                }
+                                else{
+                                    snackbar.show();
+                                    tv_snack.setText("Enter Valid Phone Number");
+                                }
+                            }
+                            else{
+                                snackbar.show();
+                                tv_snack.setText("Choose City");
+                            }
+
+                        }
+                        else{
+                            snackbar.show();
+                            tv_snack.setText("Choose State");
+                        }
+                    }
+                    else{
+                        snackbar.show();
+                        tv_snack.setText("Enter Valid Address.");
+                    }
+                }
+                else{
+                    snackbar.show();
+                    tv_snack.setText("Enter Valid Name.");
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
