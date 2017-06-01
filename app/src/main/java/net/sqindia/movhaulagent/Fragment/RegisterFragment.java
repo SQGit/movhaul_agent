@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,6 +33,7 @@ import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
 
 import net.sqindia.movhaulagent.Fragment.LoginFragment;
+import net.sqindia.movhaulagent.Model.Config_Utils;
 import net.sqindia.movhaulagent.R;
 
 import java.io.File;
@@ -44,12 +46,12 @@ import java.util.List;
 
 public class RegisterFragment extends android.support.v4.app.Fragment {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 234;
-    private static final int REQUEST_CODE =10 ;
+    private static final int REQUEST_CODE = 10;
     private static final int REQUEST_CODE_PHOTO = 20;
-    TextView tv_activity_header,tv_login;
-    TextInputLayout til_name,til_address,til_state,til_city,til_phone,til_email,til_bank;
-    EditText et_name,et_address,et_state,et_city,et_phone,et_email,et_bank,et_coverage,et_bank_no;
-    LinearLayout lt_state,lt_city,lt_bank,lt_coverage,lt_id_card,lt_photo;
+    TextView tv_activity_header, tv_login;
+    TextInputLayout til_name, til_address, til_state, til_city, til_phone, til_email, til_bank;
+    EditText et_name, et_address, et_state, et_city, et_phone, et_email, et_bank, et_coverage, et_bank_no;
+    LinearLayout lt_state, lt_city, lt_bank, lt_coverage, lt_id_card, lt_photo;
     public String[] ar_banks;
     public String[] ar_state;
     public String[] ar_city;
@@ -58,15 +60,18 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
     CountryCodePicker ccp_register;
 
     ArrayList<Uri> image_uris;
-    String str_id_card_photo,str_photograph;
-    ImageView iv_id_card,iv_photograph;
+    String str_id_card_photo, str_photograph;
+    ImageView iv_id_card, iv_photograph;
 
     LinearLayout lt_action_back;
     Button btn_submit;
 
     Snackbar snackbar;
     TextView tv_snack;
-    String str_name,str_address,str_state,str_city,str_phone,str_email,str_coverage,str_bank,str_bank_no;
+    CheckBox cb_terms;
+    String str_name, str_address, str_state, str_city, str_phone, str_email, str_coverage, str_bank, str_bank_no;
+
+    Config_Utils config;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,24 +84,26 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
         tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/lato.ttf");
 
         snackbar = Snackbar
-                .make(getActivity().findViewById(R.id.top),"No NetWork", Snackbar.LENGTH_LONG);
+                .make(getActivity().findViewById(R.id.top), "No NetWork", Snackbar.LENGTH_LONG);
         View sbView = snackbar.getView();
         tv_snack = (android.widget.TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
         tv_snack.setTextColor(Color.WHITE);
         tv_snack.setTypeface(tf);
 
+        config = new Config_Utils();
+
         ar_banks = new String[]{" HSBC ", " Hongkong&Sangai Bank ", " SAFC ", " Bank Of Africa ", "Federal Bank of Nigeria", " LEKIA Bank ", " Nigeria Bank ",};
 
-        ar_state = new String[]{"Abia","Akwa Ibom","Benue","Borno","Delta","Enugu","Edo","Jigawa","Kebbi","Lagos","Ogun","Oyo","Rivers","Yobe"};
+        ar_state = new String[]{"Abia", "Akwa Ibom", "Benue", "Borno", "Delta", "Enugu", "Edo", "Jigawa", "Kebbi", "Lagos", "Ogun", "Oyo", "Rivers", "Yobe"};
 
-        ar_city = new String[]{"Asaba","Bauchi","Dutse","Jimeta","Kanduna","Lafia","Lekki","Oron","Port Harcourt","Sokoto","Warri","Zaria"};
+        ar_city = new String[]{"Asaba", "Bauchi", "Dutse", "Jimeta", "Kanduna", "Lafia", "Lekki", "Oron", "Port Harcourt", "Sokoto", "Warri", "Zaria"};
 
         tv_login = (TextView) get_RegisterView.findViewById(R.id.textview_login);
-        tv_activity_header = (TextView)getActivity().findViewById(R.id.textview_header);
+        tv_activity_header = (TextView) getActivity().findViewById(R.id.textview_header);
         tv_activity_header.setText(getString(R.string.register));
-        Log.e("tag","register");
+        Log.e("tag", "register");
 
-        lt_action_back  = (LinearLayout) getActivity().findViewById(R.id.action_back);
+        lt_action_back = (LinearLayout) getActivity().findViewById(R.id.action_back);
         lt_action_back.setVisibility(View.VISIBLE);
 
         til_name = (TextInputLayout) get_RegisterView.findViewById(R.id.textinput_username);
@@ -115,8 +122,8 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
         lt_photo = (LinearLayout) get_RegisterView.findViewById(R.id.layout_photograph);
         btn_submit = (Button) get_RegisterView.findViewById(R.id.button_submit);
 
-        iv_id_card = (ImageView)  get_RegisterView.findViewById(R.id.imageview_idcard);
-        iv_photograph = (ImageView)  get_RegisterView.findViewById(R.id.imageview_photograph);
+        iv_id_card = (ImageView) get_RegisterView.findViewById(R.id.imageview_idcard);
+        iv_photograph = (ImageView) get_RegisterView.findViewById(R.id.imageview_photograph);
 
         et_name = (EditText) get_RegisterView.findViewById(R.id.edittext_user_name);
         et_address = (EditText) get_RegisterView.findViewById(R.id.edittext_address);
@@ -127,6 +134,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
         et_state = (EditText) get_RegisterView.findViewById(R.id.edittext_state);
         et_city = (EditText) get_RegisterView.findViewById(R.id.edittext_city);
         et_coverage = (EditText) get_RegisterView.findViewById(R.id.edittext_coverage);
+        cb_terms = (CheckBox) get_RegisterView.findViewById(R.id.check_box);
 
 
         ccp_register = (CountryCodePicker) get_RegisterView.findViewById(R.id.ccp_register);
@@ -141,10 +149,6 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
         ccp_register.setTypeFace(tf);
 
 
-
-
-
-
         tv_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,24 +160,36 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        et_address.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                    et_phone.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         lt_bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popup(ar_banks,et_bank);
+                popup(ar_banks, et_bank);
             }
         });
 
         lt_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popup(ar_state,et_state);
+                popup(config.states, et_state);
             }
         });
 
         lt_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popup(ar_city,et_city);
+                String city = et_state.getText().toString().trim();
+                popup(config.AbiaState, et_city);
             }
         });
 
@@ -184,56 +200,51 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
 
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
 
-                    lt_coverage.setVisibility(View.VISIBLE);
+                    if (et_coverage.getText().toString().trim().length() > 0) {
 
-                    String io = et_coverage.getText().toString();
+                        lt_coverage.setVisibility(View.VISIBLE);
+                        String io = et_coverage.getText().toString();
+                        LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        lparams.setMargins(5, 5, 5, 5);
+                        TextView tv = new TextView(getActivity());
+                        tv.setLayoutParams(lparams);
+                        tv.setGravity(Gravity.LEFT);
+                        Drawable img = getResources().getDrawable(R.drawable.del_icon);
+                        img.setBounds(0, 0, 20, 20);
+                        tv.setCompoundDrawables(null, null, img, null);
+                        tv.setCompoundDrawablePadding(5);
+                        tv.setBackground(getResources().getDrawable(R.drawable.chips_edittext_gb));
+                        tv.setTextColor(getResources().getColor(R.color.textColor));
+                        tv.setPadding(15, 10, 10, 5);
+                        tv.setGravity(Gravity.CENTER);
 
+                        tv.setText(io);
+                        lt_coverage.addView(tv);
 
-                    LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    lparams.setMargins(5, 5, 5,  5);
-                    TextView tv = new TextView(getActivity());
-                    tv.setLayoutParams(lparams);
-                    tv.setGravity(Gravity.LEFT);
+                        et_coverage.setText("");
 
-                    Drawable img = getResources().getDrawable(R.drawable.del_icon);
-                    img.setBounds(0, 0, 20, 20);
-                    tv.setCompoundDrawables(null, null, img, null);
-
-                    //tv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.close, 0);
-                    //  tv.setCompoundDrawables(null,null,getResources().getDrawable(R.mipmap.close),null);
-                    tv.setCompoundDrawablePadding(5);
-                    tv.setBackground(getResources().getDrawable(R.drawable.chips_edittext_gb));
-                    tv.setTextColor(getResources().getColor(R.color.textColor));
-                    tv.setPadding(15, 10, 10, 5);
-                    tv.setGravity(Gravity.CENTER);
-
-                    tv.setText(io);
-                    lt_coverage.addView(tv);
-
-                    et_coverage.setText("");
-
-                    tv.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            lt_coverage.removeView(v);
-                            if (lt_coverage.getChildCount() == 0) {
-                                lt_coverage.setVisibility(View.GONE);
+                        tv.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                lt_coverage.removeView(v);
+                                if (lt_coverage.getChildCount() == 0) {
+                                    lt_coverage.setVisibility(View.GONE);
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    Log.e("tag", "count: " + lt_coverage.getChildCount());
+                        Log.e("tag", "count: " + lt_coverage.getChildCount());
 
-
+                    }
                 }
+
 
 
                 return false;
 
             }
         });
-
 
 
         lt_id_card.setOnClickListener(new View.OnClickListener() {
@@ -308,75 +319,74 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 str_bank = et_bank.getText().toString().trim();
                 str_bank_no = et_bank_no.getText().toString().trim();
 
-                if(!str_name.isEmpty() && str_name.length()>4){
-                    if(!str_address.isEmpty() && str_address.length()>4){
-                        if(!str_state.isEmpty()){
-                            if(!str_city.isEmpty()){
-                                if(!str_phone.isEmpty() && str_phone.length()>9){
-                                    if(!str_email.isEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(str_email).matches()){
-                                        if(!str_bank_no.isEmpty() && str_bank_no.length()>9){
+                if (!str_name.isEmpty() && str_name.length() > 4) {
+                    if (!str_address.isEmpty() && str_address.length() > 4) {
+                        if (!str_state.isEmpty()) {
+                            if (!str_city.isEmpty()) {
+                                if (!str_phone.isEmpty() && str_phone.length() > 9) {
+                                    if (!str_email.isEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(str_email).matches()) {
+                                        if (!str_bank_no.isEmpty() && str_bank_no.length() > 9) {
+                                            if (str_id_card_photo != null) {
+                                                if (str_photograph != null) {
+                                                    if(cb_terms.isChecked()){
 
-                                        }
-                                        else{
+                                                    }
+                                                    else{
+                                                        snackbar.show();
+                                                        tv_snack.setText("Please Read & Agree the Terms and Conditions");
+
+                                                    }
+
+                                                } else {
+                                                    snackbar.show();
+                                                    tv_snack.setText("Upload Passport size photograph");
+                                                }
+                                            } else {
+                                                snackbar.show();
+                                                tv_snack.setText("Upload State Issued ID Card");
+                                            }
+                                        } else {
                                             snackbar.show();
                                             tv_snack.setText("Enter Valid Account Number");
+                                            et_bank_no.requestFocus();
                                         }
-                                    }
-                                    else{
+                                    } else {
                                         snackbar.show();
                                         tv_snack.setText("Enter Valid Email");
+                                        et_email.requestFocus();
                                     }
-                                }
-                                else{
+                                } else {
                                     snackbar.show();
                                     tv_snack.setText("Enter Valid Phone Number");
                                 }
-                            }
-                            else{
+                            } else {
                                 snackbar.show();
                                 tv_snack.setText("Choose City");
                             }
 
-                        }
-                        else{
+                        } else {
                             snackbar.show();
                             tv_snack.setText("Choose State");
                         }
-                    }
-                    else{
+                    } else {
                         snackbar.show();
                         tv_snack.setText("Enter Valid Address.");
+                        et_address.requestFocus();
                     }
-                }
-                else{
+                } else {
                     snackbar.show();
                     tv_snack.setText("Enter Valid Name.");
+                    et_name.requestFocus();
                 }
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         return get_RegisterView;
     }
 
 
-    public void popup(final String[] ar_bank, final EditText et_data){
+    public void popup(final String[] ar_bank, final EditText et_data) {
 
         ar_banks_copy = ar_bank;
 
@@ -418,7 +428,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
             a.addView(imageView);
             a.addView(tss);
             myRoot.addView(a);
-            if(i!=ar_banks_copy.length-1)
+            if (i != ar_banks_copy.length - 1)
                 myRoot.addView(vres);
 
             final int k = i;
@@ -453,9 +463,7 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 Glide.with(getActivity()).load(new File(str_id_card_photo)).centerCrop().into(iv_id_card);
             }
 
-        }
-
-        else if (resultCode == getActivity().RESULT_OK && requestCode == REQUEST_CODE_PHOTO) {
+        } else if (resultCode == getActivity().RESULT_OK && requestCode == REQUEST_CODE_PHOTO) {
 
 
             image_uris = data.getParcelableArrayListExtra(com.gun0912.tedpicker.ImagePickerActivity.EXTRA_IMAGE_URIS);

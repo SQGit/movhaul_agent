@@ -97,13 +97,14 @@
                     android:textColorHint="@color/textColor">
 
                     <EditText
-                        android:id="@+id/edittext_reg_name"
+                        android:id="@+id/edittext_username"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="User Name"
                         android:inputType="text"
                         android:maxLines="1"
+                        android:maxLength="20"
                         android:paddingTop="@dimen/_10sdp"
                         android:textColor="@color/textColor"
                         android:textColorHint="@color/textColor"
@@ -126,11 +127,12 @@
                     android:textColorHint="@color/textColor">
 
                     <EditText
-                        android:id="@+id/edittext_reg_address"
+                        android:id="@+id/edittext_password"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="Password"
+                        android:maxLength="20"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:paddingTop="@dimen/_5sdp"

@@ -8,11 +8,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_above="@+id/bottom"
-        android:paddingBottom="@dimen/_5sdp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="@dimen/_5sdp">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -78,6 +78,7 @@
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:hint="Address"
+                            android:imeOptions="actionNext"
                             android:inputType="text"
                             android:maxLines="1"
                             android:paddingTop="@dimen/_5sdp"
@@ -199,8 +200,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:layout_marginTop="@dimen/_3sdp"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <com.hbb20.CountryCodePicker
@@ -209,8 +210,8 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="bottom"
                             android:layout_marginTop="@dimen/_5sdp"
-                            app:arrowSize="@dimen/_13sdp"
                             android:gravity="bottom"
+                            app:arrowSize="@dimen/_13sdp"
                             app:contentColor="@color/textColor"
                             app:customMasterCountries="NG,US,IN"
                             app:defaultNameCode="NG"
@@ -230,6 +231,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
+                                android:focusable="true"
                                 android:hint="Phone"
                                 android:inputType="phone"
                                 android:maxLength="11"
@@ -237,6 +239,7 @@
                                 android:paddingTop="@dimen/_5sdp"
                                 android:textColor="@color/textColor"
                                 android:textSize="@dimen/_12sdp" />
+
                         </android.support.design.widget.TextInputLayout>
 
 
@@ -283,9 +286,9 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="Enter Coverage Area"
+                        android:imeOptions="actionDone"
                         android:inputType="text"
                         android:maxLines="1"
-                        android:imeOptions="actionDone"
                         android:minHeight="@dimen/_30sdp"
                         android:paddingTop="@dimen/_10sdp"
                         android:textColor="@color/textColor"
@@ -299,23 +302,31 @@
                         android:background="#E1E1E1" />
 
 
-                    <LinearLayout
-                        android:id="@+id/layout_coverage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:background="@color/rect_bg"
-                        android:orientation="horizontal"
-                        android:paddingLeft="@dimen/_5sdp"
-                        android:paddingTop="@dimen/_2sdp"
-                        android:paddingBottom="@dimen/_2sdp"
-                        android:paddingRight="@dimen/_5sdp"
-                        android:visibility="gone">
 
 
-                    </LinearLayout>
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:background="@color/rect_bg"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:id="@+id/layout_coverage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:orientation="horizontal"
+                                android:paddingBottom="@dimen/_2sdp"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingRight="@dimen/_10sdp"
+                                android:paddingTop="@dimen/_2sdp"
+                                android:visibility="gone">
 
 
+                            </LinearLayout>
+
+
+                        </HorizontalScrollView>
 
 
 
@@ -385,12 +396,13 @@
                             android:background="@drawable/grey_box"
                             android:gravity="center_vertical|left"
                             android:hint="Agent Bank No"
-                            android:maxLength="20"
-                            android:textColorHint="@color/textColor"
                             android:inputType="number"
+                            android:maxLength="20"
                             android:maxLines="1"
-                            android:padding="@dimen/_5sdp"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:paddingRight="@dimen/_10sdp"
                             android:textColor="@color/textColor"
+                            android:textColorHint="@color/textColor"
                             android:textSize="@dimen/_12sdp" />
 
                     </LinearLayout>
@@ -408,8 +420,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left"
-                            android:background="@drawable/btn_bg1"
                             android:layout_marginRight="@dimen/_10sdp"
+                            android:background="@drawable/btn_bg1"
                             android:gravity="bottom"
                             android:orientation="horizontal">
 
@@ -450,8 +462,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
-                            android:background="@drawable/btn_bg1"
                             android:layout_marginLeft="@dimen/_30sdp"
+                            android:background="@drawable/btn_bg1"
                             android:gravity="right"
                             android:orientation="horizontal">
 
@@ -460,8 +472,8 @@
                                 android:id="@+id/imageview_photograph"
                                 android:layout_width="@dimen/_25sdp"
                                 android:layout_height="@dimen/_21sdp"
-                                android:layout_marginTop="@dimen/_2sdp"
                                 android:layout_gravity="center_vertical"
+                                android:layout_marginTop="@dimen/_2sdp"
                                 android:background="@drawable/lic_ico" />
 
 
@@ -499,17 +511,17 @@
                         android:gravity="center">
 
                         <CheckBox
+                            android:id="@+id/check_box"
                             android:layout_width="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:padding="@dimen/_10sdp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:layout_marginLeft="@dimen/_5sdp"
                             android:text="I agree the Terms &amp; Conditions of MovHaul"
                             android:textColor="@color/textColor"
                             android:textSize="@dimen/_10sdp" />
@@ -532,17 +544,16 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_above="@+id/bottom"
-        android:background="@color/viewColor"/>
+        android:background="@color/viewColor" />
 
     <FrameLayout
+        android:id="@+id/bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:id="@+id/bottom"
         android:layout_alignParentLeft="true"
-        android:background="@color/white"
-        android:layout_alignParentStart="true">
-
+        android:layout_alignParentStart="true"
+        android:background="@color/white">
 
 
         <LinearLayout
@@ -550,7 +561,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/_3sdp">
-
 
 
             <Button
@@ -589,23 +599,23 @@
         </LinearLayout>
 
 
-       <!-- <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/_3sdp">
+        <!-- <LinearLayout
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+             android:layout_gravity="bottom"
+             android:layout_marginBottom="@dimen/_3sdp">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/_1sdp"
-                android:text="@string/register_terms"
-                android:textSize="@dimen/_5sdp" />
+             <TextView
+                 android:id="@+id/textView"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:gravity="center"
+                 android:padding="@dimen/_1sdp"
+                 android:text="@string/register_terms"
+                 android:textSize="@dimen/_5sdp" />
 
 
-        </LinearLayout>-->
+         </LinearLayout>-->
 
     </FrameLayout>
 
