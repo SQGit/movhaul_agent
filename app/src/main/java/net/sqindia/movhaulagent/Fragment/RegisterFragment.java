@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -32,45 +33,42 @@ import com.gun0912.tedpicker.ImagePickerActivity;
 import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
 
-import net.sqindia.movhaulagent.Fragment.LoginFragment;
 import net.sqindia.movhaulagent.Model.Config_Utils;
 import net.sqindia.movhaulagent.R;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by Salman on 23-05-2017.
  */
 
-public class RegisterFragment extends android.support.v4.app.Fragment {
+public class RegisterFragment extends Fragment {
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 234;
     private static final int REQUEST_CODE = 10;
     private static final int REQUEST_CODE_PHOTO = 20;
-    TextView tv_activity_header, tv_login;
-    TextInputLayout til_name, til_address, til_state, til_city, til_phone, til_email, til_bank;
-    EditText et_name, et_address, et_state, et_city, et_phone, et_email, et_bank, et_coverage, et_bank_no;
-    LinearLayout lt_state, lt_city, lt_bank, lt_coverage, lt_id_card, lt_photo;
     public String[] ar_banks;
     public String[] ar_state;
     public String[] ar_city;
     public String[] ar_banks_copy;
+    public HashMap<String, String[]> city_hash = new HashMap<>();
+    TextView tv_activity_header, tv_login;
+    TextInputLayout til_name, til_address, til_state, til_city, til_phone, til_email, til_bank;
+    EditText et_name, et_address, et_state, et_city, et_phone, et_email, et_bank, et_coverage, et_bank_no;
+    LinearLayout lt_state, lt_city, lt_bank, lt_coverage, lt_id_card, lt_photo;
     Typeface tf;
     CountryCodePicker ccp_register;
-
     ArrayList<Uri> image_uris;
     String str_id_card_photo, str_photograph;
     ImageView iv_id_card, iv_photograph;
-
     LinearLayout lt_action_back;
     Button btn_submit;
-
     Snackbar snackbar;
     TextView tv_snack;
     CheckBox cb_terms;
     String str_name, str_address, str_state, str_city, str_phone, str_email, str_coverage, str_bank, str_bank_no;
-
     Config_Utils config;
 
     @Override
@@ -92,11 +90,13 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
 
         config = new Config_Utils();
 
-        ar_banks = new String[]{" HSBC ", " Hongkong&Sangai Bank ", " SAFC ", " Bank Of Africa ", "Federal Bank of Nigeria", " LEKIA Bank ", " Nigeria Bank ",};
+        city_hash = config.getCity_hash();
+
+        ar_banks = new String[]{" GT Bank ", " Hongkong&Sangai Bank ", " SAFC ", " Bank Of Africa ", "Federal Bank of Nigeria", " LEKIA Bank ", " Nigeria Bank ",};
 
         ar_state = new String[]{"Abia", "Akwa Ibom", "Benue", "Borno", "Delta", "Enugu", "Edo", "Jigawa", "Kebbi", "Lagos", "Ogun", "Oyo", "Rivers", "Yobe"};
 
-        ar_city = new String[]{"Asaba", "Bauchi", "Dutse", "Jimeta", "Kanduna", "Lafia", "Lekki", "Oron", "Port Harcourt", "Sokoto", "Warri", "Zaria"};
+      ar_city = new String[]{"Asaba", "Bauchi", "Dutse", "Jimeta", "Kanduna", "Lafia", "Lekki", "Oron", "Port Harcourt", "Sokoto", "Warri", "Zaria"};
 
         tv_login = (TextView) get_RegisterView.findViewById(R.id.textview_login);
         tv_activity_header = (TextView) getActivity().findViewById(R.id.textview_header);
@@ -171,25 +171,33 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        et_bank.setText("GT Bank");
         lt_bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popup(ar_banks, et_bank);
+                popup(ar_banks, et_bank, 2);
             }
         });
 
         lt_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popup(config.states, et_state);
+                popup(config.states, et_state, 0);
             }
         });
 
         lt_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String city = et_state.getText().toString().trim();
-                popup(config.AbiaState, et_city);
+                if (!et_state.getText().toString().isEmpty()) {
+                    ar_city = city_hash.get(et_state.getText().toString());
+                    popup(ar_city, et_city, 1);
+                } else {
+                    snackbar.show();
+                    tv_snack.setText("Choose State First.");
+                }
+
+
             }
         });
 
@@ -238,7 +246,6 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
 
                     }
                 }
-
 
 
                 return false;
@@ -328,10 +335,9 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                                         if (!str_bank_no.isEmpty() && str_bank_no.length() > 9) {
                                             if (str_id_card_photo != null) {
                                                 if (str_photograph != null) {
-                                                    if(cb_terms.isChecked()){
+                                                    if (cb_terms.isChecked()) {
 
-                                                    }
-                                                    else{
+                                                    } else {
                                                         snackbar.show();
                                                         tv_snack.setText("Please Read & Agree the Terms and Conditions");
 
@@ -386,12 +392,12 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
     }
 
 
-    public void popup(final String[] ar_bank, final EditText et_data) {
+    public void popup(final String[] ar_bank, final EditText et_data, final int type) {
 
         ar_banks_copy = ar_bank;
 
 
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.dialog_choose_bank, null);
         dialogBuilder.setView(dialogView);
@@ -438,7 +444,8 @@ public class RegisterFragment extends android.support.v4.app.Fragment {
                 public void onClick(View v) {
                     Log.e("tag", "a:" + ar_banks_copy[k]);
                     b.dismiss();
-                    et_data.setText(ar_banks_copy[k]);
+                    String state = ar_banks_copy[k];
+                    et_data.setText(state);
                 }
             });
         }

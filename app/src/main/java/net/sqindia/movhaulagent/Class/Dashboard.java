@@ -47,8 +47,8 @@ public class Dashboard extends AppCompatActivity {
 
     TextView tv_header;
     ImageView img_back;
-    ArrayList<String> state_lists = new ArrayList<>();
-    ArrayList<String> district_lists = new ArrayList<>();
+    ArrayList<String> driver_type = new ArrayList<>();
+    ArrayList<String> company_lists = new ArrayList<>();
     ListAdapter adapter1, adapter2, adapter3;
     AlertDialog b;
     int sts;
@@ -126,7 +126,39 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                popupwithlistview();
+
+                driver_type.clear();
+                company_lists.clear();
+
+
+
+                company_lists.add("IBM");
+                company_lists.add("MovHaul");
+                company_lists.add("Opiniion");
+                company_lists.add("Sqindia");
+                company_lists.add("IFindCard");
+                company_lists.add("Zoho");
+
+                if(company_lists.size()>0) {
+
+                    driver_type.add("Private");
+                    driver_type.add("Corporate");
+
+
+                    popupwithlistview();
+                }
+                else{
+
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragment_container, new DriverFragment());
+                    ft.addToBackStack("driver");
+                    ft.commit();
+                    fl_bottom.setVisibility(View.GONE);
+                    tv_header.setText("Driver");
+                    lt_content.setVisibility(View.GONE);
+
+                }
+
 
             }
         });
@@ -193,7 +225,6 @@ public class Dashboard extends AppCompatActivity {
 
         if(index>=0){
 
-            Log.e("tag", "frags : " + getSupportFragmentManager().getFragments());
             manager.popBackStackImmediate();
             fl_bottom.setVisibility(View.VISIBLE);
             tv_header.setText("Dashboard");
@@ -216,30 +247,16 @@ public class Dashboard extends AppCompatActivity {
         b = dialogBuilder.create();
 
 
-        state_lists.clear();
-        district_lists.clear();
-
-        state_lists.add("Private");
-        state_lists.add("Corporate");
-
-
-        district_lists.add("IBM");
-        district_lists.add("MovHaul");
-        district_lists.add("Opiniion");
-        district_lists.add("Sqindia");
-        district_lists.add("IFindCard");
-        district_lists.add("Zoho");
-
         sts = 0;
 
         fl_header = (FrameLayout) dialogView.findViewById(R.id.framelayout);
         fl_header.setVisibility(View.GONE);
         lview_state = (ListView) dialogView.findViewById(R.id.lview);
         lview_district = (ListView) dialogView.findViewById(R.id.lview1);
-        Log.e("tag", "stsiz: " + state_lists.size());
-        adapter1 = new ListAdapter(getApplicationContext(), R.layout.dialog_region_txts0, state_lists);
+        Log.e("tag", "stsiz: " + driver_type.size());
+        adapter1 = new ListAdapter(getApplicationContext(), R.layout.dialog_region_txts0, driver_type);
         lview_state.setAdapter(adapter1);
-        adapter2 = new ListAdapter(getApplicationContext(), R.layout.dialog_region_txts, district_lists);
+        adapter2 = new ListAdapter(getApplicationContext(), R.layout.dialog_region_txts, company_lists);
         lview_district.setAdapter(adapter2);
 
 

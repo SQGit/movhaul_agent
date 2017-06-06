@@ -1,10 +1,15 @@
 package net.sqindia.movhaulagent.Model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Created by Salman on 19-05-2017.
  */
 
 public class Config_Utils {
+
+
 
     public String states[] = new String[]{
             "Abia State",
@@ -123,7 +128,7 @@ public class Config_Utils {
             "Atakunmosa East",
             "Atakunmosa West",
             "Atiba",
-            "Atisbo",};
+            "Atisbo"};
 
 
     public String AnambraState[] = new String[]{
@@ -148,7 +153,7 @@ public class Config_Utils {
             "Balanga",
             "Bali",
             "Bama",
-            "Bade",
+            "Bade"
 
     };
 
@@ -176,7 +181,7 @@ public class Config_Utils {
             "Bindawa",
             "Binji",
             "Biriniwa",
-            "Birnin Gwari",
+            "Birnin Gwari"
 
 
     };
@@ -191,7 +196,7 @@ public class Config_Utils {
             "Bodinga",
             "Bogoro",
             "Boki",
-            "Boluwaduro",
+            "Boluwaduro"
 
 
     };
@@ -221,7 +226,7 @@ public class Config_Utils {
             "Chibok",
             "Chikun",
             "Dala",
-            "Damaturu",
+            "Damaturu"
 
 
     };
@@ -255,7 +260,7 @@ public class Config_Utils {
             "Dutsi",
             "Dutsin Ma",
             "Eastern Obolo",
-            "Ebonyi",
+            "Ebonyi"
 
 
     };
@@ -279,7 +284,7 @@ public class Config_Utils {
             "Ehime Mbano",
             "Ejigbo",
             "Ekeremor",
-            "Eket",
+            "Eket"
 
 
     };
@@ -311,7 +316,7 @@ public class Config_Utils {
             "Ethiope West",
             "Etim Ekpo",
             "Etinan",
-            "Eti Osa",
+            "Eti Osa"
 
     };
 
@@ -330,7 +335,7 @@ public class Config_Utils {
             "Fagge",
             "Fakai",
             "Faskari",
-            "Fika",
+            "Fika"
 
     };
 
@@ -353,7 +358,7 @@ public class Config_Utils {
             "Gassol",
             "Gaya",
             "Gayuk",
-            "Gezawa",
+            "Gezawa"
 
 
     };
@@ -375,7 +380,7 @@ public class Config_Utils {
             "Gudu",
             "Gujba",
             "Gulani",
-            "Guma",
+            "Guma"
 
 
     };
@@ -399,20 +404,17 @@ public class Config_Utils {
             "Gwer West",
             "Gwiwa",
             "Gwoza",
-            "Hadejia",
+            "Hadejia"
 
     };
 
-    public String FCT
-            [] = new String[]{
-
+    public String FCTState[] = new String[]{
             "Hawul",
             "Hong",
             "Ibadan North",
             "Ibadan North-East",
             "Ibadan North-West",
-            "Ibadan South-East",
-
+            "Ibadan South-East"
     };
 
     public String GombeState
@@ -427,10 +429,7 @@ public class Config_Utils {
             "Ibesikpo Asutan",
             "Ibi",
             "Ibiono-Ibom",
-            "Idah",
-
-
-    };
+            "Idah"    };
 
     public String ImoState
             [] = new String[]{
@@ -460,7 +459,7 @@ public class Config_Utils {
             "Ijebu North",
             "Ijebu North East",
             "Ijebu Ode",
-            "Ijero",
+            "Ijero"
 
 
     };
@@ -493,7 +492,7 @@ public class Config_Utils {
             "Ilesa West",
             "Illela",
             "Ilorin East",
-            "Ilorin South",
+            "Ilorin South"
 
 
     };
@@ -523,7 +522,7 @@ public class Config_Utils {
             "Isi Uzo",
             "Isokan",
             "Isoko North",
-            "Isoko South",
+            "Isoko South"
 
 
     };
@@ -574,7 +573,7 @@ public class Config_Utils {
             "Kanke",
             "Kankia",
             "Kano Municipal",
-            "Karasuwa",
+            "Karasuwa"
 
     };
 
@@ -614,7 +613,7 @@ public class Config_Utils {
             "Kudan",
             "Kuje",
             "Kukawa",
-            "Kumbotso",
+            "Kumbotso"
 
     };
 
@@ -640,7 +639,7 @@ public class Config_Utils {
             "Lamurde",
             "Lau",
             "Lavun",
-            "Lere",
+            "Lere"
 
 
     };
@@ -667,7 +666,7 @@ public class Config_Utils {
             "Mangu",
             "Mani",
             "Maradun",
-            "Mariga",
+            "Mariga"
 
 
     };
@@ -689,7 +688,7 @@ public class Config_Utils {
             "Minjibir",
             "Misau",
             "Moba",
-            "Mobbar",
+            "Mobbar"
 
 
     };
@@ -715,7 +714,7 @@ public class Config_Utils {
             "Ndokwa East",
             "Ndokwa West",
             "Nembe",
-            "Ngala",
+            "Ngala"
 
 
     };
@@ -735,7 +734,7 @@ public class Config_Utils {
             "Nkwerre",
             "Nnewi North",
             "Nnewi South",
-            "Nsit-Atai",
+            "Nsit-Atai"
 
     };
 
@@ -765,7 +764,7 @@ public class Config_Utils {
             "Offa",
             "Ofu",
             "Ogba/Egbema/Ndoni",
-            "Ogbadibo",
+            "Ogbadibo"
 
     };
 
@@ -790,7 +789,7 @@ public class Config_Utils {
             "Oji River",
             "Ojo",
             "Oju",
-            "Okehi",
+            "Okehi"
 
 
     };
@@ -814,7 +813,7 @@ public class Config_Utils {
             "Ona Ara",
             "Ondo East",
             "Ondo West",
-            "Onicha",
+            "Onicha"
 
 
     };
@@ -850,7 +849,7 @@ public class Config_Utils {
             "Ovia South-West",
             "Owan East",
             "Owan West",
-            "Owerri Municipal",
+            "Owerri Municipal"
 
 
     };
@@ -889,7 +888,7 @@ public class Config_Utils {
             "Sabuwa",
             "Safana",
             "Sagbama",
-            "Sakaba",
+            "Sakaba"
 
 
     };
@@ -911,7 +910,7 @@ public class Config_Utils {
             "Shinkafi",
             "Shira",
             "Shiroro",
-            "Shongom",
+            "Shongom"
 
 
     };
@@ -939,7 +938,7 @@ public class Config_Utils {
             "Tambuwal",
             "Tangaza",
             "Tarauni",
-            "Tarka",
+            "Tarka"
 
 
     };
@@ -968,7 +967,7 @@ public class Config_Utils {
             "Ukum",
             "Ukwa East",
             "Ukwa West",
-            "Ukwuani",
+            "Ukwuani"
 
     };
     public String TarabaState
@@ -989,7 +988,7 @@ public class Config_Utils {
             "Vandeikya",
             "Wamako",
             "Wamba",
-            "Warawa",
+            "Warawa"
 
     };
     public String YobeState
@@ -1011,7 +1010,7 @@ public class Config_Utils {
             "Yakuur",
             "Yala",
             "Yamaltu/Deba",
-            "Yankwashi",
+            "Yankwashi"
 
     };
     public String ZamfaraState[] = new String[]{
@@ -1029,10 +1028,62 @@ public class Config_Utils {
             "Zaria",
             "Zing",
             "Zurmi",
-            "Zuru",
+            "Zuru"
 
     };
 
+    public HashMap<String,String[]> city_hash = new HashMap<>();
 
 
+
+
+
+
+
+
+
+
+
+    public HashMap<String, String[]> getCity_hash() {
+        city_hash.put("Abia State",this.AbiaState);
+        city_hash.put("Adamawa State",this.AdamawaState);
+        city_hash.put("Akwa Ibom State",this.AkwaIbomState);
+        city_hash.put("Anambra State",this.AnambraState);
+        city_hash.put("Bauchi State",this.BauchiState);
+        city_hash.put("Bayelsa State",this.BayelsaState);
+        city_hash.put("Benue State",this.BenueState);
+        city_hash.put("Borno State",this.BornoState);
+        city_hash.put("Cross River State",this.CrossRiverState);
+        city_hash.put("Delta State",this.DeltaState);
+        city_hash.put("Ebonyi State",this.EbonyiState);
+        city_hash.put("Edo State",this.EdoState);
+        city_hash.put("Ekiti State",this.EkitiState);
+        city_hash.put("Enugu State",this.EnuguState);
+        city_hash.put("FCT",this.FCTState);
+        city_hash.put("Gombe State",this.GombeState);
+        city_hash.put("Imo State",this.ImoState);
+        city_hash.put("Jigawa State",this.JigawaState);
+        city_hash.put("Kaduna State",this.KadunaState);
+        city_hash.put("Kano State",this.KanoState);
+        city_hash.put("Katsina State",this.KatsinaState);
+        city_hash.put("Kebbi State",this.KebbiState);
+        city_hash.put("Kogi State",this.KogiState);
+        city_hash.put("Kwara State",this.KwaraState);
+        city_hash.put("Lagos State",this.LagosState);
+        city_hash.put("Nasarawa State",this.NasarawaState);
+        city_hash.put("Niger State",this.NigerState);
+        city_hash.put("Ogun State",this.OgunState);
+        city_hash.put("Ondo State",this.OndoState);
+        city_hash.put("Osun State",this.OsunState);
+        city_hash.put("Oyo State",this.OyoState);
+        city_hash.put("Plateau State",this.PlateauState);
+        city_hash.put("Rivers State",this.RiversState);
+        city_hash.put("Sokoto State",this.SokotoState);
+        city_hash.put("Taraba State",this.TarabaState);
+        city_hash.put("Yobe State",this.YobeState);
+        city_hash.put("Zamfara State",this.ZamfaraState);
+
+
+        return city_hash;
+    }
 }

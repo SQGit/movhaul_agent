@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:fitsSystemWindows="true"
+    android:id="@+id/top"
     android:orientation="vertical"
     tools:context="net.sqindia.movhaulagent.LoginActivityOld">
 

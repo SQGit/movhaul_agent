@@ -1,26 +1,25 @@
 package net.sqindia.movhaulagent.Fragment;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
 
-import net.sqindia.movhaulagent.Class.Dashboard;
 import net.sqindia.movhaulagent.R;
 
 /**
@@ -29,13 +28,18 @@ import net.sqindia.movhaulagent.R;
 
 public class CompanyFragment extends Fragment {
 
-    TextInputLayout til_company,til_person,til_phone,til_email,til_reg_id,til_address;
+    TextInputLayout til_company, til_person, til_phone, til_email, til_reg_id, til_address;
     Typeface tf;
     Button btn_submit;
     TextView tv_activity_header;
     LinearLayout lt_bottom;
     ScrollView scr_top;
     CountryCodePicker ccp_company;
+
+    Snackbar snackbar;
+    TextView tv_snack;
+    String str_comp_name, str_contact_name, str_phone, str_email, str_corporate_id, str_address;
+    EditText et_comp_name, et_contact_name, et_phone, et_email, et_corporate_id, et_address;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +52,7 @@ public class CompanyFragment extends Fragment {
         tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/lato.ttf");
 
         btn_submit = (Button) get_CompanyView.findViewById(R.id.button_submit);
-        tv_activity_header = (TextView)getActivity().findViewById(R.id.textview_header);
+        tv_activity_header = (TextView) getActivity().findViewById(R.id.textview_header);
         tv_activity_header.setText("Company");
         lt_bottom = (LinearLayout) get_CompanyView.findViewById(R.id.bottom);
         scr_top = (ScrollView) get_CompanyView.findViewById(R.id.layout_company);
@@ -69,6 +73,13 @@ public class CompanyFragment extends Fragment {
         til_reg_id.setTypeface(tf);
         ccp_company.setTypeFace(tf);
 
+        snackbar = Snackbar
+                .make(getActivity().findViewById(R.id.top), "No NetWork", Snackbar.LENGTH_LONG);
+        View sbView = snackbar.getView();
+        tv_snack = (android.widget.TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        tv_snack.setTextColor(Color.WHITE);
+        tv_snack.setTypeface(tf);
+
         int currentOrientation = getResources().getConfiguration().orientation;
         if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
             //Log.e("tag","login_Landscape");
@@ -78,21 +89,69 @@ public class CompanyFragment extends Fragment {
             layoutParams1.addRule(RelativeLayout.ABOVE,R.id.bottom);
             lt_bottom.setLayoutParams(layoutParams);
             scr_top.setLayoutParams(layoutParams1);*/
-        }
-        else {
+        } else {
             //Log.e("tag","login_Portrait");
             //RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT); // or wrap_content
             //layoutParams.addRule(RelativeLayout.BELOW,R.id.layout_company);
-           // lt_bottom.setLayoutParams(layoutParams);
-           // lt_bottom.setPadding(0,0,0,30);
+            // lt_bottom.setLayoutParams(layoutParams);
+            // lt_bottom.setPadding(0,0,0,30);
 
         }
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // getActivity().getFragmentManager().popBackStack();
-                getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                // getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+
+                str_comp_name = et_comp_name.getText().toString().trim();
+                str_contact_name = et_contact_name.getText().toString().trim();
+                str_phone = et_phone.getText().toString().trim();
+                str_email = et_email.getText().toString().trim();
+                str_corporate_id = et_corporate_id.getText().toString().trim();
+                str_address = et_address.getText().toString().trim();
+
+                if (!str_comp_name.isEmpty() && str_comp_name.length() > 4) {
+                    if (!str_contact_name.isEmpty() && str_contact_name.length() > 4) {
+                        if (!str_phone.isEmpty() && str_phone.length() > 9) {
+                            if (!str_email.isEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(str_email).matches()) {
+                                if (!str_corporate_id.isEmpty() && str_corporate_id.length() > 9) {
+                                    if (!str_address.isEmpty() && str_address.length() > 4) {
+
+
+                                    } else {
+                                        snackbar.show();
+                                        tv_snack.setText("Enter Valid Address");
+                                        et_address.requestFocus();
+                                    }
+                                } else {
+                                    snackbar.show();
+                                    tv_snack.setText("Enter Valid Corporate ID");
+                                    et_corporate_id.requestFocus();
+                                }
+                            } else {
+                                snackbar.show();
+                                tv_snack.setText("Enter Valid Email");
+                                et_email.requestFocus();
+                            }
+                        } else {
+                            snackbar.show();
+                            tv_snack.setText("Enter Valid Phone Number");
+                            et_phone.requestFocus();
+                        }
+
+                    } else {
+                        snackbar.show();
+                        tv_snack.setText("Enter Valid Contact Person.");
+                        et_contact_name.requestFocus();
+                    }
+                } else {
+                    snackbar.show();
+                    tv_snack.setText("Enter Valid Company Name.");
+                    et_comp_name.requestFocus();
+                }
+
+
             }
         });
 
