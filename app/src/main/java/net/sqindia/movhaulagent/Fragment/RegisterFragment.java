@@ -500,7 +500,7 @@ public class RegisterFragment extends Fragment {
 
     }
 
-
+//
     public class register_agent extends AsyncTask<String, Void, String> {
 
 
