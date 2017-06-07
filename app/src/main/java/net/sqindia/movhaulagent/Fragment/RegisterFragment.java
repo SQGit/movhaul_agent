@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -36,7 +37,21 @@ import com.sloop.fonts.FontsManager;
 import net.sqindia.movhaulagent.Model.Config_Utils;
 import net.sqindia.movhaulagent.R;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -336,6 +351,8 @@ public class RegisterFragment extends Fragment {
                                                 if (str_photograph != null) {
                                                     if (cb_terms.isChecked()) {
 
+                                                        new register_agent().execute();
+
                                                     } else {
                                                         snackbar.show();
                                                         tv_snack.setText("Please Read & Agree the Terms and Conditions");
@@ -481,6 +498,157 @@ public class RegisterFragment extends Fragment {
 
         }
 
+    }
+
+
+    public class register_agent extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.e("tag", "driver_register");
+            //mProgressDialog.show();
+
+           // str_ref1 = et_ref1.getText().toString().trim();
+          //  str_ref2 = et_ref2.getText().toString().trim();
+          //  str_ref3 = et_ref3.getText().toString().trim();
+          //  service_areas_pref = et_service_pref.getText().toString().trim();
+
+
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            String json = "", jsonStr = "";
+
+            try {
+
+                String responseString = null;
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("Config.WEB_URL" + "driversignup");
+
+                /*httppost.setHeader("driver_name", str_username);
+                httppost.setHeader("driver_mobile_pri", str_mobile_prefix + str_phone);
+                httppost.setHeader("driver_email", str_email);
+                httppost.setHeader("driver_address", str_address);
+                httppost.setHeader("driver_experience", str_experience);
+
+                httppost.setHeader("service_type", str_service_type);
+                httppost.setHeader("primary_route", str_service_route);
+                httppost.setHeader("service_areas_distance", str_service_areas);
+                httppost.setHeader("local_government", str_service_govt);
+
+                httppost.setHeader("vehicle_type", str_vec_type);
+
+                if(str_ref1 != null && (!(str_ref1.isEmpty()))){
+                    Log.e("tag","1notnull");
+                    httppost.setHeader("reference1", str_ref1);
+                }
+                else{
+                    Log.e("tag","1null");
+                }
+                if(str_ref2 != null && (!(str_ref2.isEmpty()))){
+                    Log.e("tag","2notnull");
+                    httppost.setHeader("reference2", str_ref2);
+                }
+                else{
+                    Log.e("tag","2null");
+                }
+                if(str_ref3 != null && (!(str_ref3.isEmpty()))){
+                    Log.e("tag","3notnull");
+                    httppost.setHeader("reference3", str_ref3);
+                }
+
+                if(service_areas_pref != null && (!(service_areas_pref.isEmpty()))){
+                    Log.e("tag","3notnull");
+                    httppost.setHeader("service_areas", service_areas_pref);
+                }*/
+
+                // httppost.setHeader("driver_licence_name", str_lic_name);
+
+                //  httppost.setHeader("driver_mobile_sec", str_mobile_prefix + str_lic_mobile);
+                // httppost.setHeader("driver_licence_number", str_lic_no);
+
+
+
+                try {
+
+                    MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+                    File sourceFile = new File(str_id_card_photo);
+                    Log.e("tagtag3", "" + sourceFile);
+                    entity.addPart("driverlicence", new FileBody(sourceFile, "image/jpeg"));
+                    httppost.setEntity(entity);
+                    HttpResponse response = httpclient.execute(httppost);
+                    HttpEntity r_entity = response.getEntity();
+                    //Log.e("tagurl", "ur:" + Config.WEB_URL + "driversignup");
+                    Log.e("tag", "headers:" + httppost.getAllHeaders().toString());
+                    int statusCode = response.getStatusLine().getStatusCode();
+                    Log.e("tagtag", response.getStatusLine().toString());
+                    if (statusCode == 200) {
+                        responseString = EntityUtils.toString(r_entity);
+                    } else {
+                        responseString = "Error occurred! Http Status Code: "
+                                + statusCode;
+                    }
+                } catch (ClientProtocolException e) {
+                    responseString = e.toString();
+                    Log.e("tagerr0: ", e.toString());
+                } catch (IOException e) {
+                    responseString = e.toString();
+                    Log.e("tagerr1: ", e.toString());
+                }
+                return responseString;
+
+
+            } catch (Exception e) {
+                Log.e("tagerr2:", e.toString());
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e("tag", "tagtag" + s);
+
+          //  mProgressDialog.dismiss();
+
+            if (s != null) {
+                try {
+                    JSONObject jo = new JSONObject(s);
+                    String status = jo.getString("status");
+                    String msg = jo.getString("message");
+                    Log.d("tag", "<-----Status----->" + status);
+
+                    if (status.equals("true")) {
+                        //dialog2.show();
+                    } else {
+                        if (msg.contains("Error OccuredError: ER_DUP_ENTRY: Duplicate entry")) {
+                            snackbar.show();
+                           // tv_snack.setText(R.string.us_al);
+                        } else {
+                            snackbar.show();
+                           // tv_snack.setText(R.string.network);
+                        }
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("tag", "tagnt: " + e.toString());
+
+                    snackbar.show();
+                   // tv_snack.setText(R.string.network);
+                }
+            } else {
+                snackbar.show();
+               // tv_snack.setText(R.string.network);
+            }
+        }
     }
 
 }
