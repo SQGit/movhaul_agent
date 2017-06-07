@@ -529,47 +529,15 @@ public class RegisterFragment extends Fragment {
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpPost httppost = new HttpPost("Config.WEB_URL" + "driversignup");
 
-                /*httppost.setHeader("driver_name", str_username);
-                httppost.setHeader("driver_mobile_pri", str_mobile_prefix + str_phone);
-                httppost.setHeader("driver_email", str_email);
-                httppost.setHeader("driver_address", str_address);
-                httppost.setHeader("driver_experience", str_experience);
-
-                httppost.setHeader("service_type", str_service_type);
-                httppost.setHeader("primary_route", str_service_route);
-                httppost.setHeader("service_areas_distance", str_service_areas);
-                httppost.setHeader("local_government", str_service_govt);
-
-                httppost.setHeader("vehicle_type", str_vec_type);
-
-                if(str_ref1 != null && (!(str_ref1.isEmpty()))){
-                    Log.e("tag","1notnull");
-                    httppost.setHeader("reference1", str_ref1);
-                }
-                else{
-                    Log.e("tag","1null");
-                }
-                if(str_ref2 != null && (!(str_ref2.isEmpty()))){
-                    Log.e("tag","2notnull");
-                    httppost.setHeader("reference2", str_ref2);
-                }
-                else{
-                    Log.e("tag","2null");
-                }
-                if(str_ref3 != null && (!(str_ref3.isEmpty()))){
-                    Log.e("tag","3notnull");
-                    httppost.setHeader("reference3", str_ref3);
-                }
-
-                if(service_areas_pref != null && (!(service_areas_pref.isEmpty()))){
-                    Log.e("tag","3notnull");
-                    httppost.setHeader("service_areas", service_areas_pref);
-                }*/
-
-                // httppost.setHeader("driver_licence_name", str_lic_name);
-
-                //  httppost.setHeader("driver_mobile_sec", str_mobile_prefix + str_lic_mobile);
-                // httppost.setHeader("driver_licence_number", str_lic_no);
+                httppost.setHeader("agent_name", str_name);
+              //  httppost.setHeader("agent_mobile", str_mobile_prefix + str_phone);
+                httppost.setHeader("agent_email", str_email);
+                httppost.setHeader("agent_address", str_address);
+                httppost.setHeader("agent_state", str_state);
+                httppost.setHeader("agent_city", str_city);
+              //  httppost.setHeader("agent_region", s);
+                httppost.setHeader("agent_bank", str_bank);
+                httppost.setHeader("agent_account_no", str_bank_no);
 
 
 
@@ -579,7 +547,8 @@ public class RegisterFragment extends Fragment {
 
                     File sourceFile = new File(str_id_card_photo);
                     Log.e("tagtag3", "" + sourceFile);
-                    entity.addPart("driverlicence", new FileBody(sourceFile, "image/jpeg"));
+                    entity.addPart("agentimage", new FileBody(sourceFile, "image/jpeg"));
+                    entity.addPart("agentidentity", new FileBody(sourceFile, "image/jpeg"));
                     httppost.setEntity(entity);
                     HttpResponse response = httpclient.execute(httppost);
                     HttpEntity r_entity = response.getEntity();
