@@ -24,7 +24,7 @@ import net.sqindia.movhaulagent.R;
 
 /**
  * Created by Salman on 23-05-2017.
- */
+ **/
 
 public class CompanyFragment extends Fragment {
 
@@ -35,7 +35,6 @@ public class CompanyFragment extends Fragment {
     LinearLayout lt_bottom;
     ScrollView scr_top;
     CountryCodePicker ccp_company;
-
     Snackbar snackbar;
     TextView tv_snack;
     String str_comp_name, str_contact_name, str_phone, str_email, str_corporate_id, str_address;
@@ -64,6 +63,14 @@ public class CompanyFragment extends Fragment {
         til_reg_id = (TextInputLayout) get_CompanyView.findViewById(R.id.textinput_Corporate_id);
         til_address = (TextInputLayout) get_CompanyView.findViewById(R.id.textinput_address);
         ccp_company = (CountryCodePicker) get_CompanyView.findViewById(R.id.ccp_company);
+
+
+        et_comp_name = (EditText) get_CompanyView.findViewById(R.id.edittext_company);
+        et_contact_name = (EditText) get_CompanyView.findViewById(R.id.edittext_contact_name);
+        et_phone = (EditText) get_CompanyView.findViewById(R.id.edittext_phone);
+        et_email = (EditText) get_CompanyView.findViewById(R.id.edittext_email);
+        et_corporate_id = (EditText) get_CompanyView.findViewById(R.id.edittext_corporate_id);
+        et_address = (EditText) get_CompanyView.findViewById(R.id.edittext_address);
 
         til_company.setTypeface(tf);
         til_phone.setTypeface(tf);

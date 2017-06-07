@@ -96,7 +96,7 @@ public class RegisterFragment extends Fragment {
 
         ar_state = new String[]{"Abia", "Akwa Ibom", "Benue", "Borno", "Delta", "Enugu", "Edo", "Jigawa", "Kebbi", "Lagos", "Ogun", "Oyo", "Rivers", "Yobe"};
 
-      ar_city = new String[]{"Asaba", "Bauchi", "Dutse", "Jimeta", "Kanduna", "Lafia", "Lekki", "Oron", "Port Harcourt", "Sokoto", "Warri", "Zaria"};
+        ar_city = new String[]{"Asaba", "Bauchi", "Dutse", "Jimeta", "Kanduna", "Lafia", "Lekki", "Oron", "Port Harcourt", "Sokoto", "Warri", "Zaria"};
 
         tv_login = (TextView) get_RegisterView.findViewById(R.id.textview_login);
         tv_activity_header = (TextView) getActivity().findViewById(R.id.textview_header);
@@ -116,7 +116,6 @@ public class RegisterFragment extends Fragment {
         lt_bank = (LinearLayout) get_RegisterView.findViewById(R.id.layout_choose_bank);
         lt_state = (LinearLayout) get_RegisterView.findViewById(R.id.layout_choose_state);
         lt_city = (LinearLayout) get_RegisterView.findViewById(R.id.layout_choose_city);
-        lt_coverage = (LinearLayout) get_RegisterView.findViewById(R.id.layout_coverage);
         lt_coverage = (LinearLayout) get_RegisterView.findViewById(R.id.layout_coverage);
         lt_id_card = (LinearLayout) get_RegisterView.findViewById(R.id.layout_id_card);
         lt_photo = (LinearLayout) get_RegisterView.findViewById(R.id.layout_photograph);

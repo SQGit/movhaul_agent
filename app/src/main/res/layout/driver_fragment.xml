@@ -44,7 +44,7 @@
                         android:textColorHint="@color/textColor">
 
                         <EditText
-                            android:id="@+id/edittext_reg_name"
+                            android:id="@+id/edittext_name"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -72,7 +72,7 @@
                         android:textColorHint="@color/textColor">
 
                         <EditText
-                            android:id="@+id/edittext_reg_address"
+                            android:id="@+id/edittext_address"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -225,7 +225,7 @@
                             android:textColorHint="@color/textColor">
 
                             <EditText
-                                android:id="@+id/edittext_login_phone"
+                                android:id="@+id/edittext_phone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
@@ -257,7 +257,7 @@
                         android:textColorHint="@color/textColor">
 
                         <EditText
-                            android:id="@+id/edittext_register_mail"
+                            android:id="@+id/edittext_email"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -333,7 +333,7 @@
                         </FrameLayout>
 
                         <EditText
-                            android:id="@+id/edittext_bankacc_no"
+                            android:id="@+id/edittext_bank_no"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -372,7 +372,7 @@
                             android:textColorHint="@color/textColor">
 
                             <EditText
-                                android:id="@+id/edittext_type"
+                                android:id="@+id/edittext_service_type"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
@@ -533,7 +533,7 @@
                             android:textColorHint="@color/textColor">
 
                             <EditText
-                                android:id="@+id/edittext_typdde"
+                                android:id="@+id/edittext_govt"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
@@ -611,7 +611,7 @@
                         android:gravity="center_vertical|right">
 
                         <LinearLayout
-                            android:id="@+id/layout_id_card"
+                            android:id="@+id/layout_upload_licence"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
@@ -622,7 +622,7 @@
 
 
                             <ImageView
-                                android:id="@+id/imageview_idcard"
+                                android:id="@+id/imageview_licence"
                                 android:layout_width="@dimen/_25sdp"
                                 android:layout_height="@dimen/_21sdp"
                                 android:layout_gravity="bottom"
