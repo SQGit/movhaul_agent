@@ -1,5 +1,22 @@
 package net.sqindia.movhaulagent.Model;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.util.Log;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,6 +25,104 @@ import java.util.HashMap;
  */
 
 public class Config_Utils {
+
+
+    public static final String TAG = "tagH";
+    public static final String WEB_URL ="http://104.197.80.225:3030/" ;
+
+
+    public static String makeRequest(String url, String json) {
+        Log.v(TAG, "URL-->" + url);
+        Log.v(TAG, "input-->" + json);
+
+
+        try {
+            Log.v(TAG, "inside-->");
+
+            HttpPost httpPost = new HttpPost(url);
+            httpPost.setEntity(new StringEntity(json));
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Content-type", "application/json");
+
+            HttpResponse httpResponse = new DefaultHttpClient().execute(httpPost);
+
+
+            // receive response as inputStream
+            InputStream inputStream = httpResponse.getEntity().getContent();
+            // convert inputstream to string
+            if (inputStream != null) {
+                String result = convertInputStreamToString(inputStream);
+                Log.e(TAG, "output-->" + result);
+                return result;
+            } else {
+                Log.e(TAG, "output-->" + inputStream);
+
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
+    public static String makeRequest1(String url, String json,String id,String token) {
+        Log.e(TAG, "URL-->" + url);
+        Log.e(TAG, "input-->" + json);
+
+
+        try {
+            Log.v(TAG, "inside-->");
+
+            HttpPost httpPost = new HttpPost(url);
+            httpPost.setEntity(new StringEntity(json));
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Content-type", "application/json");
+            httpPost.setHeader("id",id);
+            httpPost.setHeader("sessiontoken",token);
+
+            HttpResponse httpResponse = new DefaultHttpClient().execute(httpPost);
+
+
+            // receive response as inputStream
+            InputStream inputStream = httpResponse.getEntity().getContent();
+            // convert inputstream to string
+            if (inputStream != null) {
+                String result = convertInputStreamToString(inputStream);
+                Log.e(TAG, "output-->" + result);
+                return result;
+            } else {
+                Log.e(TAG, "output-->" + inputStream);
+
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
+    private static String convertInputStreamToString(InputStream inputStream) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String line = "";
+        String result = "";
+        while ((line = bufferedReader.readLine()) != null)
+            result += line;
+        inputStream.close();
+        System.out.println(" OUTPUT -->" + result);
+        return result;
+    }
 
 
 
@@ -1033,17 +1148,6 @@ public class Config_Utils {
     };
 
     public HashMap<String,String[]> city_hash = new HashMap<>();
-
-
-
-
-
-
-
-
-
-
-
     public HashMap<String, String[]> getCity_hash() {
         city_hash.put("Abia State",this.AbiaState);
         city_hash.put("Adamawa State",this.AdamawaState);
@@ -1085,5 +1189,13 @@ public class Config_Utils {
 
 
         return city_hash;
+    }
+
+    public static boolean isConnected(Context context) {
+        ConnectivityManager
+                cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null
+                && activeNetwork.isConnectedOrConnecting();
     }
 }

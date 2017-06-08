@@ -168,17 +168,18 @@ public class DriverFragment extends Fragment {
         });
 
         et_bank.setText("GT Bank");
-        lt_bank.setOnClickListener(new View.OnClickListener() {
+       /* lt_bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popup(ar_banks, et_bank, 2);
             }
-        });
+        });*/
 
         lt_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popup(config.states, et_state, 0);
+                et_city.setText("");
             }
         });
 

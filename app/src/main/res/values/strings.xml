@@ -13,4 +13,19 @@
     <string name="img_vec_lic">State Issued ID Card</string>
     <string name="img_vec_lic_photo">Passport Photograph</string>
     <string name="dashboard">Dashboard</string>
+    <string name="network">No network found</string>
+
+    <string name="success">SUCCESS</string>
+    <string name="thanks">Thank you for submitting your details for verification! Admin needs to verify your details.</string>
+    <string name="verf">Once verification is completed. You can login to MovHaul.</string>
+    <string name="loading">Loading..</string>
+    <string name="wait">Please wait</string>
+    <string name="ad">Account Not Activated</string>
+    <string name="asdf">Your details for Verification!!</string>
+    <string name="cea">Once Verification is completed, You can login to Movehaul.</string>
+    <string name="login_otp">Login-OTP</string>
+    <string name="check_your_message_or">Check Your Message (Or)</string>
+    <string name="email_for_otp_code">Email for OTP Code</string>
+    <string name="resend_otp">Resend OTP</string>
+
 </resources>

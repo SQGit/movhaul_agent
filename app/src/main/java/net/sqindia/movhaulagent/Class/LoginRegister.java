@@ -1,7 +1,10 @@
 package net.sqindia.movhaulagent.Class;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -25,6 +28,8 @@ public class LoginRegister extends AppCompatActivity {
 
     boolean bl_fragment;
     LinearLayout lt_action_back;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,10 +39,22 @@ public class LoginRegister extends AppCompatActivity {
         FontsManager.initFormAssets(LoginRegister.this, "fonts/lato.ttf");
         FontsManager.changeFonts(LoginRegister.this);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginRegister.this);
+        editor = sharedPreferences.edit();
+
         lt_action_back  = (LinearLayout) findViewById(R.id.action_back);
-
-
         lt_action_back.setVisibility(View.GONE);
+
+        if(sharedPreferences.getString("login","").equals("success")){
+            Intent i = new Intent(LoginRegister.this, Dashboard.class);
+            startActivity(i);
+            finish();
+        }
+
+
+
+
+
 
 
         FragmentManager manager = getSupportFragmentManager();

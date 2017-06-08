@@ -1,10 +1,14 @@
 package net.sqindia.movhaulagent.Fragment;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -15,16 +19,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
 
-import net.sqindia.movhaulagent.Class.Dashboard;
+import net.sqindia.movhaulagent.Class.LoginOtpActivity;
+import net.sqindia.movhaulagent.Model.Config_Utils;
 import net.sqindia.movhaulagent.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Salman on 23-05-2017.
@@ -39,9 +50,15 @@ public class LoginFragment extends Fragment {
     Button btn_submit;
     boolean bl_admin;
     EditText et_phone, et_user_name, et_password;
-    String str_phone, str_username, str_password;
+    String str_phone, str_username, str_password, str_mobile_prefix;
     Snackbar snackbar;
 
+    ProgressDialog mProgressDialog;
+    CountryCodePicker ccp_login;
+    Dialog dialog_verify;
+    Button btn_ok, d2_btn_ok;
+    TextView tv_dialog1, tv_dialog2, tv_dialog3, tv_dialog4, d2_tv_dialog1, d2_tv_dialog2, d2_tv_dialog3, d2_tv_dialog4;
+    ImageView btn_close, iv_driver_lic;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,6 +88,8 @@ public class LoginFragment extends Fragment {
         et_user_name = (EditText) get_LoginView.findViewById(R.id.edittext_username);
         et_password = (EditText) get_LoginView.findViewById(R.id.edittext_password);
 
+        ccp_login = (CountryCodePicker) get_LoginView.findViewById(R.id.ccp_login);
+
         snackbar = Snackbar
                 .make(getActivity().findViewById(R.id.top), "No NetWork", Snackbar.LENGTH_LONG);
         View sbView = snackbar.getView();
@@ -82,6 +101,56 @@ public class LoginFragment extends Fragment {
         til_phone.setTypeface(tf);
         til_user_name.setTypeface(tf);
         til_password.setTypeface(tf);
+
+        str_mobile_prefix = "+234";
+
+
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setTitle(getString(R.string.loading));
+        mProgressDialog.setMessage(getString(R.string.wait));
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setCancelable(false);
+
+        ccp_login.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                str_mobile_prefix = ccp_login.getSelectedCountryCodeWithPlus();
+                Log.e("tag", "flg_ccp" + ccp_login.getSelectedCountryCodeWithPlus());
+            }
+        });
+
+
+        dialog_verify = new Dialog(getActivity());
+        dialog_verify.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_verify.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog_verify.setCancelable(false);
+        dialog_verify.setContentView(R.layout.dialog_confirm);
+        d2_btn_ok = (Button) dialog_verify.findViewById(R.id.button_ok);
+        btn_close = (ImageView) dialog_verify.findViewById(R.id.button_close);
+        d2_tv_dialog1 = (TextView) dialog_verify.findViewById(R.id.textView_1);
+        d2_tv_dialog2 = (TextView) dialog_verify.findViewById(R.id.textView_2);
+        d2_tv_dialog3 = (TextView) dialog_verify.findViewById(R.id.textView_3);
+        d2_tv_dialog4 = (TextView) dialog_verify.findViewById(R.id.textView_4);
+
+        d2_tv_dialog1.setTypeface(tf);
+        d2_tv_dialog2.setTypeface(tf);
+        d2_tv_dialog3.setTypeface(tf);
+        d2_tv_dialog4.setTypeface(tf);
+        d2_btn_ok.setTypeface(tf);
+
+        d2_tv_dialog1.setText(R.string.ad);
+        d2_tv_dialog2.setText(R.string.asdf);
+        d2_tv_dialog3.setText(R.string.cea);
+        d2_tv_dialog4.setVisibility(View.GONE);
+        btn_close.setVisibility(View.GONE);
+
+        d2_btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog_verify.dismiss();
+            }
+        });
+
 
   /*      if(savedInstanceState != null){
 
@@ -159,8 +228,14 @@ public class LoginFragment extends Fragment {
 
                     if (!str_phone.isEmpty()) {
                         if (str_phone.length() > 9) {
-                            Intent goDash = new Intent(getActivity(), Dashboard.class);
-                            getActivity().startActivity(goDash);
+
+                            if (Config_Utils.isConnected(getActivity())) {
+                                new login_agent().execute();
+                            } else {
+                                snackbar.show();
+                                tv_snack.setText(R.string.network);
+                            }
+
                         } else {
                             snackbar.show();
                             tv_snack.setText("Enter Valid Mobile Number.");
@@ -177,8 +252,8 @@ public class LoginFragment extends Fragment {
                         if (str_username.length() > 4) {
                             if (!str_password.isEmpty()) {
                                 if (str_password.length() > 4) {
-                                    snackbar.show();
-                                    tv_snack.setText("Login Success");
+
+
                                 } else {
                                     snackbar.show();
                                     tv_snack.setText("Password Should be more than 4 digits.");
@@ -245,4 +320,129 @@ public class LoginFragment extends Fragment {
         }
 
     }
+
+
+    public class login_agent extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.e("tag", "reg_preexe");
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            String json = "", jsonStr = "";
+            Log.e("tag", "web: " + Config_Utils.WEB_URL + "agentotp");
+
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.accumulate("agent_mobile", str_mobile_prefix + str_phone);
+
+                json = jsonObject.toString();
+                return jsonStr = Config_Utils.makeRequest(Config_Utils.WEB_URL + "agentotp", json);
+
+            } catch (Exception e) {
+                Log.e("InputStream", e.getLocalizedMessage());
+
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e("tag", "tag" + s);
+            mProgressDialog.dismiss();
+
+
+            if (s != null) {
+                try {
+                    JSONObject jo = new JSONObject(s);
+                    String status = jo.getString("status");
+                    String msg = "msg";
+                    if (jo.has("message")) {
+                        msg = jo.getString("message");
+                    }
+                    Log.e("tag", "<-----Status----->" + status);
+                    if (status.equals("true")) {
+
+                        String type = jo.getString("vehicle_type");
+
+
+                        // String sus_txt = "Thank you for Signing Up MoveHaul.";
+
+                        //Toast.makeText(getApplicationContext(),sus_txt,Toast.LENGTH_LONG).show();
+
+                        /*Intent i = new Intent(LoginActivity.this, LoginOtpActivity.class);
+                        i.putExtra("for","phone");
+                        i.putExtra("vec_type",type);
+                        i.putExtra("data",str_mobile_prefix+str_mobile);
+                        i.putExtra("prefix",str_mobile_prefix);
+                        startActivity(i);
+                        finish();*/
+
+
+                    } else if (status.equals("false")) {
+
+                        if (jo.has("message")) {
+                            msg = jo.getString("message");
+                        }
+                        //msg = jo.getString("message");
+                        Log.e("tag", "ms:" + msg);
+
+                        if (msg.contains("Register with Movhaul first to generate OTP")) {
+
+                            // Toast.makeText(getApplicationContext(),"Mobile Number Not Registered",Toast.LENGTH_LONG).show();
+
+                            tv_snack.setText(msg);
+                            snackbar.show();
+
+
+                        } else if (msg.contains("Error Occured[object Object]")) {
+
+                            //  String type = jo.getString("vehicle_type");
+
+                            Intent i = new Intent(getActivity(), LoginOtpActivity.class);
+                            i.putExtra("for", "phone");
+                            i.putExtra("data", str_mobile_prefix + str_phone);
+                            i.putExtra("prefix", str_mobile_prefix);
+                            startActivity(i);
+                            getActivity().finish();
+                        } else if (msg.contains("{\"agent_verification\":")) {
+//                            Log.e("tag","ds: "+jo.getString("agent_verification"));
+                            //  Log.e("tag","da: "+jo.getString("account_status"));
+                            dialog_verify.show();
+                        } else if (jo.has("agent_verification")) {
+                            //  Log.e("tag","ds: "+jo.getString("agent_verification"));
+                            //   Log.e("tag","da: "+jo.getString("account_status"));
+                            dialog_verify.show();
+                        } else if (msg.contains("{\"agent_verification\":\"pending\",\"account_status\":\"active\"}")) {
+                            dialog_verify.show();
+                        } else {
+
+                            //Toast.makeText(getApplicationContext(),"Please Try Again Later",Toast.LENGTH_LONG).show();
+                            snackbar.show();
+                        }
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("tag", "nt" + e.toString());
+                    snackbar.show();
+                }
+            } else {
+                snackbar.show();
+            }
+
+        }
+
+    }
+
+
 }

@@ -3,9 +3,12 @@ package net.sqindia.movhaulagent.Class;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -56,12 +59,15 @@ public class Dashboard extends AppCompatActivity {
     FrameLayout fl_header, fl_bottom;
     boolean bl_bottom;
     Dialog dialog_yes_no;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     Typeface tf;
     TextView tv_txt1, tv_txt2, tv_txt3, tv_snack2, sb_text, tv_snack_act, tv_snack;
     Button btn_yes, btn_no, btn_submit;
     LinearLayout lt_content;
     private ViewPager viewPager;
     private int[] layouts;
+    String id,token;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,7 +78,20 @@ public class Dashboard extends AppCompatActivity {
         FontsManager.changeFonts(Dashboard.this);
 
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Dashboard.this);
+        editor = sharedPreferences.edit();
+
+        id = sharedPreferences.getString("id","");
+        token = sharedPreferences.getString("token","");
+
+
         lt_back = (LinearLayout) findViewById(R.id.action_back);
+
+        if(sharedPreferences.getString("login","").equals("success")){
+            lt_back.setVisibility(View.GONE);
+        }
+
+
         lt_content = (LinearLayout) findViewById(R.id.content);
         ib_driver_add = (ImageButton) findViewById(R.id.add_driver);
         ib_comp_add = (ImageButton) findViewById(R.id.add_company);
@@ -180,8 +199,6 @@ public class Dashboard extends AppCompatActivity {
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             @Override
             public void onBackStackChanged() {
-
-
 
                 FragmentManager manager = getSupportFragmentManager();
                 int index = manager.getBackStackEntryCount() - 1;

@@ -1,10 +1,13 @@
 package net.sqindia.movhaulagent.Fragment;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -21,6 +24,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -83,8 +87,14 @@ public class RegisterFragment extends Fragment {
     Snackbar snackbar;
     TextView tv_snack;
     CheckBox cb_terms;
-    String str_name, str_address, str_state, str_city, str_phone, str_email, str_coverage, str_bank, str_bank_no;
+    String str_name, str_address, str_state, str_city, str_phone, str_email, str_coverage, str_bank, str_bank_no,str_mobile_prefix;
     Config_Utils config;
+    Dialog dialog_success;
+    ProgressDialog mProgressDialog;
+
+    Button d2_btn_ok;
+    TextView d2_tv_dialog1, d2_tv_dialog2, d2_tv_dialog3, d2_tv_dialog4;
+    android.widget.ImageView btn_close;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -112,6 +122,7 @@ public class RegisterFragment extends Fragment {
         ar_state = new String[]{"Abia", "Akwa Ibom", "Benue", "Borno", "Delta", "Enugu", "Edo", "Jigawa", "Kebbi", "Lagos", "Ogun", "Oyo", "Rivers", "Yobe"};
 
         ar_city = new String[]{"Asaba", "Bauchi", "Dutse", "Jimeta", "Kanduna", "Lafia", "Lekki", "Oron", "Port Harcourt", "Sokoto", "Warri", "Zaria"};
+        str_mobile_prefix = "+234";
 
         tv_login = (TextView) get_RegisterView.findViewById(R.id.textview_login);
         tv_activity_header = (TextView) getActivity().findViewById(R.id.textview_header);
@@ -162,6 +173,51 @@ public class RegisterFragment extends Fragment {
         til_bank.setTypeface(tf);
         ccp_register.setTypeFace(tf);
 
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setTitle(getString(R.string.loading));
+        mProgressDialog.setMessage(getString(R.string.wait));
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setCancelable(false);
+
+        dialog_success = new Dialog(getActivity());
+        dialog_success.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_success.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog_success.setCancelable(false);
+        dialog_success.setContentView(R.layout.dialog_confirm);
+        d2_btn_ok = (Button) dialog_success.findViewById(R.id.button_ok);
+        btn_close = (android.widget.ImageView) dialog_success.findViewById(R.id.button_close);
+        d2_tv_dialog1 = (TextView) dialog_success.findViewById(R.id.textView_1);
+        d2_tv_dialog2 = (TextView) dialog_success.findViewById(R.id.textView_2);
+        d2_tv_dialog3 = (TextView) dialog_success.findViewById(R.id.textView_3);
+        d2_tv_dialog4 = (TextView) dialog_success.findViewById(R.id.textView_4);
+
+        d2_tv_dialog1.setTypeface(tf);
+        d2_tv_dialog2.setTypeface(tf);
+        d2_tv_dialog3.setTypeface(tf);
+        d2_tv_dialog4.setTypeface(tf);
+        d2_btn_ok.setTypeface(tf);
+
+        d2_tv_dialog1.setText(R.string.success);
+        d2_tv_dialog2.setText(R.string.thanks);
+        d2_tv_dialog3.setText(R.string.verf);
+        d2_tv_dialog4.setVisibility(View.GONE);
+        btn_close.setVisibility(View.GONE);
+
+        d2_btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog_success.dismiss();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, new LoginFragment());
+                ft.commit();
+                tv_activity_header.setText(getString(R.string.login));
+                lt_action_back.setVisibility(View.GONE);
+
+            }
+        });
+
+
 
         tv_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,18 +241,27 @@ public class RegisterFragment extends Fragment {
             }
         });
 
+        ccp_register.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                str_mobile_prefix = ccp_register.getSelectedCountryCodeWithPlus();
+                Log.e("tag", "flg_ccp" + ccp_register.getSelectedCountryCodeWithPlus());
+            }
+        });
+
         et_bank.setText("GT Bank");
-        lt_bank.setOnClickListener(new View.OnClickListener() {
+       /* lt_bank.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popup(ar_banks, et_bank, 2);
             }
-        });
+        });*/
 
         lt_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popup(config.states, et_state, 0);
+                et_city.setText("");
             }
         });
 
@@ -339,6 +404,8 @@ public class RegisterFragment extends Fragment {
                 str_coverage = et_coverage.getText().toString().trim();
                 str_bank = et_bank.getText().toString().trim();
                 str_bank_no = et_bank_no.getText().toString().trim();
+                str_coverage = et_coverage.getText().toString();
+
 
                 if (!str_name.isEmpty() && str_name.length() > 4) {
                     if (!str_address.isEmpty() && str_address.length() > 4) {
@@ -508,14 +575,7 @@ public class RegisterFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             Log.e("tag", "driver_register");
-            //mProgressDialog.show();
-
-           // str_ref1 = et_ref1.getText().toString().trim();
-          //  str_ref2 = et_ref2.getText().toString().trim();
-          //  str_ref3 = et_ref3.getText().toString().trim();
-          //  service_areas_pref = et_service_pref.getText().toString().trim();
-
-
+            mProgressDialog.show();
         }
 
         @Override
@@ -527,15 +587,15 @@ public class RegisterFragment extends Fragment {
 
                 String responseString = null;
                 HttpClient httpclient = new DefaultHttpClient();
-                HttpPost httppost = new HttpPost("Config.WEB_URL" + "driversignup");
+                HttpPost httppost = new HttpPost(Config_Utils.WEB_URL + "agentsignup");
 
                 httppost.setHeader("agent_name", str_name);
-              //  httppost.setHeader("agent_mobile", str_mobile_prefix + str_phone);
-                httppost.setHeader("agent_email", str_email);
+                httppost.setHeader("agent_mobile", str_mobile_prefix + str_phone);
+                httppost.setHeader("agent_email",str_email);
                 httppost.setHeader("agent_address", str_address);
                 httppost.setHeader("agent_state", str_state);
                 httppost.setHeader("agent_city", str_city);
-              //  httppost.setHeader("agent_region", s);
+                httppost.setHeader("agent_region", str_coverage);
                 httppost.setHeader("agent_bank", str_bank);
                 httppost.setHeader("agent_account_no", str_bank_no);
 
@@ -584,7 +644,7 @@ public class RegisterFragment extends Fragment {
             super.onPostExecute(s);
             Log.e("tag", "tagtag" + s);
 
-          //  mProgressDialog.dismiss();
+           mProgressDialog.dismiss();
 
             if (s != null) {
                 try {
@@ -594,14 +654,14 @@ public class RegisterFragment extends Fragment {
                     Log.d("tag", "<-----Status----->" + status);
 
                     if (status.equals("true")) {
-                        //dialog2.show();
+                        dialog_success.show();
                     } else {
                         if (msg.contains("Error OccuredError: ER_DUP_ENTRY: Duplicate entry")) {
                             snackbar.show();
-                           // tv_snack.setText(R.string.us_al);
+                            tv_snack.setText("User Already Registerd");
                         } else {
                             snackbar.show();
-                           // tv_snack.setText(R.string.network);
+                            tv_snack.setText("No network found");
                         }
                     }
 
@@ -611,11 +671,11 @@ public class RegisterFragment extends Fragment {
                     Log.e("tag", "tagnt: " + e.toString());
 
                     snackbar.show();
-                   // tv_snack.setText(R.string.network);
+                    tv_snack.setText("No network found");
                 }
             } else {
                 snackbar.show();
-               // tv_snack.setText(R.string.network);
+                tv_snack.setText("No network found");
             }
         }
     }

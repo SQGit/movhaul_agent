@@ -1,13 +1,19 @@
 package net.sqindia.movhaulagent.Fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +22,17 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
 
+import net.sqindia.movhaulagent.Class.Dashboard;
+import net.sqindia.movhaulagent.Model.Config_Utils;
 import net.sqindia.movhaulagent.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Salman on 23-05-2017.
@@ -37,8 +49,12 @@ public class CompanyFragment extends Fragment {
     CountryCodePicker ccp_company;
     Snackbar snackbar;
     TextView tv_snack;
-    String str_comp_name, str_contact_name, str_phone, str_email, str_corporate_id, str_address;
+    String str_comp_name, str_contact_name, str_phone, str_email, str_corporate_id, str_address,str_mobile_prefix;
     EditText et_comp_name, et_contact_name, et_phone, et_email, et_corporate_id, et_address;
+    ProgressDialog mProgressDialog;
+    String id,token;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +65,12 @@ public class CompanyFragment extends Fragment {
         FontsManager.initFormAssets(getActivity(), "fonts/lato.ttf");
         FontsManager.changeFonts(get_CompanyView);
         tf = Typeface.createFromAsset(getActivity().getAssets(), "fonts/lato.ttf");
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        editor = sharedPreferences.edit();
+
+        id = sharedPreferences.getString("id","");
+        token = sharedPreferences.getString("token","");
 
         btn_submit = (Button) get_CompanyView.findViewById(R.id.button_submit);
         tv_activity_header = (TextView) getActivity().findViewById(R.id.textview_header);
@@ -86,6 +108,25 @@ public class CompanyFragment extends Fragment {
         tv_snack = (android.widget.TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
         tv_snack.setTextColor(Color.WHITE);
         tv_snack.setTypeface(tf);
+
+
+        str_mobile_prefix = "+234";
+
+
+        ccp_company.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                str_mobile_prefix = ccp_company.getSelectedCountryCodeWithPlus();
+                Log.e("tag", "flg_ccp" + ccp_company.getSelectedCountryCodeWithPlus());
+            }
+        });
+
+
+        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setTitle(getString(R.string.loading));
+        mProgressDialog.setMessage(getString(R.string.wait));
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setCancelable(false);
 
         int currentOrientation = getResources().getConfiguration().orientation;
         if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -125,6 +166,7 @@ public class CompanyFragment extends Fragment {
                                 if (!str_corporate_id.isEmpty() && str_corporate_id.length() > 9) {
                                     if (!str_address.isEmpty() && str_address.length() > 4) {
 
+                                        new add_company().execute();
 
                                     } else {
                                         snackbar.show();
@@ -171,6 +213,81 @@ public class CompanyFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+    }
+
+    public class add_company extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.e("tag", "booking_task");
+            mProgressDialog.show();
+
+
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String json = "", jsonStr = "";
+
+            Log.e("tag", "no poto");
+
+            String s = "";
+            JSONObject jsonObject = new JSONObject();
+            try {
+
+
+                jsonObject.put("company_name", str_comp_name);
+                jsonObject.put("drop_location", str_contact_name);
+                jsonObject.put("vehicle_type", str_mobile_prefix+str_phone);
+                jsonObject.put("vehicle_main_type", str_email);
+                jsonObject.put("vehicle_sub_type", str_corporate_id);
+                jsonObject.put("vehicle_sub_type", str_address);
+
+
+                json = jsonObject.toString();
+
+                return s = Config_Utils.makeRequest1(Config_Utils.WEB_URL + "customer/booking", json, id, token);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.e("tag", "tag" + s);
+            mProgressDialog.dismiss();
+
+            if (s != null) {
+                try {
+                    JSONObject jo = new JSONObject(s);
+                    String status = jo.getString("status");
+                    String msg = jo.getString("message");
+                    String bookingid = jo.getString("booking_id");
+                    Log.d("tag", "<-----Status----->" + status);
+                    if (status.equals("true")) {
+                        Log.e("tag", "Location Updated");
+
+
+                    } else if (status.equals("false")) {
+
+                        Log.e("tag", "Location not updated");
+                        //has to check internet and location...
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.e("tag", "nt" + e.toString());
+                }
+            } else {
+                // Toast.makeText(getApplicationContext(),"Network Errror1",Toast.LENGTH_LONG).show();
+            }
+
+        }
+
     }
 
 }
