@@ -1,5 +1,6 @@
 package net.sqindia.movhaulagent.Fragment;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -366,12 +367,12 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                     Log.e("tag", "permission Not granted");
 
 
                     ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{android.Manifest.permission.CAMERA},
+                            new String[]{android.Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                             MY_PERMISSIONS_REQUEST_CAMERA);
 
                 } else {

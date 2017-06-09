@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -237,16 +238,16 @@ public class CompanyFragment extends Fragment {
 
 
                 jsonObject.put("company_name", str_comp_name);
-                jsonObject.put("drop_location", str_contact_name);
-                jsonObject.put("vehicle_type", str_mobile_prefix+str_phone);
-                jsonObject.put("vehicle_main_type", str_email);
-                jsonObject.put("vehicle_sub_type", str_corporate_id);
-                jsonObject.put("vehicle_sub_type", str_address);
+                jsonObject.put("cotact_person", str_contact_name);
+                jsonObject.put("phone", str_mobile_prefix+str_phone);
+                jsonObject.put("email", str_email);
+                jsonObject.put("corporate_id", str_corporate_id);
+                jsonObject.put("address", str_address);
 
 
                 json = jsonObject.toString();
 
-                return s = Config_Utils.makeRequest1(Config_Utils.WEB_URL + "customer/booking", json, id, token);
+                return s = Config_Utils.makeRequest1(Config_Utils.WEB_URL + "agent/companyregister", json, id, token);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -266,11 +267,12 @@ public class CompanyFragment extends Fragment {
                     JSONObject jo = new JSONObject(s);
                     String status = jo.getString("status");
                     String msg = jo.getString("message");
-                    String bookingid = jo.getString("booking_id");
                     Log.d("tag", "<-----Status----->" + status);
                     if (status.equals("true")) {
                         Log.e("tag", "Location Updated");
-
+                        getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                        snackbar.show();
+                        tv_snack.setText("Company Added Successfully");
 
                     } else if (status.equals("false")) {
 

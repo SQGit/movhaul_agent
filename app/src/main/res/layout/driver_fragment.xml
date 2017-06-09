@@ -342,6 +342,7 @@
                             android:background="@drawable/grey_box"
                             android:gravity="center_vertical|left"
                             android:hint="Driver Bank No"
+                            android:imeOptions="actionDone"
                             android:inputType="number"
                             android:maxLength="20"
                             android:maxLines="1"
@@ -427,6 +428,7 @@
                             android:layout_gravity="left"
                             android:layout_marginBottom="@dimen/_2sdp"
                             android:paddingBottom="@dimen/_5sdp"
+                            android:id="@+id/radio_primary_route"
                             android:paddingLeft="@dimen/_10sdp"
                             android:gravity="left|center_vertical"
                             android:layout_height="match_parent">
@@ -436,6 +438,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:textSize="@dimen/_10sdp"
+                                android:id="@+id/radio_local"
                                 android:textColor="@color/textColor"
                                 android:text="Local" />
 
@@ -444,6 +447,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_15sdp"
                                 android:textColor="@color/textColor"
+                                android:id="@+id/radio_inter"
                                 android:textSize="@dimen/_10sdp"
                                 android:text="InterState" />
 
@@ -478,6 +482,7 @@
                             android:orientation="horizontal"
                             android:layout_gravity="center"
                             android:paddingBottom="@dimen/_5sdp"
+                            android:id="@+id/radio_service_range"
                             android:layout_marginBottom="@dimen/_2sdp"
                             android:paddingLeft="@dimen/_10sdp"
                             android:gravity="left|center_vertical"
@@ -488,6 +493,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:textSize="@dimen/_10sdp"
+                                android:id="@+id/radio_50"
                                 android:textColor="@color/textColor"
                                 android:text="50-100 miles" />
 
@@ -496,6 +502,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_10sdp"
                                 android:textColor="@color/textColor"
+                                android:id="@+id/radio_100"
                                 android:textSize="@dimen/_10sdp"
                                 android:text="100-200 miles" />
 
@@ -503,6 +510,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_10sdp"
+                                android:id="@+id/radio_200"
                                 android:textColor="@color/textColor"
                                 android:textSize="@dimen/_10sdp"
                                 android:text="200+ miles" />

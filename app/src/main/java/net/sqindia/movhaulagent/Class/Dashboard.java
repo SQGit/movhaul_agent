@@ -1,15 +1,20 @@
 package net.sqindia.movhaulagent.Class;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -32,7 +37,13 @@ import com.sloop.fonts.FontsManager;
 
 import net.sqindia.movhaulagent.Fragment.CompanyFragment;
 import net.sqindia.movhaulagent.Fragment.DriverFragment;
+import net.sqindia.movhaulagent.Fragment.LoginFragment;
+import net.sqindia.movhaulagent.Model.Config_Utils;
 import net.sqindia.movhaulagent.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +79,11 @@ public class Dashboard extends AppCompatActivity {
     private ViewPager viewPager;
     private int[] layouts;
     String id,token;
+    ProgressDialog mProgressDialog;
+    Snackbar snackbar;
 
+
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +113,28 @@ public class Dashboard extends AppCompatActivity {
         fl_bottom = (FrameLayout) findViewById(R.id.bottom_layout);
 
         tv_header = (TextView) findViewById(R.id.textview_header);
+
+
+
+        snackbar = Snackbar.make(findViewById(R.id.top), "No NetWork", Snackbar.LENGTH_LONG);
+        View sbView = snackbar.getView();
+        tv_snack = (android.widget.TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        tv_snack.setTextColor(Color.WHITE);
+        tv_snack.setTypeface(tf);
+
+        mProgressDialog = new ProgressDialog(Dashboard.this);
+        mProgressDialog.setTitle(getString(R.string.loading));
+        mProgressDialog.setMessage(getString(R.string.wait));
+        mProgressDialog.setIndeterminate(false);
+        mProgressDialog.setCancelable(false);
+
+        if (Config_Utils.isConnected(Dashboard.this)) {
+            new fetch_data().execute();
+        } else {
+            snackbar.show();
+            tv_snack.setText(R.string.network);
+        }
+
 
 
         dialog_yes_no = new Dialog(Dashboard.this);
@@ -372,5 +409,78 @@ public class Dashboard extends AppCompatActivity {
 
             return arow;
         }
+    }
+
+
+    class fetch_data extends AsyncTask<String, Void, String> {
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProgressDialog.show();
+        }
+
+        protected String doInBackground(String... params) {
+            String json = "", jsonStr = "";
+            try {
+                String virtual_url = Config_Utils.WEB_URL + "agent/getcompanydriver";
+                JSONObject jsonobject = Config_Utils.getData(virtual_url, id, token);
+                if (jsonobject.toString() == "sam") {
+                }
+                json = jsonobject.toString();
+                return json;
+            } catch (Exception e) {
+                jsonStr = "";
+            }
+            return jsonStr;
+        }
+
+        @Override
+        protected void onPostExecute(String jsonStr) {
+            Log.e("tag", "<-----rerseres---->" + jsonStr);
+            super.onPostExecute(jsonStr);
+            mProgressDialog.dismiss();
+            try {
+                JSONObject jo = new JSONObject(jsonStr);
+                String status = jo.getString("status");
+                if (status.equals("true")) {
+                    JSONArray truck_data = jo.getJSONArray("message");
+                    if (truck_data.length() > 0) {
+
+                       /* hash_subtype = new HashMap<String, String>();
+                        hash_subtype1 = new HashMap<String, String>();
+                        for (int i = 0; i < truck_data.length(); i++) {
+                            String datas = truck_data.getString(i);
+                            JSONObject subs = new JSONObject(datas);
+
+                            if (subs.getString("vehicle_type").contains("truck")) {
+                                ar_truck_type.add(subs.getString("vehicle_main_type"));
+                                ar_truck_sstype.add(subs.getString("vehicle_sub_type"));
+                                ar_truck_imgs.add(subs.getString("vehicle_image"));
+                                hash_subtype.put(subs.getString("vehicle_sub_type"), subs.getString("vehicle_main_type"));
+                                hash_truck_imgs.put(subs.getString("vehicle_image"), subs.getString("vehicle_main_type"));
+                            } else if (subs.getString("vehicle_type").contains("bus")) {
+                                ar_truck_type1.add(subs.getString("vehicle_main_type"));
+                                ar_truck_sstype1.add(subs.getString("vehicle_sub_type"));
+                                ar_truck_imgs1.add(subs.getString("vehicle_image"));
+                                hash_subtype1.put(subs.getString("vehicle_sub_type"), subs.getString("vehicle_main_type"));
+                                hash_truck_imgs1.put(subs.getString("vehicle_image"), subs.getString("vehicle_main_type"));
+                            }
+                        }*/
+
+
+
+                    } else {
+                    }
+                } else {
+                }
+                //  Log.e("tag", "trk_siz_img" + ar_truck_imgs.size());
+                //  Log.e("tag", "bus_siz" + ar_truck_type1.size());
+                //  Log.e("tag", "bus_siz_img" + ar_truck_imgs1.size());
+
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+
     }
 }
