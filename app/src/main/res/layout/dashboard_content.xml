@@ -10,12 +10,16 @@
 
         >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TableRow android:layout_height="1px"
-                android:layout_width="match_parent" >
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="1px">
 
 
                 <TextView
@@ -123,10 +127,10 @@
                     android:id="@+id/textview_hasdfeader"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColorLight"
+                    android:gravity="center|center_vertical"
+                    android:paddingLeft="@dimen/_5sdp"
                     android:text="25"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -136,10 +140,10 @@
                     android:id="@+id/textview_headasdferasf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColor"
+                    android:gravity="center|center_vertical"
+                    android:paddingLeft="@dimen/_5sdp"
                     android:text="240 ₦"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -149,10 +153,10 @@
                     android:id="@+id/textview_hesdfaderaf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColorLight"
+                    android:gravity="center|center_vertical"
+                    android:paddingLeft="@dimen/_5sdp"
                     android:text="3500 ₦"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -164,8 +168,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColor"
+                    android:gravity="center|center_vertical"
                     android:text="17"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -175,10 +179,10 @@
                     android:id="@+id/textview_hesasdfdfader"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColorLight"
+                    android:gravity="center|center_vertical"
+                    android:paddingLeft="@dimen/_5sdp"
                     android:text="5"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -188,10 +192,10 @@
                     android:id="@+id/asd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColor"
+                    android:gravity="center|center_vertical"
+                    android:paddingLeft="@dimen/_5sdp"
                     android:text="3"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -211,8 +215,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/viewColor"
-                    android:gravity="center_vertical"
                     android:drawableRight="@drawable/plus"
+                    android:gravity="center_vertical"
                     android:paddingRight="@dimen/_10sdp"
                     android:text="Chibu"
                     android:textColor="@color/textColor"
@@ -224,10 +228,10 @@
                     android:id="@+id/dfd"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColorLight"
+                    android:gravity="center|center_vertical"
+                    android:paddingLeft="@dimen/_5sdp"
                     android:text="18"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -237,10 +241,10 @@
                     android:id="@+id/sdfsdf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColor"
+                    android:gravity="center|center_vertical"
+                    android:paddingLeft="@dimen/_5sdp"
                     android:text="420 ₦"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -250,10 +254,10 @@
                     android:id="@+id/dsfdf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColorLight"
+                    android:gravity="center|center_vertical"
+                    android:paddingLeft="@dimen/_5sdp"
                     android:text="5700 ₦"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -265,8 +269,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColor"
+                    android:gravity="center|center_vertical"
                     android:text="10"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -276,10 +280,10 @@
                     android:id="@+id/ewsdf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColorLight"
+                    android:gravity="center|center_vertical"
+                    android:paddingLeft="@dimen/_5sdp"
                     android:text="8"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -289,10 +293,10 @@
                     android:id="@+id/asdf"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:gravity="center|center_vertical"
                     android:background="@color/viewColor"
+                    android:gravity="center|center_vertical"
+                    android:paddingLeft="@dimen/_5sdp"
                     android:text="2"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/_11sdp"
@@ -305,12 +309,13 @@
         </TableLayout>
 
         <ListView
-            android:layout_width="match_parent"
             android:id="@+id/listview"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
         </ListView>
 
+        </LinearLayout>
 
     </HorizontalScrollView>
 </LinearLayout>
