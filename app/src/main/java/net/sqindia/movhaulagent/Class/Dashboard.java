@@ -184,16 +184,16 @@ public class Dashboard extends AppCompatActivity {
 
 
                 driver_type.clear();
-                company_lists.clear();
+           //     company_lists.clear();
 
 
 
-                company_lists.add("IBM");
-                company_lists.add("MovHaul");
-                company_lists.add("Opiniion");
-                company_lists.add("Sqindia");
-                company_lists.add("IFindCard");
-                company_lists.add("Zoho");
+           //     company_lists.add("IBM");
+            //    company_lists.add("MovHaul");
+            //    company_lists.add("Opiniion");
+            //    company_lists.add("Sqindia");
+            //    company_lists.add("IFindCard");
+            //    company_lists.add("Zoho");
 
                 if(company_lists.size()>0) {
 
@@ -442,34 +442,46 @@ public class Dashboard extends AppCompatActivity {
                 JSONObject jo = new JSONObject(jsonStr);
                 String status = jo.getString("status");
                 if (status.equals("true")) {
-                    JSONArray truck_data = jo.getJSONArray("message");
-                    if (truck_data.length() > 0) {
+                    JSONArray jsr_company = jo.getJSONArray("company");
+                    JSONArray jsr_driver = jo.getJSONArray("driver");
+                    if (jsr_company.length() > 0) {
 
-                       /* hash_subtype = new HashMap<String, String>();
-                        hash_subtype1 = new HashMap<String, String>();
-                        for (int i = 0; i < truck_data.length(); i++) {
-                            String datas = truck_data.getString(i);
+                       // hash_subtype = new HashMap<String, String>();
+                       // hash_subtype1 = new HashMap<String, String>();
+                        ar_comp_lists.clear();
+                        for (int i = 0; i < jsr_company.length(); i++) {
+                            String datas = jsr_company.getString(i);
                             JSONObject subs = new JSONObject(datas);
 
-                            if (subs.getString("vehicle_type").contains("truck")) {
-                                ar_truck_type.add(subs.getString("vehicle_main_type"));
+
+                            ar_comp_lists.add(subs.getString("company_name"));
+                               /* ar_truck_type.add(subs.getString("vehicle_main_type"));
                                 ar_truck_sstype.add(subs.getString("vehicle_sub_type"));
                                 ar_truck_imgs.add(subs.getString("vehicle_image"));
                                 hash_subtype.put(subs.getString("vehicle_sub_type"), subs.getString("vehicle_main_type"));
-                                hash_truck_imgs.put(subs.getString("vehicle_image"), subs.getString("vehicle_main_type"));
-                            } else if (subs.getString("vehicle_type").contains("bus")) {
-                                ar_truck_type1.add(subs.getString("vehicle_main_type"));
-                                ar_truck_sstype1.add(subs.getString("vehicle_sub_type"));
-                                ar_truck_imgs1.add(subs.getString("vehicle_image"));
-                                hash_subtype1.put(subs.getString("vehicle_sub_type"), subs.getString("vehicle_main_type"));
-                                hash_truck_imgs1.put(subs.getString("vehicle_image"), subs.getString("vehicle_main_type"));
-                            }
-                        }*/
+                                hash_truck_imgs.put(subs.getString("vehicle_image"), subs.getString("vehicle_main_type"));*/
+                        }
 
 
 
                     } else {
+
+
                     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 } else {
                 }
                 //  Log.e("tag", "trk_siz_img" + ar_truck_imgs.size());
