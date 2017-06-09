@@ -573,7 +573,7 @@ public class DriverFragment extends Fragment {
                 httppost.setHeader("driver_service_type",str_service_type);
                 httppost.setHeader("primary_route",str_service_route);
                 httppost.setHeader("service_range",str_service_range);
-                httppost.setHeader("driver_operated_by", "movhaul");
+                httppost.setHeader("driver_operated_by", sharedPreferences.getString("company",""));
                 httppost.setHeader("local_govt","local");
                 httppost.setHeader("service_areas","lagos");
                 httppost.setHeader("id",id);

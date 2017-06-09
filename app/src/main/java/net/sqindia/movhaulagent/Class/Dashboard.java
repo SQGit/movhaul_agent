@@ -57,7 +57,7 @@ public class Dashboard extends AppCompatActivity {
     LinearLayout lt_back;
     ImageButton ib_driver_add, ib_comp_add;
 
-    List<String> ar_comp_lists = new ArrayList<String>();
+    ArrayList<String>  ar_comp_lists;
 
     TextView tv_header;
     ImageView img_back;
@@ -81,6 +81,8 @@ public class Dashboard extends AppCompatActivity {
     String id,token;
     ProgressDialog mProgressDialog;
     Snackbar snackbar;
+    String str_name;
+    TextView tv_header_name;
 
 
     @SuppressLint("WrongViewCast")
@@ -100,7 +102,10 @@ public class Dashboard extends AppCompatActivity {
         token = sharedPreferences.getString("token","");
 
 
+        str_name = sharedPreferences.getString("agent_name","");
+
         lt_back = (LinearLayout) findViewById(R.id.action_back);
+        tv_header_name = (TextView) findViewById(R.id.textview_header_name);
 
         if(sharedPreferences.getString("login","").equals("success")){
             lt_back.setVisibility(View.GONE);
@@ -113,6 +118,9 @@ public class Dashboard extends AppCompatActivity {
         fl_bottom = (FrameLayout) findViewById(R.id.bottom_layout);
 
         tv_header = (TextView) findViewById(R.id.textview_header);
+
+
+        tv_header_name.setText("Welcome "+str_name);
 
 
 
@@ -195,7 +203,7 @@ public class Dashboard extends AppCompatActivity {
             //    company_lists.add("IFindCard");
             //    company_lists.add("Zoho");
 
-                if(company_lists.size()>0) {
+                if(ar_comp_lists.size()>0) {
 
                     driver_type.add("Private");
                     driver_type.add("Corporate");
@@ -310,7 +318,7 @@ public class Dashboard extends AppCompatActivity {
         Log.e("tag", "stsiz: " + driver_type.size());
         adapter1 = new ListAdapter(getApplicationContext(), R.layout.dialog_region_txts0, driver_type);
         lview_state.setAdapter(adapter1);
-        adapter2 = new ListAdapter(getApplicationContext(), R.layout.dialog_region_txts, company_lists);
+        adapter2 = new ListAdapter(getApplicationContext(), R.layout.dialog_region_txts, ar_comp_lists);
         lview_district.setAdapter(adapter2);
 
 
@@ -382,6 +390,9 @@ public class Dashboard extends AppCompatActivity {
                             lt_content.setVisibility(View.GONE);
                             b.dismiss();
 
+                            editor.putString("company","movhaul");
+                            editor.apply();
+
                         } else {
                             lview_state.setVisibility(View.GONE);
                             lview_district.setVisibility(View.VISIBLE);
@@ -399,6 +410,10 @@ public class Dashboard extends AppCompatActivity {
                         fl_bottom.setVisibility(View.GONE);
                         lt_content.setVisibility(View.GONE);
                         sts = 0;
+
+                        Log.e("tag","pp: "+data_lists.get(posi));
+                        editor.putString("company",data_lists.get(posi));
+                        editor.apply();
                     }
 
                 }
@@ -442,18 +457,19 @@ public class Dashboard extends AppCompatActivity {
                 JSONObject jo = new JSONObject(jsonStr);
                 String status = jo.getString("status");
                 if (status.equals("true")) {
+
+                    ar_comp_lists = new ArrayList<String>();
                     JSONArray jsr_company = jo.getJSONArray("company");
                     JSONArray jsr_driver = jo.getJSONArray("driver");
                     if (jsr_company.length() > 0) {
 
                        // hash_subtype = new HashMap<String, String>();
                        // hash_subtype1 = new HashMap<String, String>();
-                        ar_comp_lists.clear();
                         for (int i = 0; i < jsr_company.length(); i++) {
                             String datas = jsr_company.getString(i);
                             JSONObject subs = new JSONObject(datas);
 
-
+                            Log.e("tag","cc: :"+subs.getString("company_name"));
                             ar_comp_lists.add(subs.getString("company_name"));
                                /* ar_truck_type.add(subs.getString("vehicle_main_type"));
                                 ar_truck_sstype.add(subs.getString("vehicle_sub_type"));
