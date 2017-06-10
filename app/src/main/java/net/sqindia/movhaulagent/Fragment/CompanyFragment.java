@@ -273,6 +273,8 @@ public class CompanyFragment extends Fragment {
                         getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                         snackbar.show();
                         tv_snack.setText("Company Added Successfully");
+                        editor.putString("service","yes");
+                        editor.apply();
 
                     } else if (status.equals("false")) {
 

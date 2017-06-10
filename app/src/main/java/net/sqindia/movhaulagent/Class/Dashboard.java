@@ -5,8 +5,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -31,22 +31,23 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.sloop.fonts.FontsManager;
 
 import net.sqindia.movhaulagent.Fragment.CompanyFragment;
 import net.sqindia.movhaulagent.Fragment.DriverFragment;
-import net.sqindia.movhaulagent.Fragment.LoginFragment;
 import net.sqindia.movhaulagent.Model.Config_Utils;
 import net.sqindia.movhaulagent.R;
+import net.sqindia.movhaulagent.adapter.driver_listdatas;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * Created by Salman on 25-05-2017.
@@ -57,7 +58,8 @@ public class Dashboard extends AppCompatActivity {
     LinearLayout lt_back;
     ImageButton ib_driver_add, ib_comp_add;
 
-    ArrayList<String>  ar_comp_lists;
+    ArrayList<String> ar_comp_lists;
+    ArrayList<String> ar_driv_ids;
 
     TextView tv_header;
     ImageView img_back;
@@ -76,14 +78,18 @@ public class Dashboard extends AppCompatActivity {
     TextView tv_txt1, tv_txt2, tv_txt3, tv_snack2, sb_text, tv_snack_act, tv_snack;
     Button btn_yes, btn_no, btn_submit;
     LinearLayout lt_content;
-    private ViewPager viewPager;
-    private int[] layouts;
-    String id,token;
+    String id, token;
     ProgressDialog mProgressDialog;
     Snackbar snackbar;
     String str_name;
     TextView tv_header_name;
-
+    ListView lv_driver_datas;
+    HashMap<String, HashMap<String, String>> hash_datas;
+    HashMap<String, String> hs_drivers_datas;
+    ScrollView scr_drivers;
+    TextView tv_hint_txt;
+    private ViewPager viewPager;
+    private int[] layouts;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -98,16 +104,17 @@ public class Dashboard extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Dashboard.this);
         editor = sharedPreferences.edit();
 
-        id = sharedPreferences.getString("id","");
-        token = sharedPreferences.getString("token","");
+        id = sharedPreferences.getString("id", "");
+        token = sharedPreferences.getString("token", "");
 
 
-        str_name = sharedPreferences.getString("agent_name","");
+        str_name = sharedPreferences.getString("agent_name", "");
 
         lt_back = (LinearLayout) findViewById(R.id.action_back);
         tv_header_name = (TextView) findViewById(R.id.textview_header_name);
+        lv_driver_datas = (ListView) findViewById(R.id.listview);
 
-        if(sharedPreferences.getString("login","").equals("success")){
+        if (sharedPreferences.getString("login", "").equals("success")) {
             lt_back.setVisibility(View.GONE);
         }
 
@@ -115,13 +122,16 @@ public class Dashboard extends AppCompatActivity {
         lt_content = (LinearLayout) findViewById(R.id.content);
         ib_driver_add = (ImageButton) findViewById(R.id.add_driver);
         ib_comp_add = (ImageButton) findViewById(R.id.add_company);
-        fl_bottom = (FrameLayout) findViewById(R.id.bottom_layout);
+        fl_bottom = (FrameLayout) findViewById(R.id.bbb);
 
         tv_header = (TextView) findViewById(R.id.textview_header);
 
+        tv_hint_txt = (TextView) findViewById(R.id.hint_text);
+        tv_hint_txt.setVisibility(View.GONE);
+        scr_drivers = (ScrollView) findViewById(R.id.scroll);
 
-        tv_header_name.setText("Welcome "+str_name);
 
+        tv_header_name.setText("Welcome " + str_name);
 
 
         snackbar = Snackbar.make(findViewById(R.id.top), "No NetWork", Snackbar.LENGTH_LONG);
@@ -141,6 +151,15 @@ public class Dashboard extends AppCompatActivity {
         } else {
             snackbar.show();
             tv_snack.setText(R.string.network);
+        }
+
+
+
+        int currentOrientation = getResources().getConfiguration().orientation;
+        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+           if(scr_drivers.getVisibility()==View.VISIBLE){
+               scr_drivers.fullScroll(View.FOCUS_UP);
+           }
         }
 
 
@@ -190,34 +209,23 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
 
 
-
                 driver_type.clear();
-           //     company_lists.clear();
 
-
-
-           //     company_lists.add("IBM");
-            //    company_lists.add("MovHaul");
-            //    company_lists.add("Opiniion");
-            //    company_lists.add("Sqindia");
-            //    company_lists.add("IFindCard");
-            //    company_lists.add("Zoho");
-
-                if(ar_comp_lists.size()>0) {
+                if (ar_comp_lists.size() > 0) {
 
                     driver_type.add("Private");
                     driver_type.add("Corporate");
 
 
                     popupwithlistview();
-                }
-                else{
+                } else {
 
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.fragment_container, new DriverFragment());
                     ft.addToBackStack("driver");
                     ft.commit();
                     fl_bottom.setVisibility(View.GONE);
+                    tv_hint_txt.setVisibility(View.GONE);
                     tv_header.setText("Driver");
                     lt_content.setVisibility(View.GONE);
 
@@ -247,13 +255,23 @@ public class Dashboard extends AppCompatActivity {
 
                 FragmentManager manager = getSupportFragmentManager();
                 int index = manager.getBackStackEntryCount() - 1;
-                Log.e("tag","bakstk"+index);
-                if(index<0){
+                Log.e("tag", "bakstk" + index);
+                if (index < 0) {
                     fl_bottom.setVisibility(View.VISIBLE);
                     tv_header.setText("Dashboard");
                     lt_content.setVisibility(View.VISIBLE);
-
                 }
+                if (sharedPreferences.getString("service", "").equals("yes")) {
+
+                    if (Config_Utils.isConnected(Dashboard.this)) {
+                        new fetch_data().execute();
+                    } else {
+                        snackbar.show();
+                        tv_snack.setText(R.string.network);
+                    }
+                }
+
+
             }
         });
     }
@@ -264,6 +282,7 @@ public class Dashboard extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         bl_bottom = fl_bottom.getVisibility() == View.VISIBLE;
         outState.putBoolean("bl_layout", bl_bottom);
+        Log.e("tag", "saveins");
     }
 
 
@@ -273,7 +292,28 @@ public class Dashboard extends AppCompatActivity {
         bl_bottom = savedInstanceState.getBoolean("bl_layout");
         fl_bottom.setVisibility(bl_bottom ? View.VISIBLE : View.GONE);
         lt_content.setVisibility(bl_bottom ? View.VISIBLE : View.GONE);
+        Log.e("tag", "restoreins");
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("tag", "restart");
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        Log.e("tag", "restart");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e("tag", "restart");
+
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -285,20 +325,17 @@ public class Dashboard extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         int index = manager.getBackStackEntryCount() - 1;
 
-        if(index>=0){
+        if (index >= 0) {
 
             manager.popBackStackImmediate();
             fl_bottom.setVisibility(View.VISIBLE);
             tv_header.setText("Dashboard");
             lt_content.setVisibility(View.VISIBLE);
 
-        }
-        else{
+        } else {
             dialog_yes_no.show();
         }
 
-
-        //
     }
 
     public void popupwithlistview() {
@@ -386,11 +423,13 @@ public class Dashboard extends AppCompatActivity {
                             ft.addToBackStack("driver");
                             ft.commit();
                             fl_bottom.setVisibility(View.GONE);
+
                             tv_header.setText("Driver");
+
                             lt_content.setVisibility(View.GONE);
                             b.dismiss();
 
-                            editor.putString("company","movhaul");
+                            editor.putString("company", "movhaul");
                             editor.apply();
 
                         } else {
@@ -411,8 +450,8 @@ public class Dashboard extends AppCompatActivity {
                         lt_content.setVisibility(View.GONE);
                         sts = 0;
 
-                        Log.e("tag","pp: "+data_lists.get(posi));
-                        editor.putString("company",data_lists.get(posi));
+                        Log.e("tag", "pp: " + data_lists.get(posi));
+                        editor.putString("company", data_lists.get(posi));
                         editor.apply();
                     }
 
@@ -459,50 +498,61 @@ public class Dashboard extends AppCompatActivity {
                 if (status.equals("true")) {
 
                     ar_comp_lists = new ArrayList<String>();
+                    ar_driv_ids = new ArrayList<String>();
+
                     JSONArray jsr_company = jo.getJSONArray("company");
                     JSONArray jsr_driver = jo.getJSONArray("driver");
                     if (jsr_company.length() > 0) {
-
-                       // hash_subtype = new HashMap<String, String>();
-                       // hash_subtype1 = new HashMap<String, String>();
                         for (int i = 0; i < jsr_company.length(); i++) {
                             String datas = jsr_company.getString(i);
                             JSONObject subs = new JSONObject(datas);
-
-                            Log.e("tag","cc: :"+subs.getString("company_name"));
+                            Log.e("tag", "cc: :" + subs.getString("company_name"));
                             ar_comp_lists.add(subs.getString("company_name"));
-                               /* ar_truck_type.add(subs.getString("vehicle_main_type"));
-                                ar_truck_sstype.add(subs.getString("vehicle_sub_type"));
-                                ar_truck_imgs.add(subs.getString("vehicle_image"));
-                                hash_subtype.put(subs.getString("vehicle_sub_type"), subs.getString("vehicle_main_type"));
-                                hash_truck_imgs.put(subs.getString("vehicle_image"), subs.getString("vehicle_main_type"));*/
                         }
+                    }
 
+                    if (jsr_driver.length() > 0) {
+                        hash_datas = new HashMap<String, HashMap<String, String>>();
+                        for (int i = 0; i < jsr_driver.length(); i++) {
+                            String datas = jsr_driver.getString(i);
+                            JSONObject subs = new JSONObject(datas);
+                            hs_drivers_datas = new HashMap<String, String>();
+                            Log.e("tag", "dd: :" + subs.getString("driver_name"));
+                            ar_driv_ids.add(subs.getString("fake_id"));
+                            hs_drivers_datas.put("driver_id", subs.getString("fake_id"));
+                            hs_drivers_datas.put("driver_name", subs.getString("driver_name"));
+                            hs_drivers_datas.put("driver_mobile", subs.getString("driver_mobile_pri"));
+                            hs_drivers_datas.put("driver_email", subs.getString("driver_email"));
+                            hs_drivers_datas.put("driver_company", subs.getString("driver_operated_by"));
+                            hs_drivers_datas.put("driver_address", subs.getString("driver_address"));
+                            hs_drivers_datas.put("driver_type", subs.getString("vehicle_type"));
+                            hs_drivers_datas.put("driver_route", subs.getString("primary_route"));
+                            hs_drivers_datas.put("driver_service_areas", subs.getString("service_areas"));
+                            hash_datas.put(subs.getString("fake_id"), hs_drivers_datas);
+                        }
+                        tv_hint_txt.setVisibility(View.GONE);
+                        scr_drivers.setVisibility(View.VISIBLE);
 
+                        scr_drivers.fullScroll(View.FOCUS_UP);
+                        driver_listdatas adapter = new driver_listdatas(Dashboard.this, ar_driv_ids, hash_datas);
+                        lv_driver_datas.setAdapter(adapter);
 
                     } else {
-
-
+                        scr_drivers.setVisibility(View.GONE);
+                        tv_hint_txt.setVisibility(View.VISIBLE);
                     }
 
 
-
-
-
-
-
-
-
-
-
-
+                    editor.putString("service", "");
+                    editor.apply();
 
 
                 } else {
+                    snackbar.show();
+                    tv_snack.setText("Network Failed, Please Try Again Later.");
+
                 }
-                //  Log.e("tag", "trk_siz_img" + ar_truck_imgs.size());
-                //  Log.e("tag", "bus_siz" + ar_truck_type1.size());
-                //  Log.e("tag", "bus_siz_img" + ar_truck_imgs1.size());
+
 
             } catch (JSONException e) {
                 // TODO Auto-generated catch block

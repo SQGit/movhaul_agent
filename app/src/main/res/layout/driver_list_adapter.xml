@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <!--<HorizontalScrollView
+        android:layout_width="match_parent"
+        android:clickable="false"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_height="wrap_content">-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/textview_drivers"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="wrap_content"
+                android:background="@color/viewColor"
+                android:drawableRight="@drawable/plus"
+                android:gravity="center_vertical"
+                android:paddingRight="@dimen/_10sdp"
+                android:text="Emeka"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/textview_jobs"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="match_parent"
+                android:background="@color/viewColorLight"
+                android:gravity="center|center_vertical"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="25"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview_headasdferasf"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="match_parent"
+                android:background="@color/viewColor"
+                android:gravity="center|center_vertical"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="240 ₦"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview_hesdfaderaf"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="match_parent"
+                android:background="@color/viewColorLight"
+                android:gravity="center|center_vertical"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="3500 ₦"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview_headeasdfrsafd"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="match_parent"
+                android:background="@color/viewColor"
+                android:gravity="center|center_vertical"
+                android:text="17"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textview_hesasdfdfader"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="match_parent"
+                android:background="@color/viewColorLight"
+                android:gravity="center|center_vertical"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="5"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/asd"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="match_parent"
+                android:background="@color/viewColor"
+                android:gravity="center|center_vertical"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="3"
+                android:textColor="@color/textColor"
+                android:textSize="@dimen/_11sdp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/viewColorLight"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/viewColorLight"
+                android:padding="@dimen/_2sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Driver ID : "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/driver_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:text="MV32IX93 "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/viewColor"
+                android:padding="@dimen/_2sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Driver Name : "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/driver_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:text="Emeka "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:padding="@dimen/_2sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Driver Mobile No : "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/driver_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:text="32423487383 "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/viewColor"
+                android:padding="@dimen/_2sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Driver Address : "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/driver_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:text="202, North Hut, Lagos. "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:padding="@dimen/_2sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Driver Email : "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/driver_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:text="emika@gmail.com "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/viewColor"
+                android:padding="@dimen/_2sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Driver Type : "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/driver_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:text="Bus "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:padding="@dimen/_2sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Driver Primary Route : "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/driver_route"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:text="Local "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/viewColor"
+                android:padding="@dimen/_2sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="Driver Owned by : "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/driver_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:text="movhaul "
+                    android:textColor="@color/textColor"
+                    android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!-- </HorizontalScrollView>-->
+
+</LinearLayout>

@@ -391,8 +391,8 @@ public class DriverFragment extends Fragment {
                                     if (!str_email.isEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(str_email).matches()) {
                                         if (!str_bank_no.isEmpty() && str_bank_no.length() > 9) {
                                             if (!str_service_type.isEmpty()) {
-                                                if (!str_service_route.isEmpty()) {
-                                                    if (!str_service_range.isEmpty()) {
+                                                if (str_service_route!= null) {
+                                                    if (str_service_range!= null) {
                                                         if (str_driving_licence!= null) {
                                                              new add_driver().execute();
                                                         } else {
@@ -563,14 +563,14 @@ public class DriverFragment extends Fragment {
                 HttpPost httppost = new HttpPost(Config_Utils.WEB_URL + "agent/driverregister");
 
                 httppost.setHeader("driver_name", str_name);
-                httppost.setHeader("driver_address",str_email);
-                httppost.setHeader("driver_state", str_address);
-                httppost.setHeader("driver_city", str_state);
-                httppost.setHeader("driver_mobile", str_mobile_prefix + str_phone);
-                httppost.setHeader("driver_email", str_city);
+                httppost.setHeader("driver_address",str_address);
+                httppost.setHeader("driver_state", str_state);
+                httppost.setHeader("driver_city", str_city);
+                httppost.setHeader("driver_mobile_pri", str_mobile_prefix + str_phone);
+                httppost.setHeader("driver_email", str_email);
                 httppost.setHeader("driver_bank", str_bank);
                 httppost.setHeader("driver_bank_no", str_bank_no);
-                httppost.setHeader("driver_service_type",str_service_type);
+                httppost.setHeader("vehicle_type",str_service_type);
                 httppost.setHeader("primary_route",str_service_route);
                 httppost.setHeader("service_range",str_service_range);
                 httppost.setHeader("driver_operated_by", sharedPreferences.getString("company",""));
@@ -637,6 +637,8 @@ public class DriverFragment extends Fragment {
                         getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                         snackbar.show();
                         tv_snack.setText("Driver Added Successfully");
+                        editor.putString("service","yes");
+                        editor.apply();
 
                     } else {
                         if (msg.contains("Error OccuredError: ER_DUP_ENTRY: Duplicate entry")) {
