@@ -24,8 +24,8 @@
     <string name="asdf">Your details for Verification!!</string>
     <string name="cea">Once Verification is completed, You can login to Movehaul.</string>
     <string name="login_otp">Login-OTP</string>
-    <string name="check_your_message_or">Check Your Message (Or)</string>
-    <string name="email_for_otp_code">Email for OTP Code</string>
+    <string name="check_your_message_or">Check Your Message  (Or) </string>
+    <string name="email_for_otp_code">  Email for OTP Code</string>
     <string name="resend_otp">Resend OTP</string>
 
 </resources>

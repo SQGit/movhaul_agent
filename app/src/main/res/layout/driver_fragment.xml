@@ -543,13 +543,13 @@
                             android:textColorHint="@color/textColor">
 
                             <EditText
-                                android:id="@+id/edittext_govt"
+                                android:id="@+id/edittext_experience"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:clickable="false"
                                 android:enabled="false"
-                                android:hint="Local Government"
+                                android:hint="Experience"
                                 android:inputType="text"
                                 android:maxLines="1"
                                 android:paddingTop="@dimen/_5sdp"
@@ -565,7 +565,7 @@
 
 
                         <LinearLayout
-                            android:id="@+id/layout_choose_service_tydpde"
+                            android:id="@+id/layout_choose_experience"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">

@@ -6,6 +6,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -62,6 +63,7 @@ public class LoginOtpActivity extends Activity implements TextWatcher {
 
     int a,b,c,d;
     InputMethodManager inputMethodManager;
+    LinearLayout lt_msg;
 
    // ReceiveSmsBroadcastReceiver receiver;
 
@@ -90,6 +92,16 @@ public class LoginOtpActivity extends Activity implements TextWatcher {
         str_for = getIntent.getStringExtra("for");
         str_data = getIntent.getStringExtra("data");
         str_prefix = getIntent.getStringExtra("prefix");
+
+        lt_msg = (LinearLayout) findViewById(R.id.msg_layout);
+
+
+        int currentOrientation = getResources().getConfiguration().orientation;
+        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+            lt_msg.setOrientation(LinearLayout.HORIZONTAL);
+        } else {
+            lt_msg.setOrientation(LinearLayout.VERTICAL);
+        }
 
 
         Log.e("tag", "data:" + str_for);

@@ -74,6 +74,7 @@ public class DriverFragment extends Fragment {
     public String[] ar_city;
     public String[] ar_banks_copy;
     public String[] ar_service_type;
+    public String[] ar_experience;
     public HashMap<String, String[]> city_hash = new HashMap<>();
     TextView tv_activity_header;
     LinearLayout lt_service_range;
@@ -83,9 +84,9 @@ public class DriverFragment extends Fragment {
     Button btn_submit;
     Snackbar snackbar;
     TextView tv_snack;
-    String str_name, str_address, str_state, str_city, str_phone, str_email, str_bank, str_bank_no, str_service_type, str_service_route, str_service_range, str_govt, str_services_areas, str_driving_licence,str_mobile_prefix;
-    EditText et_name, et_address, et_state, et_city, et_phone, et_email, et_bank, et_bank_no, et_service_type, et_coverage, et_govt;
-    LinearLayout lt_state, lt_city, lt_bank, lt_service_type, lt_coverage, lt_driving_licence;
+    String str_name, str_address, str_state, str_city, str_phone, str_email, str_bank, str_bank_no, str_service_type, str_service_route, str_service_range, str_govt, str_services_areas, str_driving_licence,str_mobile_prefix,str_experience;
+    EditText et_name, et_address, et_state, et_city, et_phone, et_email, et_bank, et_bank_no, et_service_type, et_coverage, et_govt,et_exp;
+    LinearLayout lt_state, lt_city, lt_bank, lt_service_type, lt_coverage, lt_driving_licence,lt_exp;
     Config_Utils config;
     ArrayList<Uri> image_uris;
     ImageView iv_driving_licence;
@@ -126,7 +127,8 @@ public class DriverFragment extends Fragment {
         ar_banks = new String[]{" GT Bank ", " Hongkong&Sangai Bank ", " SAFC ", " Bank Of Africa ", "Federal Bank of Nigeria", " LEKIA Bank ", " Nigeria Bank ",};
         ar_state = new String[]{"Abia", "Akwa Ibom", "Benue", "Borno", "Delta", "Enugu", "Edo", "Jigawa", "Kebbi", "Lagos", "Ogun", "Oyo", "Rivers", "Yobe"};
         ar_city = new String[]{"Asaba", "Bauchi", "Dutse", "Jimeta", "Kanduna", "Lafia", "Lekki", "Oron", "Port Harcourt", "Sokoto", "Warri", "Zaria"};
-        ar_service_type = new String[]{"Truck Services", "Charter Bus Services", "Road Side Assistance"};
+        ar_service_type = new String[]{"Haulage-Local", "Haulage-Interstate", "Service Truck-Party Van", "Service Truck-Cooling van", "Service Truck-Gas", "Tow truck", "Bus Rental-Charter"};
+        ar_experience = new String[]{" 1 ", " 2 ", " 3 ", " 4 ", "5+"};
 
 
         btn_submit = (Button) get_DriverView.findViewById(R.id.button_submit);
@@ -146,6 +148,7 @@ public class DriverFragment extends Fragment {
         lt_bank = (LinearLayout) get_DriverView.findViewById(R.id.layout_choose_bank);
         lt_service_type = (LinearLayout) get_DriverView.findViewById(R.id.layout_choose_service_type);
         lt_coverage = (LinearLayout) get_DriverView.findViewById(R.id.layout_coverage);
+        lt_exp = (LinearLayout) get_DriverView.findViewById(R.id.layout_choose_experience);
         lt_driving_licence = (LinearLayout) get_DriverView.findViewById(R.id.layout_upload_licence);
 
         et_name = (EditText) get_DriverView.findViewById(R.id.edittext_name);
@@ -157,8 +160,9 @@ public class DriverFragment extends Fragment {
         et_state = (EditText) get_DriverView.findViewById(R.id.edittext_state);
         et_city = (EditText) get_DriverView.findViewById(R.id.edittext_city);
         et_coverage = (EditText) get_DriverView.findViewById(R.id.edittext_coverage);
-        et_govt = (EditText) get_DriverView.findViewById(R.id.edittext_govt);
+        //et_govt = (EditText) get_DriverView.findViewById(R.id.edittext_govt);
         et_service_type = (EditText) get_DriverView.findViewById(R.id.edittext_service_type);
+        et_exp = (EditText) get_DriverView.findViewById(R.id.edittext_experience);
 
         rg_primary_route = (RadioGroup) get_DriverView.findViewById(R.id.radio_primary_route);
         rg_service_range = (RadioGroup) get_DriverView.findViewById(R.id.radio_service_range);
@@ -250,6 +254,14 @@ public class DriverFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 popup(ar_service_type, et_service_type, 3);
+            }
+        });
+
+
+        lt_exp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup(ar_experience, et_exp, 3);
             }
         });
 
@@ -381,7 +393,8 @@ public class DriverFragment extends Fragment {
                 str_bank = et_bank.getText().toString().trim();
                 str_bank_no = et_bank_no.getText().toString().trim();
                 str_service_type = et_service_type.getText().toString().trim();
-                str_govt = et_govt.getText().toString().trim();
+                str_experience = et_exp.getText().toString().trim();
+                // = et_govt.getText().toString().trim();
 
                 if (!str_name.isEmpty() && str_name.length() > 4) {
                     if (!str_address.isEmpty() && str_address.length() > 4) {
@@ -393,11 +406,17 @@ public class DriverFragment extends Fragment {
                                             if (!str_service_type.isEmpty()) {
                                                 if (str_service_route!= null) {
                                                     if (str_service_range!= null) {
-                                                        if (str_driving_licence!= null) {
-                                                             new add_driver().execute();
-                                                        } else {
+                                                        if (str_experience!= null) {
+                                                            if (str_driving_licence != null) {
+                                                                new add_driver().execute();
+                                                            } else {
+                                                                snackbar.show();
+                                                                tv_snack.setText("Upload Driving Licence");
+                                                            }
+                                                        }
+                                                        else{
                                                             snackbar.show();
-                                                            tv_snack.setText("Upload Driving Licence");
+                                                            tv_snack.setText("Choose Experience");
                                                         }
                                                     } else {
                                                         snackbar.show();
@@ -574,7 +593,7 @@ public class DriverFragment extends Fragment {
                 httppost.setHeader("primary_route",str_service_route);
                 httppost.setHeader("service_range",str_service_range);
                 httppost.setHeader("driver_operated_by", sharedPreferences.getString("company",""));
-                httppost.setHeader("local_govt","local");
+                httppost.setHeader("driver_experience",str_experience);
                 httppost.setHeader("service_areas","lagos");
                 httppost.setHeader("id",id);
                 httppost.setHeader("sessiontoken",token);

@@ -41,18 +41,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginRight="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/textview_header_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Welcom Ron"
+                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:textColor="@color/textColor"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:textSize="@dimen/_11sdp"
                     android:textStyle="bold" />
+
+
+
+                <ImageView
+                    android:id="@+id/right_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end|center_vertical"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingRight="@dimen/_6sdp"
+                    android:paddingTop="@dimen/_3sdp"
+                    android:src="@drawable/right_nav_menu" />
             </LinearLayout>
 
             <LinearLayout

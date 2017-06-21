@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -19,8 +20,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -31,6 +37,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -39,6 +46,7 @@ import com.sloop.fonts.FontsManager;
 import net.sqindia.movhaulagent.Fragment.CompanyFragment;
 import net.sqindia.movhaulagent.Fragment.DriverFragment;
 import net.sqindia.movhaulagent.Model.Config_Utils;
+import net.sqindia.movhaulagent.Model.CustomTypefaceSpan;
 import net.sqindia.movhaulagent.R;
 import net.sqindia.movhaulagent.adapter.driver_listdatas;
 
@@ -90,6 +98,7 @@ public class Dashboard extends AppCompatActivity {
     TextView tv_hint_txt;
     private ViewPager viewPager;
     private int[] layouts;
+    ImageView iv_options;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -113,6 +122,7 @@ public class Dashboard extends AppCompatActivity {
         lt_back = (LinearLayout) findViewById(R.id.action_back);
         tv_header_name = (TextView) findViewById(R.id.textview_header_name);
         lv_driver_datas = (ListView) findViewById(R.id.listview);
+        iv_options = (ImageView) findViewById(R.id.right_menu);
 
         if (sharedPreferences.getString("login", "").equals("success")) {
             lt_back.setVisibility(View.GONE);
@@ -152,6 +162,95 @@ public class Dashboard extends AppCompatActivity {
             snackbar.show();
             tv_snack.setText(R.string.network);
         }
+
+
+        iv_options.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              //  openContextMenu(view);
+
+
+                PopupMenu popup = new PopupMenu(Dashboard.this, iv_options);
+
+                popup.getMenuInflater().inflate(R.menu.menu, popup.getMenu());
+
+
+                Menu m = popup.getMenu();
+                for (int i = 0; i < m.size(); i++) {
+                    MenuItem mi = m.getItem(i);
+
+                    //for aapplying a font to subMenu ...
+                    SubMenu subMenu = mi.getSubMenu();
+                    if (subMenu != null && subMenu.size() > 0) {
+                        for (int j = 0; j < subMenu.size(); j++) {
+                            MenuItem subMenuItem = subMenu.getItem(j);
+                            applyFontToMenuItem(subMenuItem);
+                        }
+                    }
+
+
+                    //the method we have create in activity
+                    applyFontToMenuItem(mi);
+
+                }
+
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        switch (item.getItemId()) {
+
+                            case R.id.feedback: {
+
+                                return true;
+                            }
+                            case R.id.logout: {
+
+
+                                editor.putString("login", "");
+                                editor.clear();
+                                editor.apply();
+
+                                dialog_yes_no.dismiss();
+
+
+                                Intent i = new Intent(Dashboard.this, LoginRegister.class);
+                                startActivity(i);
+                                finishAffinity();
+
+                                return true;
+                            }
+                            case R.id.exit: {
+
+
+                                FragmentManager manager = getSupportFragmentManager();
+                                int index = manager.getBackStackEntryCount() - 1;
+
+
+                                    dialog_yes_no.show();
+
+
+
+                                return true;
+                            }
+
+                            default: {
+                                return true;
+                            }
+
+                        }
+
+
+                    }
+                });
+
+                popup.show();
+
+
+            }
+        });
+
+
 
 
 
@@ -274,6 +373,15 @@ public class Dashboard extends AppCompatActivity {
 
             }
         });
+    }
+
+
+
+    private void applyFontToMenuItem(MenuItem mi) {
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/lato.ttf");
+        SpannableString mNewTitle = new SpannableString(mi.getTitle());
+        mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(mNewTitle);
     }
 
 
