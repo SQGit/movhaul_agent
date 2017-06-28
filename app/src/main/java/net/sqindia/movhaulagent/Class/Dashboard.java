@@ -309,6 +309,7 @@ public class Dashboard extends AppCompatActivity {
 
 
                 driver_type.clear();
+                tv_hint_txt.setVisibility(View.GONE);
 
                 if (ar_comp_lists.size() > 0) {
 
@@ -344,6 +345,7 @@ public class Dashboard extends AppCompatActivity {
                 ft.commit();
                 fl_bottom.setVisibility(View.GONE);
                 tv_header.setText("Company");
+                tv_hint_txt.setVisibility(View.GONE);
                 lt_content.setVisibility(View.GONE);
 
             }
