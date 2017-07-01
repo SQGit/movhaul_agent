@@ -1,10 +1,8 @@
-package net.sqindia.movhaulagent;
+package com.movhaul.agent;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -50,39 +48,39 @@ public class LoginActivityOld extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_login);
+        setContentView(com.movhaul.agent.R.layout.activity_login);
         FontsManager.initFormAssets(LoginActivityOld.this, "fonts/lato.ttf");
         FontsManager.changeFonts(LoginActivityOld.this);
         tf = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/lato.ttf");
 
-        til_login_phone = (TextInputLayout) findViewById(R.id.textinputlayout_login_phone);
-        tv_header = (TextView) findViewById(R.id.textview_header);
-        tv_agent_reg = (TextView) findViewById(R.id.textview_register);
-        tv_agent_login = (TextView) findViewById(R.id.textview_login);
-        tv_admin = (TextView) findViewById(R.id.textview_admin);
-        view_horiz = findViewById(R.id.view_horiz);
+        til_login_phone = (TextInputLayout) findViewById(com.movhaul.agent.R.id.textinputlayout_login_phone);
+        tv_header = (TextView) findViewById(com.movhaul.agent.R.id.textview_header);
+        tv_agent_reg = (TextView) findViewById(com.movhaul.agent.R.id.textview_register);
+        tv_agent_login = (TextView) findViewById(com.movhaul.agent.R.id.textview_login);
+        tv_admin = (TextView) findViewById(com.movhaul.agent.R.id.textview_admin);
+        view_horiz = findViewById(com.movhaul.agent.R.id.view_horiz);
 
-        lt_agent_login = (LinearLayout) findViewById(R.id.layout_login);
-        lt_agent_register = (LinearLayout) findViewById(R.id.layout_register);
-        lt_agent_reg = (LinearLayout) findViewById(R.id.layout_register_first);
-        lt_agent_reg_2 = (LinearLayout) findViewById(R.id.layout_register_second);
-        btn_reg_next = (Button) findViewById(R.id.button_register_next);
-        et_chipedit = (EditText) findViewById(R.id.edittext_chiptxt);
-        et_bank = (EditText) findViewById(R.id.edittext_bank);
-        et_region = (EditText) findViewById(R.id.edittext_region);
-        lt_chip_layout = (LinearLayout) findViewById(R.id.layout_new);
-        lt_choose_bank = (LinearLayout) findViewById(R.id.layout_select_bank);
-        lt_choose_region = (LinearLayout) findViewById(R.id.layout_choose_region);
+        lt_agent_login = (LinearLayout) findViewById(com.movhaul.agent.R.id.layout_login);
+        lt_agent_register = (LinearLayout) findViewById(com.movhaul.agent.R.id.layout_register);
+        lt_agent_reg = (LinearLayout) findViewById(com.movhaul.agent.R.id.layout_register_first);
+        lt_agent_reg_2 = (LinearLayout) findViewById(com.movhaul.agent.R.id.layout_register_second);
+        btn_reg_next = (Button) findViewById(com.movhaul.agent.R.id.button_register_next);
+        et_chipedit = (EditText) findViewById(com.movhaul.agent.R.id.edittext_chiptxt);
+        et_bank = (EditText) findViewById(com.movhaul.agent.R.id.edittext_bank);
+        et_region = (EditText) findViewById(com.movhaul.agent.R.id.edittext_region);
+        lt_chip_layout = (LinearLayout) findViewById(com.movhaul.agent.R.id.layout_new);
+        lt_choose_bank = (LinearLayout) findViewById(com.movhaul.agent.R.id.layout_select_bank);
+        lt_choose_region = (LinearLayout) findViewById(com.movhaul.agent.R.id.layout_choose_region);
 
-        ccp_login = (CountryCodePicker) findViewById(R.id.ccp_login);
-        ccp_register = (CountryCodePicker) findViewById(R.id.ccp_register);
+        ccp_login = (CountryCodePicker) findViewById(com.movhaul.agent.R.id.ccp_login);
+        ccp_register = (CountryCodePicker) findViewById(com.movhaul.agent.R.id.ccp_register);
 
-        til_reg_name = (TextInputLayout) findViewById(R.id.textinputlayout_register_username);
-        til_reg_phone = (TextInputLayout) findViewById(R.id.textinputlayout_register_phone);
-        til_reg_email = (TextInputLayout) findViewById(R.id.textinputlayout_register_email);
-        til_reg_bank = (TextInputLayout) findViewById(R.id.textinputlayout_register_bank);
-        til_reg_address = (TextInputLayout) findViewById(R.id.textinputlayout_register_address);
-        til_reg_region = (TextInputLayout) findViewById(R.id.textinputlayout_register_region);
+        til_reg_name = (TextInputLayout) findViewById(com.movhaul.agent.R.id.textinputlayout_register_username);
+        til_reg_phone = (TextInputLayout) findViewById(com.movhaul.agent.R.id.textinputlayout_register_phone);
+        til_reg_email = (TextInputLayout) findViewById(com.movhaul.agent.R.id.textinputlayout_register_email);
+        til_reg_bank = (TextInputLayout) findViewById(com.movhaul.agent.R.id.textinputlayout_register_bank);
+        til_reg_address = (TextInputLayout) findViewById(com.movhaul.agent.R.id.textinputlayout_register_address);
+        til_reg_region = (TextInputLayout) findViewById(com.movhaul.agent.R.id.textinputlayout_register_region);
 
         lt_agent_register.setVisibility(View.GONE);
 
@@ -116,15 +114,15 @@ public class LoginActivityOld extends AppCompatActivity {
                     TextView tv = new TextView(LoginActivityOld.this);
                     tv.setLayoutParams(lparams);
 
-                    Drawable img = getResources().getDrawable(R.drawable.close);
+                    Drawable img = getResources().getDrawable(com.movhaul.agent.R.drawable.close);
                     img.setBounds(0, 0, 30, 30);
                     tv.setCompoundDrawables(null, null, img, null);
 
                     //tv.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.close, 0);
                     //  tv.setCompoundDrawables(null,null,getResources().getDrawable(R.mipmap.close),null);
                     tv.setCompoundDrawablePadding(10);
-                    tv.setBackground(getResources().getDrawable(R.drawable.chips_edittext_gb));
-                    tv.setTextColor(getResources().getColor(R.color.colorAccent));
+                    tv.setBackground(getResources().getDrawable(com.movhaul.agent.R.drawable.chips_edittext_gb));
+                    tv.setTextColor(getResources().getColor(com.movhaul.agent.R.color.colorAccent));
                     tv.setPadding(10, 10, 10, 10);
 
                     tv.setText(io);
@@ -212,10 +210,10 @@ public class LoginActivityOld extends AppCompatActivity {
 
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(LoginActivityOld.this);
                 LayoutInflater inflater = getLayoutInflater();
-                final View dialogView = inflater.inflate(R.layout.dialog_choose_bank, null);
+                final View dialogView = inflater.inflate(com.movhaul.agent.R.layout.dialog_choose_bank, null);
                 dialogBuilder.setView(dialogView);
                 final AlertDialog b = dialogBuilder.create();
-                LinearLayout myRoot = (LinearLayout) dialogView.findViewById(R.id.layout_top);
+                LinearLayout myRoot = (LinearLayout) dialogView.findViewById(com.movhaul.agent.R.id.layout_top);
                 LinearLayout a = null;
 
                 for (int i = 0; i < ar_banks.length; i++) {
@@ -228,7 +226,7 @@ public class LoginActivityOld extends AppCompatActivity {
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(60, 60);
                     params.gravity = Gravity.CENTER;
                     ImageView imageView = new ImageView(LoginActivityOld.this);
-                    imageView.setImageResource(R.drawable.button_change);
+                    imageView.setImageResource(com.movhaul.agent.R.drawable.button_change);
                     imageView.setLayoutParams(params);
                     TextView tss = new TextView(LoginActivityOld.this);
                     tss.setText(ar_banks[i]);
@@ -236,13 +234,13 @@ public class LoginActivityOld extends AppCompatActivity {
                     paramsQ.gravity = Gravity.CENTER;
                     tss.setLayoutParams(paramsQ);
                     tss.setTextSize(16);
-                    tss.setTextColor(getResources().getColor(R.color.textColor));
+                    tss.setTextColor(getResources().getColor(com.movhaul.agent.R.color.textColor));
                     tss.setTypeface(tf);
 
                     View vres = new View(LoginActivityOld.this);
                     LinearLayout.LayoutParams paramss = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);
                     vres.setLayoutParams(paramss);
-                    vres.setBackgroundColor(getResources().getColor(R.color.viewColor));
+                    vres.setBackgroundColor(getResources().getColor(com.movhaul.agent.R.color.viewColor));
 
                     a.addView(imageView);
                     a.addView(tss);

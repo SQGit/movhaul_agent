@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent.adapter;
+package com.movhaul.agent.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,12 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sloop.fonts.FontsManager;
 
-import net.sqindia.movhaulagent.R;
+import com.movhaul.agent.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,26 +1,21 @@
-package net.sqindia.movhaulagent.Class;
+package com.movhaul.agent.Class;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -31,8 +26,8 @@ import android.widget.TextView;
 
 import com.sloop.fonts.FontsManager;
 
-import net.sqindia.movhaulagent.Model.Config_Utils;
-import net.sqindia.movhaulagent.R;
+import com.movhaul.agent.Model.Config_Utils;
+import com.movhaul.agent.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

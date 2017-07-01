@@ -1,8 +1,7 @@
-package net.sqindia.movhaulagent.Fragment;
+package com.movhaul.agent.Fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -23,14 +22,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
 
-import net.sqindia.movhaulagent.Class.Dashboard;
-import net.sqindia.movhaulagent.Model.Config_Utils;
-import net.sqindia.movhaulagent.R;
+import com.movhaul.agent.Model.Config_Utils;
+import com.movhaul.agent.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

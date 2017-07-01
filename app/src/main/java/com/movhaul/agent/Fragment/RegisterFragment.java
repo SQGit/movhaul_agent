@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent.Fragment;
+package com.movhaul.agent.Fragment;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -39,8 +39,8 @@ import com.gun0912.tedpicker.ImagePickerActivity;
 import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
 
-import net.sqindia.movhaulagent.Model.Config_Utils;
-import net.sqindia.movhaulagent.R;
+import com.movhaul.agent.Model.Config_Utils;
+import com.movhaul.agent.R;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

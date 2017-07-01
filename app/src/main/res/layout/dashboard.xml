@@ -7,7 +7,7 @@
     android:background="@drawable/bg"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="net.sqindia.movhaulagent.LoginActivityOld">
+    tools:context="com.movhaul.agent.LoginActivityOld">
 
 
     <LinearLayout

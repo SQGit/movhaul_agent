@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent.Dialog;
+package com.movhaul.agent.Dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -19,8 +19,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import net.sqindia.movhaulagent.LoginActivityOld;
-import net.sqindia.movhaulagent.R;
+import com.movhaul.agent.LoginActivityOld;
+import com.movhaul.agent.R;
 
 import java.util.ArrayList;
 

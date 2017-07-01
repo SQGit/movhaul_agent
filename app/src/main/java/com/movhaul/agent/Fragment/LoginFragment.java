@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent.Fragment;
+package com.movhaul.agent.Fragment;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -30,9 +30,9 @@ import android.widget.TextView;
 import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
 
-import net.sqindia.movhaulagent.Class.LoginOtpActivity;
-import net.sqindia.movhaulagent.Model.Config_Utils;
-import net.sqindia.movhaulagent.R;
+import com.movhaul.agent.Class.LoginOtpActivity;
+import com.movhaul.agent.Model.Config_Utils;
+import com.movhaul.agent.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

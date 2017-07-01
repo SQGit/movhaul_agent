@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent;
+package com.movhaul.agent;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

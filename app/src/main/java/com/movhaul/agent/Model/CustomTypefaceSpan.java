@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent.Model;
+package com.movhaul.agent.Model;
 
 /**
  * Created by Ramya on 09-06-2016.

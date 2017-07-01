@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent.Class;
+package com.movhaul.agent.Class;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,8 +17,8 @@ import android.widget.LinearLayout;
 
 import com.sloop.fonts.FontsManager;
 
-import net.sqindia.movhaulagent.Fragment.LoginFragment;
-import net.sqindia.movhaulagent.R;
+import com.movhaul.agent.Fragment.LoginFragment;
+import com.movhaul.agent.R;
 
 /**
  * Created by Salman on 23-05-2017.

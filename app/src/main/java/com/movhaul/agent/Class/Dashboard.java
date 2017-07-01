@@ -1,4 +1,4 @@
-package net.sqindia.movhaulagent.Class;
+package com.movhaul.agent.Class;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -43,12 +43,12 @@ import android.widget.TextView;
 
 import com.sloop.fonts.FontsManager;
 
-import net.sqindia.movhaulagent.Fragment.CompanyFragment;
-import net.sqindia.movhaulagent.Fragment.DriverFragment;
-import net.sqindia.movhaulagent.Model.Config_Utils;
-import net.sqindia.movhaulagent.Model.CustomTypefaceSpan;
-import net.sqindia.movhaulagent.R;
-import net.sqindia.movhaulagent.adapter.driver_listdatas;
+import com.movhaul.agent.Fragment.CompanyFragment;
+import com.movhaul.agent.Fragment.DriverFragment;
+import com.movhaul.agent.Model.Config_Utils;
+import com.movhaul.agent.Model.CustomTypefaceSpan;
+import com.movhaul.agent.R;
+import com.movhaul.agent.adapter.driver_listdatas;
 
 import org.json.JSONArray;
 import org.json.JSONException;
