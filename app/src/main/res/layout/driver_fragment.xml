@@ -343,7 +343,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/grey_box"
                             android:gravity="center_vertical|left"
-                            android:hint="Driver Bank No"
+                            android:hint="Account No"
                             android:imeOptions="actionDone"
                             android:inputType="number"
                             android:maxLength="20"
@@ -482,7 +482,7 @@
                         <RadioGroup
                             android:layout_width="match_parent"
                             android:orientation="horizontal"
-                            android:layout_gravity="center"
+                            android:layout_gravity="center|center_vertical"
                             android:paddingBottom="@dimen/_5sdp"
                             android:id="@+id/radio_service_range"
                             android:layout_marginBottom="@dimen/_2sdp"
@@ -497,16 +497,16 @@
                                 android:textSize="@dimen/_10sdp"
                                 android:id="@+id/radio_50"
                                 android:textColor="@color/textColor"
-                                android:text="50-100 miles" />
+                                android:text="1-100 miles" />
 
                             <RadioButton
+                                android:id="@+id/radio_100"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_10sdp"
+                                android:text="1-200 miles"
                                 android:textColor="@color/textColor"
-                                android:id="@+id/radio_100"
-                                android:textSize="@dimen/_10sdp"
-                                android:text="100-200 miles" />
+                                android:textSize="@dimen/_10sdp" />
 
                             <RadioButton
                                 android:layout_width="wrap_content"
@@ -574,6 +574,10 @@
                     </FrameLayout>
 
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                     <EditText
                         android:id="@+id/edittext_coverage"
                         android:layout_width="fill_parent"
@@ -588,6 +592,16 @@
                         android:textColor="@color/textColor"
                         android:textColorHint="@color/textColor"
                         android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="ex: Bayo,Itu"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:textSize="@dimen/_8sdp"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
 
                     <View
                         android:layout_width="match_parent"

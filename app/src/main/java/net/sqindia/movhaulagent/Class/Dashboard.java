@@ -580,6 +580,8 @@ public class Dashboard extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressDialog.show();
+            Log.e("tag","token "+token);
+            Log.e("tag","id "+id);
         }
 
         protected String doInBackground(String... params) {
@@ -638,6 +640,7 @@ public class Dashboard extends AppCompatActivity {
                             hs_drivers_datas.put("driver_type", subs.getString("vehicle_type"));
                             hs_drivers_datas.put("driver_route", subs.getString("primary_route"));
                             hs_drivers_datas.put("driver_service_areas", subs.getString("service_areas"));
+                            hs_drivers_datas.put("driver_finished_jobs", subs.getString("finished_jobs"));
                             hash_datas.put(subs.getString("fake_id"), hs_drivers_datas);
                         }
                         tv_hint_txt.setVisibility(View.GONE);

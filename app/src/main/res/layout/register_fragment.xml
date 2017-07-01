@@ -280,6 +280,9 @@
                         android:background="#E1E1E1" />
 
 
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/edittext_coverage"
                         android:layout_width="fill_parent"
@@ -291,9 +294,20 @@
                         android:maxLines="1"
                         android:minHeight="@dimen/_30sdp"
                         android:paddingTop="@dimen/_10sdp"
-                        android:textColor="@color/viewColor"
+                        android:textColor="@color/textColor"
                         android:textColorHint="@color/textColor"
                         android:textSize="@dimen/_12sdp" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:text="ex: Bayo,Itu"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:textSize="@dimen/_8sdp"
+                            android:layout_height="wrap_content" />
+
+                    </FrameLayout>
 
                     <View
                         android:layout_width="match_parent"
@@ -396,7 +410,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/grey_box"
                             android:gravity="center_vertical|left"
-                            android:hint="Agent Bank No"
+                            android:hint="Account No"
                             android:inputType="number"
                             android:maxLength="15"
                             android:maxLines="1"

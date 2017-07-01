@@ -136,6 +136,7 @@ public class driver_listdatas extends BaseAdapter {
 
 
         tv_drivers.setText(hs_drivers_datas.get("driver_name"));
+        tv_jobs.setText(hs_drivers_datas.get("driver_finished_jobs"));
 
         tv_driver_id.setText(hs_drivers_datas.get("driver_id"));
         tv_driver_name.setText(hs_drivers_datas.get("driver_name"));
