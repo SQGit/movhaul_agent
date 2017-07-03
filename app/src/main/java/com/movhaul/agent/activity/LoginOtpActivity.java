@@ -1,4 +1,4 @@
-package com.movhaul.agent.Class;
+package com.movhaul.agent.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

@@ -1,4 +1,4 @@
-package com.movhaul.agent.Class;
+package com.movhaul.agent.activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -53,6 +53,7 @@ import com.movhaul.agent.adapter.driver_listdatas;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,6 +100,9 @@ public class Dashboard extends AppCompatActivity {
     private ViewPager viewPager;
     private int[] layouts;
     ImageView iv_options;
+    LinearLayout lt_earnings;
+    Dialog dialog_earnings;
+    int tot_drvs=0;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -123,6 +127,7 @@ public class Dashboard extends AppCompatActivity {
         tv_header_name = (TextView) findViewById(R.id.textview_header_name);
         lv_driver_datas = (ListView) findViewById(R.id.listview);
         iv_options = (ImageView) findViewById(R.id.right_menu);
+        lt_earnings = (LinearLayout) findViewById(R.id.layout_earnings);
 
         if (sharedPreferences.getString("login", "").equals("success")) {
             lt_back.setVisibility(View.GONE);
@@ -140,8 +145,41 @@ public class Dashboard extends AppCompatActivity {
         tv_hint_txt.setVisibility(View.GONE);
         scr_drivers = (ScrollView) findViewById(R.id.scroll);
 
+        dialog_earnings = new Dialog(Dashboard.this);
+        dialog_earnings.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog_earnings.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog_earnings.setCancelable(true);
+        dialog_earnings.setContentView(R.layout.dialog_earnings);
+
+        final TextView tv_tot_drv,tv_week_drv,tv_commission;
+        ImageView iv_close;
+
+        tv_tot_drv = (TextView) dialog_earnings.findViewById(R.id.total_driver);
+        tv_week_drv = (TextView) dialog_earnings.findViewById(R.id.week_driver);
+        tv_commission = (TextView) dialog_earnings.findViewById(R.id.driver_commission);
+        iv_close = (ImageView) dialog_earnings.findViewById(R.id.imageview);
+
+        tv_tot_drv.setTypeface(tf);
+        tv_week_drv.setTypeface(tf);
+        tv_commission.setTypeface(tf);
+
+        iv_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_earnings.dismiss();
+            }
+        });
+
 
         tv_header_name.setText("Welcome " + str_name);
+
+        lt_earnings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_earnings.show();
+                tv_tot_drv.setText("Total Drivers is "+tot_drvs);
+            }
+        });
 
 
         snackbar = Snackbar.make(findViewById(R.id.top), "No NetWork", Snackbar.LENGTH_LONG);
@@ -375,6 +413,8 @@ public class Dashboard extends AppCompatActivity {
 
             }
         });
+
+        scr_drivers.fullScroll(View.FOCUS_UP);
     }
 
 
@@ -625,6 +665,7 @@ public class Dashboard extends AppCompatActivity {
 
                     if (jsr_driver.length() > 0) {
                         hash_datas = new HashMap<String, HashMap<String, String>>();
+                        tot_drvs = jsr_driver.length();
                         for (int i = 0; i < jsr_driver.length(); i++) {
                             String datas = jsr_driver.getString(i);
                             JSONObject subs = new JSONObject(datas);

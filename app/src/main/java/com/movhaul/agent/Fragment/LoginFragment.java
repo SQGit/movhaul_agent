@@ -30,7 +30,7 @@ import android.widget.TextView;
 import com.hbb20.CountryCodePicker;
 import com.sloop.fonts.FontsManager;
 
-import com.movhaul.agent.Class.LoginOtpActivity;
+import com.movhaul.agent.activity.LoginOtpActivity;
 import com.movhaul.agent.Model.Config_Utils;
 import com.movhaul.agent.R;
 

@@ -12,4 +12,5 @@
     <color name="box_bg">#fdd4d1</color>
     <color name="rect_bg">#f2f2f2</color>
     <color name="dialog_text">#6a6a6a</color>
+    <color name="gold">#FEB34E</color>
 </resources>

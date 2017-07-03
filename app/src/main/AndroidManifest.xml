@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         tools:replace="android:icon"
         android:theme="@style/AppTheme">
-        <activity android:name="com.movhaul.agent.Class.LoginRegister" android:windowSoftInputMode="stateHidden">
+        <activity android:name="com.movhaul.agent.activity.LoginRegister" android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,9 +27,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.movhaul.agent.Class.Dashboard" android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+        <activity android:name="com.movhaul.agent.activity.Dashboard" android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
-        <activity android:name="com.movhaul.agent.Class.LoginOtpActivity"/>
+        <activity android:name="com.movhaul.agent.activity.LoginOtpActivity"/>
 
         <activity
             android:name="com.gun0912.tedpicker.ImagePickerActivity"
