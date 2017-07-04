@@ -19,13 +19,15 @@
         android:supportsRtl="true"
         tools:replace="android:icon"
         android:theme="@style/AppTheme">
-        <activity android:name="com.movhaul.agent.activity.LoginRegister" android:windowSoftInputMode="stateHidden">
+        <activity android:name="com.movhaul.agent.activity.Splash" android:windowSoftInputMode="stateHidden" android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.movhaul.agent.activity.LoginRegister" android:windowSoftInputMode="stateHidden"/>
 
         <activity android:name="com.movhaul.agent.activity.Dashboard" android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
 
