@@ -54,7 +54,7 @@ public class Splash extends Activity {
             Log.e("Tag", "err:" + "No network");
             Toast.makeText(getApplicationContext(),"No network found,Please try again later",Toast.LENGTH_SHORT).show();
         } else {
-            new GetVersionCode().execute();
+            //new GetVersionCode().execute();
         }
 
         dg_show_update = new Dialog(Splash.this);
